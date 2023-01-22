@@ -40,7 +40,6 @@ checkIsSession(); // !menjalankan fungsi untuk mengecek session
           Username atau Password salah!
         </span>
       <?php endif; ?>
-
       <button type="submit" name="login">Login</button>
     </form>
   </div>
