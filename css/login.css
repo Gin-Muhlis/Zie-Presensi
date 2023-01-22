@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(45deg, orange, red);
+  min-height: 100vh;
+}
+
+.wrapper {
+  width: 350px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, .2);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-right-color: #fff;
+  border-bottom-color: rgba(255, 255, 255, .7);
+  border-left-color: rgba(255, 255, 255, .1);
+  border-top-color: rgba(255, 255, 255, .1);
+  border-bottom-color: rgba(255, 255, 255, .7);
+  z-index: 999;
+}
+
+.wrapper h1 {
+  text-align: center;
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, .1);
+}
+
+.wrapper form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+form .label-input-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-block: 15px;
+}
+
+form label:first-child {
+  margin-bottom: 15px;
+}
+
+
+label span {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .8);
+  order: -1;
+  transform: translateY(20px);
+  font-size: 16px;
+  transition: .5s;
+}
+
+label .input-text {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  color: #fff;
+}
+
+label input#nama,
+label input#password {
+  border-bottom: 1px solid rgba(255, 255, 255, .7);
+}
+
+label input:focus~span {
+  transform: translateY(0);
+  font-size: 14px;
+}
+
+label input#nama:valid~span,
+label input#password:valid~span {
+  transform: translateY(0);
+  font-size: 14px;
+}
+
+form button {
+  outline: none;
+  border: none;
+  background: #fff;
+  color: #080818;
+  align-self: flex-end;
+  padding: 7px 24px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+form .remember {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.remember .label-remember {
+  font-size: 12px;
+  color: #fff;
+}
