@@ -1,5 +1,6 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
+require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
 
 checkSession("login_siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -18,7 +19,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     }
   }
 }
-
 
 ?>
 
@@ -76,12 +76,17 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <label class="field">
           <span class="label">Nama</span>
           <span class="two-point">:</span>
-          <input type="text" name="nama" id="nama" autocomplete="off" value="Gin Gin Nurilham Muhlis" disabled>
+          <input type="text" name="nama" id="nama" autocomplete="off" value="<?= $dataUser["nama"] ?>" disabled>
         </label>
         <label class="field">
-          <span class="label">NIS</span>
+          <span class="label">Kelas</span>
           <span class="two-point">:</span>
-          <input type="text" name="nis" id="nis" autocomplete="off" value="78673423" disabled>
+          <input type="text" name="kelas" id="kelas" autocomplete="off" value="<?= $dataUser["kelas"] ?>" disabled>
+        </label>
+        <label class="field">
+          <span class="label">No Absen</span>
+          <span class="two-point">:</span>
+          <input type="text" name="no_absen" id="no_absen" autocomplete="off" value="<?= $dataUser["nis"] ?>" disabled>
         </label>
         <div id="status">
           <span class="status-field label">Status</span>

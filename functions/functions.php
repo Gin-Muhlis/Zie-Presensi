@@ -10,7 +10,8 @@ if (isset($_POST["login"])) { // !mengecek apakah button login di klik
   checkUser($table_database); // !jika di klik jalankan fungsi checkUser
 }
 
-function checkCookie() // !function untuk mengecek cookie
+// !---------- function tuntuk mengecek cookie ----------!
+function checkCookie()
 {
   global $conn; // !membuat variabel $conn bisa diakses
   global $table_database; // !membuat variabel $table_database bisa diakses
@@ -30,8 +31,8 @@ function checkCookie() // !function untuk mengecek cookie
   }
 }
 
-
-function checkIsSession() // !functin untuk mengecek apakah ada session di halaman login
+// !---------- function untuk mengecek apakah ada session di halaman login ----------!
+function checkIsSession()
 {
   global $levels; // !membuat variabel $levels bisa diakses
 
@@ -72,7 +73,8 @@ function checkIsSession() // !functin untuk mengecek apakah ada session di halam
   }
 }
 
-function checkUser($tables) // !function untuk mengecek data user yang di input
+// !---------- function untuk mengecek data user yang diinputkan ----------!
+function checkUser($tables)
 {
   global $error; // !membuat variabel $error bisa diakses
   global $conn; // !membuat variabel $conn bisa diakses
@@ -129,7 +131,7 @@ function checkUser($tables) // !function untuk mengecek data user yang di input
   $error = true; // !mengeset variabel error jika user tidak ditemukan
 }
 
-// !cek session
+// !---------- cek session ----------!
 function checkSession($nameOfSession) // !function untuk mengecek session di halaman landing page
 {
   if (!isset($_SESSION[$nameOfSession])) { // !mengecek ketika tidak ada session yang sesuai dengan argumen yang dikirim
@@ -138,7 +140,7 @@ function checkSession($nameOfSession) // !function untuk mengecek session di hal
   }
 }
 
-// !ambil data dari database 
+// !---------- ambil data dari database ----------!
 function getDataFromCookie() // !function untuk mengambil data dari database sesuai data yang ada di cookie
 {
   global $conn; // !membuat variabel $conn bisa diakses

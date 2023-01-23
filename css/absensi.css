@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
   background: #fff;
-  padding: 50px;
+  padding: 40px;
   border-radius: 15px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -26,7 +26,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 form>* {
@@ -81,6 +81,10 @@ form .field {
   justify-content: space-between;
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+#status .two-point {
+  font-weight: 600;
 }
 
 #status .two-point {
