@@ -43,7 +43,7 @@ function checkIsSession() // !functin untuk mengecek apakah ada session di halam
 
       switch ($check) { // !mengecek isi variabel $check
         case "siswa": // !jika nilai dari variabel check adalah siswa
-          header("Location: landing/siswa.php"); // !arahkan ke halaman siswa
+          header("Location: ../zie presensi/landing/siswa/siswa.php"); // !arahkan ke halaman siswa
           exit; // !keluar dari function
 
           break;
@@ -100,7 +100,7 @@ function checkUser($tables) // !function untuk mengecek data user yang di input
 
         switch ($user["level"]) { // !mengecek level dari user yang login lalu arahkan ke halaman yang sesuai dengan level/jabatannya
           case "siswa":
-            header("Location: landing/siswa.php");
+            header("Location: ../zie presensi/landing/siswa/siswa.php");
             exit;
 
             break;

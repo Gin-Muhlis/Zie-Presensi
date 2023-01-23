@@ -1,5 +1,5 @@
 <?php
-require_once("functions.php"); // !memanggil file functions.php 
+require_once("functions/functions.php"); // !memanggil file functions.php 
 
 checkCookie(); // !menjalankan fungsi untuk mengecek cookie
 checkIsSession(); // !menjalankan fungsi untuk mengecek session

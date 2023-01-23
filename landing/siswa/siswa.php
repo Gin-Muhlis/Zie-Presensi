@@ -1,5 +1,5 @@
 <?php
-require "../functions.php"; // !memanggil file functions.php
+require "../../functions/functions.php"; // !memanggil file functions.php
 
 checkSession("login_siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -29,7 +29,9 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/siswa.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/siswa.css">
   <title>halaman siswa</title>
 </head>
 
@@ -37,18 +39,21 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <div class="sidebar">
     <div class="head-sidebar">
       <div class="image-profile">
-        <img src="../image/profile.jpg" alt="image-profile">
+        <img src="../../image/profile.jpg" alt="image-profile">
       </div>
       <div class="name-profile">
         <h2><?= $dataUser["nama"] ?></h2>
       </div>
       <div class="class-profile">
-        <p><?= $dataUser["nis"] ?></p>
+        <p><?= $dataUser["level"] ?></p>
       </div>
     </div>
     <div class="body-sidebar">
       <div class="menu">
-        <a href="#">Isi Absensi</a>
+        <a href="#">Home</a>
+      </div>
+      <div class="menu">
+        <a href="absensi.php">Absensi</a>
       </div>
       <div class="menu">
         <a href="#">Jadwal Pelajaran</a>
@@ -65,7 +70,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   </div>
 
   <div class="container">
-    <img src="../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
+    <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
     <h1>Selamat Datang di Zie Presensi</h1>
     <p>Jangan lupa untuk mengisi absen setiap pagi</p>
   </div>

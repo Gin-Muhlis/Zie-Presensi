@@ -1,5 +1,5 @@
 <?php
-require "../functions.php"; // !memanggil file functions.php
+require "../functions/functions.php"; // !memanggil file functions.php
 
 checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
 
