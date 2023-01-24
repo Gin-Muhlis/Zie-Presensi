@@ -135,7 +135,7 @@ function checkUser($tables)
 function checkSession($nameOfSession) // !function untuk mengecek session di halaman landing page
 {
   if (!isset($_SESSION[$nameOfSession])) { // !mengecek ketika tidak ada session yang sesuai dengan argumen yang dikirim
-    header("Location: ../login.php"); // !mengarahkan user ke halaman login
+    header("Location: ../../login.php"); // !mengarahkan user ke halaman login
     exit;
   }
 }

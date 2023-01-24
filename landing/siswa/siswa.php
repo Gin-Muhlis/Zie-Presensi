@@ -49,7 +49,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
       </div>
     </div>
     <div class="body-sidebar">
-      <div class="menu">
+      <div class="menu" id="active">
         <a href="#">Home</a>
       </div>
       <div class="menu">

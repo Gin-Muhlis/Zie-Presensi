@@ -21,7 +21,6 @@
   width: 100px;
   height: 100px;
   overflow: hidden;
-  /* border: 1px solid rgba(255, 255, 255, 1); */
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -128,4 +127,12 @@
   font-size: .9rem;
   width: 100%;
   display: block;
+}
+
+.body-sidebar #active {
+  background: orange;
+}
+
+.body-sidebar #active a {
+  color: #fff;
 }
