@@ -1,0 +1,3 @@
+Branch main untuk projek utama dan branch base adalah gambaran dari logika yang telah dibuat
+
+/-- JIKA INGIN MENJALANKAN PROJECT YANG DI BRANCH BASE DOWNLOAD TERLEBIH DAHULU FILE school.sql DAN IMPORT DI PHPMYADMIN --/
