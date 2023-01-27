@@ -49,7 +49,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <a href="#">Absensi</a>
       </div>
       <div class="menu">
-        <a href="#">Jadwal Pelajaran</a>
+        <a href="mapel.php">Jadwal Pelajaran</a>
       </div>
       <div class="menu">
         <a href="#">Edit Data</a>

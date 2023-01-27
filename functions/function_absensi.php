@@ -28,3 +28,32 @@ function cekAbsensi()
 
   mysqli_affected_rows($conn);
 }
+
+function getDataFromSession() // !function untuk mengambil data dari database sesuai data yang ada di cookie
+{
+  global $conn; // !membuat variabel $conn bisa diakses
+  global $table_database; // !membuat variabel $table_database bisa diakses
+
+  if (isset($_SESSION["nama"])) {
+    $nama = $_SESSION["nama"]; // !menyimpan value dari session dengan nama nama kedalam variabel
+
+    foreach ($table_database as $table) { // !me looping array nama table
+      $query = "SELECT $table.*, kelas.kode
+                FROM $table 
+                JOIN kelas
+                ON $table.id_kelas = kelas.id
+                WHERE $table.nama = '$nama'";
+      $result = mysqli_query($conn, $query); // !membuat query untuk mengambil data sesuai session yang ada
+
+      if (mysqli_num_rows($result) === 1) { // !mengecek apakah variabel $result ada isinya
+        $user = mysqli_fetch_assoc($result); // !simpan data yang sesuai kedalam variabel dataUser
+        if ($nama === $user["nama"]) {
+          return $user;
+        }
+      }
+    }
+  }
+
+
+  return false; // !keluar dari function ketika tidak ada cookie yang sesuai
+}

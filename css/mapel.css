@@ -1,0 +1,66 @@
+.container {
+    padding: 40px;
+}
+
+.container .wrapper {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, .1);
+}
+
+.wrapper h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: #080808;
+    margin-bottom: 30px;
+}
+
+.wrapper form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+form h2 {
+    font-size: 1rem;
+    color: #080808;
+}
+form select,
+select option {
+    font-size: 1rem;
+    padding: 3px;
+}
+
+table {
+    width: 100%;
+    border-color: #080808;
+}
+
+table thead,
+table tbody {
+    width: 100%;
+}
+
+thead th {
+    font-size: 1.1rem;
+    color: #080808;
+    padding: 7px;
+}
+
+tbody td {
+    padding: 5px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
