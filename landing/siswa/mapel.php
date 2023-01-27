@@ -1,6 +1,7 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
 require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
+require "../../functions/functionMapel.php";
 
 checkSession("login_siswa"); // !menjalankan fungsi untuk mengecek session
 
@@ -11,6 +12,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 } else { // !ketika function getDataFromCookie mengembalikan false
     $dataUser = getDataFromSession();
 }
+
+$mataPelajan = getDataMapel($dataUser["kode"]);
 
 ?>
 
@@ -65,8 +68,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <div class="container">
         <div class="wrapper">
             <h1>Jadwal Pelajaran</h1>
-            <form action="#" method="POST">
-                <h2>Hari : Senin</h2>
+            <form>
+                <h2>Hari : <?= $mataPelajan[0]["nama_hari"] ?></h2>
                 <select name="hari" id="hari">
                     <option value="senin">senin</option>
                     <option value="selasa">selasa</option>
@@ -83,18 +86,41 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                     <th>Pengajar</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>07-00 - 09-00</td>
-                        <td>Matematika</td>
-                        <td>Novi Siswayanti</td>
-                    </tr>
+                    <?php $no = 1 ?>
+                    <?php foreach ($mataPelajan as $mapel) : ?>
+                        <tr>
+                            <td><?= $no ?></td>
+                            <td><?= $mapel["jam_mulai"] ?> - <?= $mapel["jam_selesai"] ?></td>
+                            <td><?= $mapel["nama_mapel"] ?></td>
+                            <td><?= ucwords($mapel["nama_guru"]) ?></td>
+                        </tr>
+                        <?php $no++; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <script>
+        const select = document.querySelector('select');
 
+        select.onchange = function() {
+            let pilihan = this.value;
+            let formData = new FormData();
+            formData.append("pilihan", pilihan);
+            fetch("functionMapel.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.text)
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+        }
+    </script>
 
 </body>
 
