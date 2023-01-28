@@ -62,7 +62,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
     <h1>Selamat Datang di Zie Presensi</h1>
     <p>Jangan lupa untuk mengisi absen setiap pagi</p>
-    <?php echo $_SESSION["nama"] ?>
   </div>
 </body>
 

@@ -1,0 +1,67 @@
+.container {
+    padding: 40px;
+}
+
+.container .wrapper {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, .1);
+}
+
+.wrapper h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #080808;
+    margin-bottom: 50px;
+}
+
+.wrapper form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+form input {
+    font-size: 1rem;
+    padding: 7px;
+    outline: none;
+    background: none;
+    border: 1px solid #08080870;
+    border-radius: 5px;
+}
+
+form #name {
+    flex-basis: 40%;
+}
+
+form #date {
+    flex-basis: 25%;
+}
+
+.wrapper table {
+    width: 100%;
+    border-color: #080808;
+}
+
+table th {
+    padding: 7px;
+    font-size: 1rem;
+    color: #080808;
+}
+
+table td {
+    font-size: .9rem;
+    color: #080818;
+    padding: 6px;
+    text-align: center;
+    font-weight: 500;
+}

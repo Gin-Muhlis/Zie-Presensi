@@ -3,7 +3,7 @@ session_start(); // !memulai session
 
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 $table_database = array("siswa", "guru", "kepala_sekolah"); // !menyimpan nama tabel di dalam array
-$levels = array("siswa", "guru", "kepala sekolah", "wali kelas"); // !menyimpan jabatan di dalam array
+$levels = array("siswa", "guru", "kepala sekolah", "wali kelas", "operator siswa"); // !menyimpan jabatan di dalam array
 $error = null; // !membuat variabel untuk ketika ada error
 
 if (isset($_POST["login"])) { // !mengecek apakah button login di klik
@@ -22,10 +22,12 @@ function checkCookie()
 
     foreach ($table_database as $table) { // !me looping array tabel database
       $result = mysqli_query($conn, "SELECT * FROM $table WHERE id = $id"); // !mencari kolom yang sesuai dengan variabel id
-      $row = mysqli_fetch_assoc($result); // !menyimpan data dalam bentuk array associative didalam variabel row
-      $level = $row["level"]; // !menyimpan data level dalam variabel
-      if ($nama === hash("sha384", $row["nama"])) { // !mengecek apakah nama yang ada di cookie sama dengan nama yang ada di database
-        $_SESSION["login_$level"] = true; // !jika ada set session dengan nama login_level dari datanya
+      if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result); // !menyimpan data dalam bentuk array associative didalam variabel row
+        $level = $row["level"]; // !menyimpan data level dalam variabel
+        if ($nama === hash("sha384", $row["nama"])) { // !mengecek apakah nama yang ada di cookie sama dengan nama yang ada di database
+          $_SESSION["login_$level"] = true; // !jika ada set session dengan nama login_level dari datanya
+        }
       }
     }
   }
@@ -45,6 +47,11 @@ function checkIsSession()
       switch ($check) { // !mengecek isi variabel $check
         case "siswa": // !jika nilai dari variabel check adalah siswa
           header("Location: ../zie presensi/landing/siswa/siswa.php"); // !arahkan ke halaman siswa
+          exit; // !keluar dari function
+
+          break;
+        case "operator siswa": // !jika nilai dari variabel check adalah operator siswa
+          header("Location: ../zie presensi/landing/operator siswa/operator_siswa.php"); // !arahkan ke halaman siswa
           exit; // !keluar dari function
 
           break;
@@ -103,6 +110,11 @@ function checkUser($tables)
         switch ($user["level"]) { // !mengecek level dari user yang login lalu arahkan ke halaman yang sesuai dengan level/jabatannya
           case "siswa":
             header("Location: ../zie presensi/landing/siswa/siswa.php");
+            exit;
+
+            break;
+          case "operator siswa":
+            header("Location: ../zie presensi/landing/operator siswa/operator_siswa.php");
             exit;
 
             break;
@@ -168,6 +180,35 @@ function getDataFromCookie() // !function untuk mengambil data dari database ses
       }
     }
   }
+
+  return false; // !keluar dari function ketika tidak ada cookie yang sesuai
+}
+
+function getDataFromSession() // !function untuk mengambil data dari database sesuai data yang ada di cookie
+{
+  global $conn; // !membuat variabel $conn bisa diakses
+  global $table_database; // !membuat variabel $table_database bisa diakses
+
+  if (isset($_SESSION["nama"])) {
+    $nama = $_SESSION["nama"]; // !menyimpan value dari session dengan nama nama kedalam variabel
+
+    foreach ($table_database as $table) { // !me looping array nama table
+      $query = "SELECT $table.*, kelas.kode
+                FROM $table 
+                JOIN kelas
+                ON $table.id_kelas = kelas.id
+                WHERE $table.nama = '$nama'";
+      $result = mysqli_query($conn, $query); // !membuat query untuk mengambil data sesuai session yang ada
+
+      if (mysqli_num_rows($result) === 1) { // !mengecek apakah variabel $result ada isinya
+        $user = mysqli_fetch_assoc($result); // !simpan data yang sesuai kedalam variabel dataUser
+        if ($nama === $user["nama"]) {
+          return $user;
+        }
+      }
+    }
+  }
+
 
   return false; // !keluar dari function ketika tidak ada cookie yang sesuai
 }
