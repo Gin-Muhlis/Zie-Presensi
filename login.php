@@ -3,8 +3,6 @@ require_once("functions/functions.php"); // !memanggil file functions.php
 
 checkCookie(); // !menjalankan fungsi untuk mengecek cookie
 checkIsSession(); // !menjalankan fungsi untuk mengecek session
-
-echo password_hash("matematika", PASSWORD_DEFAULT);
 ?>
 
 <!DOCTYPE html>

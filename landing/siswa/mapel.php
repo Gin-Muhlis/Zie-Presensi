@@ -13,7 +13,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
-$mataPelajan = getDataMapel($dataUser["kode"]);
+$nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+$hari = $nama_hari[date("w")];
+
+$mataPelajaran = getDataMapel($dataUser["kode"], $hari);
 
 ?>
 
@@ -54,9 +57,6 @@ $mataPelajan = getDataMapel($dataUser["kode"]);
             <div class="menu" id="active">
                 <a href="#">Jadwal Pelajaran</a>
             </div>
-            <div class="menu">
-                <a href="#">Edit Data</a>
-            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
@@ -68,16 +68,35 @@ $mataPelajan = getDataMapel($dataUser["kode"]);
     <div class="container">
         <div class="wrapper">
             <h1>Jadwal Pelajaran</h1>
-            <form>
-                <h2>Hari : <?= $mataPelajan[0]["nama_hari"] ?></h2>
-                <select name="hari" id="hari">
-                    <option value="senin">senin</option>
-                    <option value="selasa">selasa</option>
-                    <option value="rabu">rabu</option>
-                    <option value="Kamis">Kamis</option>
-                    <option value="jumat">jumat</option>
+            <form action="" method="POST">
+                <h2>Hari : <?php
+                            if (isset($_POST["hari"])) {
+                                echo $_POST["hari"];
+                            } else {
+                                echo $hari;
+                            }
+                            ?></h2>
+                <select name="hari" id="hari" onchange="this.form.submit()">
+                    <?php
+                    $query = $conn->query("SELECT * FROM hari");
+                    while ($dataHari = $query->fetch_assoc()) : ?>
+                        <option value="<?= $dataHari["nama"] ?>" <?php
+                                                                    if (isset($_POST["hari"])) {
+                                                                        if ($_POST["hari"] == $dataHari["nama"]) {
+                                                                            echo "selected";
+                                                                        }
+                                                                    }
+                                                                    ?>><?= $dataHari["nama"] ?></option>
+                    <?php endwhile; ?>
                 </select>
             </form>
+            <?php
+            if (isset($_POST["hari"])) {
+                $query = $conn->query("SELECT * FROM hari WHERE nama = '$_POST[hari]'");
+                $result = $query->fetch_assoc();
+                $mataPelajaran = getDataMapel($dataUser["kode"], $result["nama"]);
+            }
+            ?>
             <table border="1" cellspacing="0">
                 <thead>
                     <th>No</th>
@@ -87,7 +106,7 @@ $mataPelajan = getDataMapel($dataUser["kode"]);
                 </thead>
                 <tbody>
                     <?php $no = 1 ?>
-                    <?php foreach ($mataPelajan as $mapel) : ?>
+                    <?php foreach ($mataPelajaran as $mapel) : ?>
                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $mapel["jam_mulai"] ?> - <?= $mapel["jam_selesai"] ?></td>
@@ -100,27 +119,6 @@ $mataPelajan = getDataMapel($dataUser["kode"]);
             </table>
         </div>
     </div>
-
-    <script>
-        const select = document.querySelector('select');
-
-        select.onchange = function() {
-            let pilihan = this.value;
-            let formData = new FormData();
-            formData.append("pilihan", pilihan);
-            fetch("functionMapel.php", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.text)
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-        }
-    </script>
 
 </body>
 

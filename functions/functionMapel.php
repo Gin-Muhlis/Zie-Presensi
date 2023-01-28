@@ -1,7 +1,7 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 
-function getDataMapel($kodeKelas)
+function getDataMapel($kodeKelas, $hari)
 {
     global $conn;
 
@@ -11,9 +11,11 @@ function getDataMapel($kodeKelas)
     JOIN mapel ON jadwal.id_mapel = mapel.id 
     JOIN guru ON jadwal.id_guru = guru.id 
     JOIN kelas ON jadwal.id_kelas = kelas.id 
-    WHERE hari.nama = 'senin' AND kelas.kode = '$kodeKelas'";
+    WHERE hari.nama = '$hari' AND kelas.kode = '$kodeKelas'";
 
     $result = mysqli_query($conn, $query);
+
+    $mapel = [];
 
     while ($row = mysqli_fetch_assoc($result)) {
         $mapel[] = $row;

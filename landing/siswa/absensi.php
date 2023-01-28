@@ -51,9 +51,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
       <div class="menu">
         <a href="mapel.php">Jadwal Pelajaran</a>
       </div>
-      <div class="menu">
-        <a href="#">Edit Data</a>
-      </div>
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">
