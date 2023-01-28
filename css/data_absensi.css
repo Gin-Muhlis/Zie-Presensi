@@ -26,7 +26,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
 }
 
@@ -40,11 +40,12 @@ form input {
 }
 
 form #name {
-    flex-basis: 40%;
+    flex-basis: 50%;
 }
 
-form #date {
-    flex-basis: 25%;
+form button {
+    height: 100%;
+    padding: 3px;
 }
 
 .wrapper table {
@@ -64,4 +65,8 @@ table td {
     padding: 6px;
     text-align: center;
     font-weight: 500;
+}
+
+.container .wrapper .data-field {
+    width: 100%;
 }

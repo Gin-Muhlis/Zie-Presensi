@@ -1,5 +1,6 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
+require "../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
 
 checkSession("login_operator siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -11,6 +12,9 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
+$kodeKelas = strtolower($dataUser["kode"]);
+
+$dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'");
 
 ?>
 
@@ -65,36 +69,43 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <div class="wrapper">
             <h1>Data Absensi</h1>
             <form action="" method="post">
-                <input type="text" name="search_by_name" id="name" placeholder="Filter berdasarkan nama" onchange="this.form.submit()">
+                <input type="text" name="search" id="keyword" placeholder="Cari data absensi">
+                <button name="cari" type="submit" id="button-cari">Cari</button>
 
-                <input type="date" name="search_by_date" id="date" onchange="this.form.submit()">
             </form>
-            <table border="1" cellspacing="0">
-                <thead>
-                    <th>No</th>
-                    <th>No Absen</th>
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                    <th>Keterangan</th>
-                    <th>Aksi</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>6</td>
-                        <td>Gin Gin Nurilham Muhlis</td>
-                        <td>2023-01-28</td>
-                        <td>Sakit</td>
-                        <td>Demam tinggi dan batuk pilek</td>
-                        <td>
-                            <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php" onclick="return confirm('Apakah anda yakin ingin mengahpusnya?')">Hapus</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-field" data-kelas="<?= $dataUser["kode"] ?>">
+                <table border="1" cellspacing="0">
+                    <thead>
+                        <th>No</th>
+                        <th>No Absen</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1 ?>
+                        <?php foreach ($dataAbsensi as $data) : ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $data["no_absen"] ?></td>
+                                <td><?= $data["nama"] ?></td>
+                                <td><?= $data["tanggal"] ?></td>
+                                <td><?= $data["status"] ?></td>
+                                <td><?= $data["keterangan"] ?></td>
+                                <td>
+                                    <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php" onclick="return confirm('Apakah anda yakin ingin mengahpusnya?')">Hapus</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <script src="../../js/script.js"></script>
 </body>
 
 </html>
