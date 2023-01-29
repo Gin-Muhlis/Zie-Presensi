@@ -61,7 +61,7 @@ table th {
 
 table td {
     font-size: .9rem;
-    color: #080818;
+    color: #080808;
     padding: 6px;
     text-align: center;
     font-weight: 500;
@@ -69,4 +69,8 @@ table td {
 
 .container .wrapper .data-field {
     width: 100%;
+}
+
+table .status {
+    color: #fff;
 }

@@ -1,9 +1,15 @@
 <?php
 require "../functions/function_data_absensi.php";
 
-$keyword = $_GET["keyword"];
-$query = "SELECT * FROM absensi WHERE"
+$keyword = strtolower($_GET["keyword"]);
+$kodeKelas = strtolower($_GET["dataKelas"]);
+$query = "SELECT * FROM absensi 
+         WHERE
+         kelas = '$kodeKelas' AND
+         (nama LIKE '%$keyword%' OR no_absen LIKE '%$keyword%' OR tanggal LIKE '%$keyword%' OR status LIKE '%$keyword%')";
 
+
+$dataAbsensi = getDataAbsensi($query);
 ?>
 
 <table border="1" cellspacing="0">
@@ -22,14 +28,29 @@ $query = "SELECT * FROM absensi WHERE"
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $data["no_absen"] ?></td>
-                <td><?= $data["nama"] ?></td>
+                <td><?= ucwords($data["nama"]) ?></td>
                 <td><?= $data["tanggal"] ?></td>
-                <td><?= $data["status"] ?></td>
+                <td class="status" <?php
+                                    switch ($data["status"]) {
+                                        case "hadir":
+                                            echo "style='background: #54B435;'";
+                                            break;
+                                        case "izin":
+                                            echo "style='background: #4B56D2;'";
+                                            break;
+                                        case "sakit":
+                                            echo "style='background: #FF1E1E;'";
+                                            break;
+                                        default:
+                                            echo "style='background: #2C3333;'";
+                                    }
+                                    ?>><?= ucwords($data["status"]) ?></td>
                 <td><?= $data["keterangan"] ?></td>
                 <td>
-                    <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php" onclick="return confirm('Apakah anda yakin ingin mengahpusnya?')">Hapus</a>
+                    <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">Hapus</a>
                 </td>
             </tr>
+            <?php $no++ ?>
         <?php endforeach; ?>
     </tbody>
 </table>

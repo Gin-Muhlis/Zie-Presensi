@@ -90,14 +90,29 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $data["no_absen"] ?></td>
-                                <td><?= $data["nama"] ?></td>
+                                <td><?= ucwords($data["nama"]) ?></td>
                                 <td><?= $data["tanggal"] ?></td>
-                                <td><?= $data["status"] ?></td>
+                                <td class="status" <?php
+                                                    switch ($data["status"]) {
+                                                        case "hadir":
+                                                            echo "style='background: #54B435;'";
+                                                            break;
+                                                        case "izin":
+                                                            echo "style='background: #4B56D2;'";
+                                                            break;
+                                                        case "sakit":
+                                                            echo "style='background: #FF1E1E;'";
+                                                            break;
+                                                        default:
+                                                            echo "style='background: #2C3333;'";
+                                                    }
+                                                    ?>><?= ucwords($data["status"]) ?></td>
                                 <td><?= $data["keterangan"] ?></td>
                                 <td>
-                                    <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php" onclick="return confirm('Apakah anda yakin ingin mengahpusnya?')">Hapus</a>
+                                    <a href="edit_absensi.php?id=<?= $data['id'] ?>">Edit</a> | <a href="hapus_absensi.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">Hapus</a>
                                 </td>
                             </tr>
+                            <?php $no++ ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
