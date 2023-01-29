@@ -47,7 +47,7 @@ $dataAbsensi = getDataAbsensi($query);
                                     ?>><?= ucwords($data["status"]) ?></td>
                 <td><?= $data["keterangan"] ?></td>
                 <td>
-                    <a href="edit_absensi.php">Edit</a> | <a href="hapus_absensi.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">Hapus</a>
+                    <a href="edit_absensi.php?id=<?= $data['id'] ?>">Edit</a> | <a href="hapus_absensi.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">Hapus</a>
                 </td>
             </tr>
             <?php $no++ ?>

@@ -28,6 +28,8 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/data_absensi.css">
+    <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/script.js"></script>
     <title>halaman operator siswa</title>
 </head>
 
@@ -70,8 +72,7 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
             <h1>Data Absensi</h1>
             <form action="" method="post">
                 <input type="text" name="search" id="keyword" placeholder="Cari data absensi">
-                <button name="cari" type="submit" id="button-cari">Cari</button>
-
+                <a href="tambah_data_absensi.php">Tambah Data</a>
             </form>
             <div class="data-field" data-kelas="<?= $dataUser["kode"] ?>">
                 <table border="1" cellspacing="0">
@@ -120,7 +121,6 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
         </div>
     </div>
 
-    <script src="../../js/script.js"></script>
 </body>
 
 </html>

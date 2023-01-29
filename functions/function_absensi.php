@@ -26,5 +26,5 @@ function cekAbsensi()
 
   mysqli_query($conn, "INSERT INTO absensi VALUES ('', $no_absen, '$nama', '$kelas', '$current_date', '$status', '$keterangan')");
 
-  mysqli_affected_rows($conn);
+  return mysqli_affected_rows($conn);
 }

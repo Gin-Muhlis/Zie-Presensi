@@ -1,8 +1,8 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
+require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
 
-checkSession("login_operator siswa"); // !menjalankan fungi untuk mengecek session
+checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
@@ -11,11 +11,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 } else { // !ketika function getDataFromCookie mengembalikan false
     $dataUser = getDataFromSession();
 }
-
-$id = strtolower($_GET["id"]);
-
-$dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
-
 
 ?>
 
@@ -26,11 +21,12 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/styleAbsensi.css">
     <link rel="stylesheet" href="../../css/editAbsensi.css">
-    <title>Halaman edit data absensi</title>
+    <title>halaman absensi</title>
 </head>
 
 <body>
@@ -69,22 +65,22 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
 
     <div class="container">
         <div class="wrapper">
-            <h1>Edit Absensi Siswa</h1>
+            <h1>Absensi Kehadiran Siswa</h1>
             <form action="#" method="POST">
                 <label class="field">
                     <span class="label">Nama</span>
                     <span class="two-point">:</span>
-                    <input type="text" name="nama" id="nama" autocomplete="off" value="<?= ucwords($dataAbsensi[0]["nama"]) ?>">
+                    <input type="text" name="nama" id="nama" autocomplete="off">
                 </label>
                 <label class="field">
                     <span class="label">Kelas</span>
                     <span class="two-point">:</span>
-                    <input type="text" name="kelas" id="kelas" autocomplete="off" value="<?= strtoupper($dataAbsensi[0]["kelas"]) ?>">
+                    <input type="text" name="kelas" id="kelas" autocomplete="off">
                 </label>
                 <label class="field">
                     <span class="label">No Absen</span>
                     <span class="two-point">:</span>
-                    <input type="text" name="no_absen" id="no_absen" autocomplete="off" value="<?= $dataAbsensi[0]["no_absen"] ?>">
+                    <input type="text" name="no_absen" id="no_absen" autocomplete="off">
                 </label>
                 <div id="status">
                     <span class="status-field label">Status</span>
@@ -113,26 +109,18 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
                         <span class="label">keterangan</span>
                         <span class="two-point">:</span>
                     </div>
-                    <textarea name="keterangan" id="keterangan"><?= $dataAbsensi[0]["keterangan"] ?></textarea>
+                    <textarea name="keterangan" id="keterangan"></textarea>
                 </label>
                 <div class="button-area">
-                    <button type="submit" name="edit-absensi">Edit</button>
+                    <button type="submit" name="kirim-absensi">Tambah</button>
                 </div>
             </form>
+
         </div>
     </div>
 
-    <?php
-    if (isset($_POST["edit-absensi"])) {
-        if (editAbsensi($id) > 0) {
-            echo "hellowww";
-            echo "<script>
-                alert('Data berhasil diedit');
-                document.location.href = 'data_absensi.php';
-            </script>";
-        }
-    }
-    ?>
+
+
 </body>
 
 </html>
