@@ -60,6 +60,9 @@ $mataPelajaran = getDataMapel($dataUser["kode"], $hari);
             <div class="menu">
                 <a href="data_absensi.php">Data Absensi</a>
             </div>
+            <div class="menu">
+                <a href="agenda.php">Agenda</a>
+            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
