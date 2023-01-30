@@ -1,6 +1,6 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
+require "../../functions/function_tambah_data_absensi.php"; // !memanggil file function_absensi.php
 
 checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
 
@@ -112,14 +112,25 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                     <textarea name="keterangan" id="keterangan"></textarea>
                 </label>
                 <div class="button-area">
-                    <button type="submit" name="kirim-absensi">Tambah</button>
+                    <button type="submit" name="tambah-absensi">Tambah</button>
                 </div>
             </form>
 
         </div>
     </div>
 
+    <?php
 
+    if (isset($_POST["tambah-absensi"])) {
+        if (tambahDataAbsensi() > 0) {
+            echo "<script>
+                alert('Data absensi berhasil ditambahkan');
+                document.location.href = './data_absensi.php';
+            </script>";
+        }
+    }
+
+    ?>
 
 </body>
 

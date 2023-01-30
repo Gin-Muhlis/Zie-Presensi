@@ -46,6 +46,8 @@ form a {
     padding: 5px 25px;
     background: #080808;
     border-radius: 5px;
+    text-decoration: none;
+    height: 100%;
 }
 
 .wrapper table {
