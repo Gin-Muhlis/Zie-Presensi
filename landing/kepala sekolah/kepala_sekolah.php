@@ -1,7 +1,7 @@
 <?php
-require "../functions/functions.php"; // !memanggil file functions.php
+require "../../../functions/functions.php"; // !memanggil file functions.php
 
-checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
+checkSession("login_kepala sekolah"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
@@ -28,17 +28,17 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/sidebar.css">
-  <link rel="stylesheet" href="../css/siswa.css">
-  <title>halaman wali kelas</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/siswa.css">
+  <title>halaman siswa</title>
 </head>
 
 <body>
   <div class="sidebar">
     <div class="head-sidebar">
       <div class="image-profile">
-        <img src="../image/profile.jpg" alt="image-profile">
+        <img src="../../image/profile.jpg" alt="image-profile">
       </div>
       <div class="name-profile">
         <h2><?= $dataUser["nama"] ?></h2>
@@ -60,7 +60,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">
-        <a href="../logout.php">Keluar</a>
+        <a href="../../logout.php">Keluar</a>
       </div>
     </div>
   </div>

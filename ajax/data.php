@@ -1,7 +1,7 @@
 <?php
 require "../functions/function_data_absensi.php";
 
-$keyword = strtolower($_GET["keyword"]);
+$keyword = mysqli_real_escape_string($conn, strtolower($_GET["keyword"]));
 $kodeKelas = strtolower($_GET["dataKelas"]);
 $query = "SELECT * FROM absensi 
          WHERE

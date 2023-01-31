@@ -11,15 +11,17 @@ function cekAbsensi()
   global $conn;
   global $done;
 
-  $nama = strtolower($_POST["nama"]);
-  $kelas = strtolower($_POST["kelas"]);
-  $no_absen = $_POST["no_absen"];
-  $status = strtolower($_POST["status"]);
-  $keterangan = strtolower($_POST["keterangan"]);
+  $nama = mysqli_real_escape_string($conn, strtolower($_POST["nama"]));
+  $kelas = mysqli_real_escape_string($conn, strtolower($_POST["kelas"]));
+  $no_absen = mysqli_real_escape_string($conn, strtolower($_POST["no_absen"]));
+  $status = mysqli_real_escape_string($conn, strtolower($_POST["status"]));
+  $keterangan = mysqli_real_escape_string($conn, strtolower($_POST["keterangan"]));
   $current_date = date('Y-m-d');
 
-  setcookie("absen", hash("sha384", $nama), time() + 86400);
+  setcookie("absen", hash("sha384", $nama), time() + (3600 * 24));
+
   $done = true;
+
   if (empty($keterangan)) {
     $keterangan = "-";
   }

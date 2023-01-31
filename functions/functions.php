@@ -2,7 +2,7 @@
 session_start(); // !memulai session
 
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
-$table_database = array("siswa", "guru", "kepala_sekolah"); // !menyimpan nama tabel di dalam array
+$table_database = array("guru", "kepala_sekolah", "siswa"); // !menyimpan nama tabel di dalam array
 $levels = array("siswa", "guru", "kepala sekolah", "wali kelas", "operator siswa"); // !menyimpan jabatan di dalam array
 $error = null; // !membuat variabel untuk ketika ada error
 
@@ -46,27 +46,27 @@ function checkIsSession()
 
       switch ($check) { // !mengecek isi variabel $check
         case "siswa": // !jika nilai dari variabel check adalah siswa
-          header("Location: ../zie presensi/landing/siswa/siswa.php"); // !arahkan ke halaman siswa
+          header("Location: landing/siswa/siswa.php"); // !arahkan ke halaman siswa
           exit; // !keluar dari function
 
           break;
         case "operator siswa": // !jika nilai dari variabel check adalah operator siswa
-          header("Location: ../zie presensi/landing/operator siswa/operator_siswa.php"); // !arahkan ke halaman siswa
+          header("Location: landing/operator siswa/operator_siswa.php"); // !arahkan ke halaman siswa
           exit; // !keluar dari function
 
           break;
         case "guru": // !jika nilai dari variabel check adalah guru 
-          header("Location: landing/guru.php"); // !arahkan ke halaman guru
+          header("Location: landing/guru/guru.php"); // !arahkan ke halaman guru
           exit;
 
           break;
         case "wali kelas": // !jika nilai dari variabel check adalah wali kelas
-          header("Location: landing/wali_kelas.php"); // !arahkan ke halaman wali kelas
+          header("Location: landing/wali kelas/wali_kelas.php"); // !arahkan ke halaman wali kelas
           exit;
 
           break;
         case "kepala sekolah": // !jika nilai dari variabel check adalah kepala sekolah
-          header("Location: landing/kepala_sekolah.php"); // !arahkan ke halaman kepala sekolah
+          header("Location: landing/kepala sekolah/kepala_sekolah.php"); // !arahkan ke halaman kepala sekolah
           exit;
 
           break;
@@ -86,12 +86,12 @@ function checkUser($tables)
   global $error; // !membuat variabel $error bisa diakses
   global $conn; // !membuat variabel $conn bisa diakses
 
+  $nama = mysqli_real_escape_string($conn, strtolower($_POST["nama"])); // !menyimpan inputan user yang namenya nama kedalam variabel nama
+  $password = mysqli_real_escape_string($conn, $_POST["password"]); // !menyimpan inputan user yang namenya password kedalam variabel password
+
   foreach ($tables as $table) { // !me looping array tables
 
-    $nama = $_POST["nama"]; // !menyimpan inputan user yang namenya nama kedalam variabel nama
-    $password = $_POST["password"]; // !menyimpan inputan user yang namenya password kedalam variabel password
-
-    $result = mysqli_query($conn, "SELECT * FROM $table WHERE nama = '$nama'"); // !membuat query untkk mengamil data dari database sesuai dengna nama yang diinput user
+    $result = mysqli_query($conn, "SELECT * FROM $table WHERE nama = '$nama'"); // !membuat query untuk mengambil data dari database sesuai dengna nama yang diinput user
 
     if (mysqli_num_rows($result) === 1) { // !mengecek ketika datanya ada
       $user = mysqli_fetch_assoc($result); // !mengambil datanya dan simpan kedalam variabel
@@ -119,17 +119,17 @@ function checkUser($tables)
 
             break;
           case "guru":
-            header("Location: landing/guru.php");
+            header("Location: ../zie presensi/landing/guru/guru.php");
             exit;
 
             break;
           case "wali kelas":
-
+            header("Location: ../zie presensi/landing/wali kelas/wali_kelas.php");
             exit;
 
             break;
           case "kepala sekolah":
-            header("Location: landing/kepala_sekolah.php");
+            header("Location: ../zie presensi/landing/kepala sekolah/kepala_sekolah.php");
             exit;
 
             break;
@@ -161,21 +161,34 @@ function getDataFromCookie() // !function untuk mengambil data dari database ses
   if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) { // !mengecek apakah ada cookie dengan nama "id" dan "key"
     $id = $_COOKIE["id"]; // !menyimpan nilai cookie yang namanya id ke dalam variabel 
     $namaCookie = $_COOKIE["key"]; // !menyimpan nilai cooke yang namanya key ke dalam variabel
+    $data = null;
 
+    for ($i = 0; $i < count($table_database); $i++) {
+      $tabel = $table_database[$i];
+      if ($tabel == "siswa") {
+        $queryForSiswa = "SELECT siswa.*, kelas.kode
+               FROM siswa 
+               JOIN kelas
+               ON siswa.id_kelas = kelas.id
+               WHERE siswa.id = $id";
 
-    foreach ($table_database as $table) { // !me looping array nama tabel
-      $query = "SELECT $table.*, kelas.kode
-              FROM $table 
-              JOIN kelas
-              ON $table.id_kelas = kelas.id
-              WHERE $table.id = $id";
-      $result = mysqli_query($conn, $query); // !membuat query untuk mengambil data yang id sama dengan variabel id
+        $resultSiswa = $conn->query($queryForSiswa);
+        if (mysqli_num_rows($resultSiswa) > 0) {
+          $data = mysqli_fetch_assoc($resultSiswa);
+          if ($namaCookie == hash("sha384", $data["nama"])) {
+            return $data;
+          }
+        }
+      } else {
+        $queryForElse = "SELECT * FROM $table_database[$i] WHERE id = $id";
+        $resultElse = $conn->query($queryForElse);
 
-      if (mysqli_num_rows($result) === 1) { // !mengecek apakah $result ada isinya
-        $user = mysqli_fetch_assoc($result); // !menyimpan data yang sesuai ke dalam variabel
+        if (mysqli_num_rows($resultElse) > 0) {
+          $data = mysqli_fetch_assoc($resultElse);
 
-        if ($namaCookie === hash("sha384", $user["nama"])) { // !mengecek apakah hash nama yang ada di cookie sama dengan hash nama dari data yang diambil
-          return $user; // !mengembalikan variabel $user
+          if ($namaCookie == hash("sha384", $data["nama"])) {
+            return $data;
+          }
         }
       }
     }
@@ -184,31 +197,45 @@ function getDataFromCookie() // !function untuk mengambil data dari database ses
   return false; // !keluar dari function ketika tidak ada cookie yang sesuai
 }
 
-function getDataFromSession() // !function untuk mengambil data dari database sesuai data yang ada di cookie
+function getDataFromSession() // !function untuk mengambil data dari database sesuai data yang ada di session
 {
   global $conn; // !membuat variabel $conn bisa diakses
   global $table_database; // !membuat variabel $table_database bisa diakses
 
   if (isset($_SESSION["nama"])) {
     $nama = $_SESSION["nama"]; // !menyimpan value dari session dengan nama nama kedalam variabel
+    $data = null;
 
-    foreach ($table_database as $table) { // !me looping array nama table
-      $query = "SELECT $table.*, kelas.kode
-                FROM $table 
-                JOIN kelas
-                ON $table.id_kelas = kelas.id
-                WHERE $table.nama = '$nama'";
-      $result = mysqli_query($conn, $query); // !membuat query untuk mengambil data sesuai session yang ada
+    for ($i = 0; $i < count($table_database); $i++) {
+      $tabel = $table_database[$i];
+      if ($tabel == "siswa") {
+        $queryForSiswa = "SELECT siswa.*, kelas.kode
+               FROM siswa 
+               JOIN kelas
+               ON siswa.id_kelas = kelas.id
+               WHERE siswa.nama = '$nama'";
 
-      if (mysqli_num_rows($result) === 1) { // !mengecek apakah variabel $result ada isinya
-        $user = mysqli_fetch_assoc($result); // !simpan data yang sesuai kedalam variabel dataUser
-        if ($nama === $user["nama"]) {
-          return $user;
+        $resultSiswa = $conn->query($queryForSiswa);
+        if (mysqli_num_rows($resultSiswa) > 0) {
+          $data = mysqli_fetch_assoc($resultSiswa);
+          if ($nama == $data["nama"]) {
+            return $data;
+          }
+        }
+      } else {
+        $queryForElse = "SELECT * FROM $table_database[$i] WHERE nama = '$nama'";
+        $resultElse = $conn->query($queryForElse);
+
+        if (mysqli_num_rows($resultElse) > 0) {
+          $data = mysqli_fetch_assoc($resultElse);
+
+          if ($nama == $data["nama"]) {
+            return $data;
+          }
         }
       }
     }
   }
-
 
   return false; // !keluar dari function ketika tidak ada cookie yang sesuai
 }

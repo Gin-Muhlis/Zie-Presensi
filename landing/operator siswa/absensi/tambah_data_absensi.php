@@ -1,6 +1,6 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_tambah_data_absensi.php"; // !memanggil file function_absensi.php
+require "../../../functions/functions.php"; // !memanggil file functions.php
+require "../../../functions/function_tambah_data_absensi.php"; // !memanggil file function_absensi.php
 
 checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
 
@@ -22,10 +22,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/styleAbsensi.css">
-    <link rel="stylesheet" href="../../css/editAbsensi.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/styleAbsensi.css">
+    <link rel="stylesheet" href="../../../css/editAbsensi.css">
     <title>halaman absensi</title>
 </head>
 
@@ -33,24 +33,24 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
             </div>
             <div class="name-profile">
-                <h2><?= $dataUser["nama"] ?></h2>
+                <h2><?= ucwords($dataUser["nama"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= $dataUser["level"] ?></p>
+                <p><?= ucwords($dataUser["level"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="operator_siswa.php">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
                 <a href="data_absensi.php">Data Absensi</a>

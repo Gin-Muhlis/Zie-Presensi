@@ -1,6 +1,6 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
+require "../../../functions/functions.php"; // !memanggil file functions.php
+require "../../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
 
 checkSession("login_operator siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -26,10 +26,10 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/styleAbsensi.css">
-    <link rel="stylesheet" href="../../css/editAbsensi.css">
+    <link rel="stylesheet" href="../../css/../base.css">
+    <link rel="stylesheet" href="../../css/../sidebar.css">
+    <link rel="stylesheet" href="../../css/../styleAbsensi.css">
+    <link rel="stylesheet" href="../../css/../editAbsensi.css">
     <title>Halaman edit data absensi</title>
 </head>
 
@@ -37,24 +37,24 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
             </div>
             <div class="name-profile">
-                <h2><?= $dataUser["nama"] ?></h2>
+                <h2><?= ucwords($dataUser["nama"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= $dataUser["level"] ?></p>
+                <p><?= ucwords($dataUser["level"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="operator_siswa.php">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
                 <a href="data_absensi.php">Data Absensi</a>

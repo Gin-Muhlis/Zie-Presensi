@@ -34,10 +34,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <img src="../../image/profile.jpg" alt="image-profile">
       </div>
       <div class="name-profile">
-        <h2><?= $dataUser["nama"] ?></h2>
+        <h2><?= ucwords($dataUser["nama"]) ?></h2>
       </div>
       <div class="class-profile">
-        <p><?= $dataUser["level"] ?></p>
+        <p><?= ucwords($dataUser["level"]) ?></p>
       </div>
     </div>
     <div class="body-sidebar">

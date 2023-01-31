@@ -1,17 +1,15 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 
-function getDataAgenda($kodeKelas)
+function getDataAgenda($query)
 {
     global $conn;
 
-    $today = date("Y-m-d");
-
     $agenda = [];
 
-    $query = $conn->query("SELECT * FROM agenda WHERE kelas = '$kodeKelas' AND tanggal = '$today'");
+    $result = $conn->query($query);
 
-    while ($row = $query->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $agenda[] = $row;
     }
 
@@ -22,14 +20,34 @@ function tambahAgenda($kodeKelas)
 {
     global $conn;
 
-    $namaGuru = strtolower($_POST["nama_guru"]);
-    $materi = strtolower($_POST["materi"]);
-    $jam = $_POST["jam"];
-    $keterangan = strtolower($_POST["keterangan"]);
+    $namaGuru = mysqli_real_escape_string($conn, strtolower($_POST["nama_guru"]));
+    $materi = mysqli_real_escape_string($conn, strtolower($_POST["materi"]));
+    $jam = mysqli_real_escape_string($conn, strtolower($_POST["jam"]));
+    $keterangan = mysqli_real_escape_string($conn, strtolower($_POST["keterangan"]));
     $current_date = date('Y-m-d');
 
     $query = "INSERT INTO agenda VALUES 
     ('', '$current_date', '$namaGuru', '$jam', '$materi', '$keterangan', '$kodeKelas')";
+
+    $conn->query($query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function editAgenda($id)
+{
+    global $conn;
+
+    $namaGuru = mysqli_real_escape_string($conn, strtolower($_POST["nama_guru"]));
+    $materi = mysqli_real_escape_string($conn, strtolower($_POST["materi"]));
+    $jam = mysqli_real_escape_string($conn, strtolower($_POST["jam"]));
+    $keterangan = mysqli_real_escape_string($conn, strtolower($_POST["keterangan"]));
+    $query = "UPDATE agenda
+              SET pengajar = '$namaGuru',
+              materi = '$materi',
+              jam = '$jam',
+              keterangan = '$keterangan'
+              WHERE id = $id";
 
     $conn->query($query);
 

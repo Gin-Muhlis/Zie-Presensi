@@ -1,14 +1,15 @@
-<?php     
+<?php
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 
-function getDataAbsensi($getQuery) {
+function getDataAbsensi($getQuery)
+{
     global $conn;
 
     $query = $conn->query($getQuery);
 
     $dataAbsensi = [];
 
-    while($row = $query->fetch_assoc()) {
+    while ($row = $query->fetch_assoc()) {
         $dataAbsensi[] = $row;
     }
 
@@ -20,11 +21,11 @@ function editAbsensi($id)
 {
     global $conn;
 
-    $nama = strtolower($_POST["nama"]);
-    $kelas = strtolower($_POST["kelas"]);
-    $no_absen = $_POST["no_absen"];
-    $status = strtolower($_POST["status"]);
-    $keterangan = strtolower($_POST["keterangan"]);
+    $nama = mysqli_real_escape_string($conn, strtolower($_POST["nama"]));
+    $kelas = mysqli_real_escape_string($conn, strtolower($_POST["kelas"]));
+    $no_absen = mysqli_real_escape_string($conn, strtolower($_POST["no_absen"]));
+    $status = mysqli_real_escape_string($conn, strtolower($_POST["status"]));
+    $keterangan = mysqli_real_escape_string($conn, strtolower($_POST["keterangan"]));
     $current_date = date('Y-m-d');
 
     if (empty($keterangan)) {

@@ -1,6 +1,6 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_agenda.php"; // !memanggil file functions.php
+require "../../../functions/functions.php"; // !memanggil file functions.php
+require "../../../functions/function_agenda.php"; // !memanggil file functions.php
 
 checkSession("login_operator siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -12,7 +12,9 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
-$dataAgenda = getDataAgenda($dataUser["kode"]);
+$today = date("Y-m-d");
+
+$dataAgenda = getDataAgenda("SELECT * FROM agenda WHERE kelas = '$dataUser[kode]' AND tanggal = '$today'");
 
 ?>
 
@@ -23,9 +25,9 @@ $dataAgenda = getDataAgenda($dataUser["kode"]);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/agenda.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/agenda.css">
     <title>halaman operator siswa</title>
 </head>
 
@@ -33,27 +35,27 @@ $dataAgenda = getDataAgenda($dataUser["kode"]);
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
             </div>
             <div class="name-profile">
-                <h2><?= $dataUser["nama"] ?></h2>
+                <h2><?= ucwords($dataUser["nama"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= $dataUser["level"] ?></p>
+                <p><?= ucwords($dataUser["level"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="data_absensi.php">Data Absensi</a>
+                <a href="../absensi/data_absensi.php">Data Absensi</a>
             </div>
             <div class="menu" id="active">
                 <a href="agenda.php">Agenda</a>
@@ -82,20 +84,26 @@ $dataAgenda = getDataAgenda($dataUser["kode"]);
                     <th>Jam</th>
                     <th>Materi</th>
                     <th>Keterangan</th>
+                    <th>Aksi</th>
                 </thead>
                 <tbody>
                     <?php if (count($dataAgenda) != 0) : ?>
                         <?php $no =  1; ?>
                         <?php foreach ($dataAgenda as $data) : ?>
-                            <td><?= $no ?></td>
-                            <td><?= $data["tanggal"] ?></td>
-                            <td><?= $data["pengajar"] ?></td>
-                            <td><?= $data["jam"] ?></td>
-                            <td><?= $data["materi"] ?></td>
-                            <td><?= $data["keterangan"] ?></td>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $data["tanggal"] ?></td>
+                                <td><?= ucwords($data["pengajar"]) ?></td>
+                                <td><?= ucwords($data["jam"]) ?></td>
+                                <td><?= ucwords($data["materi"]) ?></td>
+                                <td><?= ucfirst($data["keterangan"]) ?></td>
+                                <td>
+                                    <a href="edit_agenda.php?id=<?= $data["id"] ?>">Edit</a> | <a href="hapus_agenda.php?id=<?= $data["id"] ?>" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <td colspan="6">Agenda hari ini belum diisi</td>
+                        <td colspan="7">Agenda hari ini belum diisi</td>
                     <?php endif; ?>
                 </tbody>
             </table>

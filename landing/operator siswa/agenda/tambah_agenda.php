@@ -1,6 +1,6 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_agenda.php"; // !memanggil file functions.php
+require "../../../functions/functions.php"; // !memanggil file functions.php
+require "../../../functions/function_agenda.php"; // !memanggil file functions.php
 
 checkSession("login_operator siswa"); // !menjalankan fungi untuk mengecek session
 
@@ -23,9 +23,9 @@ $kodeKelas = $dataUser["kode"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/agenda.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/agenda.css">
     <title>halaman operator siswa</title>
 </head>
 
@@ -33,24 +33,24 @@ $kodeKelas = $dataUser["kode"];
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
             </div>
             <div class="name-profile">
-                <h2><?= $dataUser["nama"] ?></h2>
+                <h2><?= ucwords($dataUser["nama"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= $dataUser["level"] ?></p>
+                <p><?= ucwords($dataUser["level"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
                 <a href="data_absensi.php">Data Absensi</a>

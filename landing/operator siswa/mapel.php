@@ -41,10 +41,10 @@ $mataPelajaran = getDataMapel($dataUser["kode"], $hari);
                 <img src="../../image/profile.jpg" alt="image-profile">
             </div>
             <div class="name-profile">
-                <h2><?= $dataUser["nama"] ?></h2>
+                <h2><?= ucwords($dataUser["nama"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= $dataUser["level"] ?></p>
+                <p><?= ucwords($dataUser["level"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
@@ -58,10 +58,10 @@ $mataPelajaran = getDataMapel($dataUser["kode"], $hari);
                 <a href="#">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="data_absensi.php">Data Absensi</a>
+                <a href="absensi/data_absensi.php">Data Absensi</a>
             </div>
             <div class="menu">
-                <a href="agenda.php">Agenda</a>
+                <a href="agenda/agenda.php">Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">

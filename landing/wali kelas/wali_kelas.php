@@ -1,22 +1,14 @@
 <?php
-require "../functions/functions.php"; // !memanggil file functions.php
+require "../../functions/functions.php"; // !memanggil file functions.php
 
-checkSession("login_guru"); // !menjalankan fungi untuk mengecek session
+checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
 if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
   $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
 } else { // !ketika function getDataFromCookie mengembalikan false
-  $nama = $_SESSION["nama"]; // !menyimpan value dari session dengan nama nama kedalam variabel
-
-  foreach ($table_database as $table) { // !me looping array nama table
-    $result = mysqli_query($conn, "SELECT * FROM $table WHERE nama = '$nama'"); // !membuat query untuk mengambil data dari database yang sesuai dengan variabel nama
-
-    if (mysqli_num_rows($result) === 1) { // !mengecek apakah variabel $result ada isinya
-      $dataUser = mysqli_fetch_assoc($result); // !simpan data yang sesuai kedalam variabel dataUser
-    }
-  }
+  $dataUser = getDataFromSession();
 }
 
 ?>
@@ -28,10 +20,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/sidebar.css">
-  <link rel="stylesheet" href="../css/siswa.css">
-  <title>halaman siswa</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/siswa.css">
+  <title>halaman wali kelas</title>
 </head>
 
 <body>
@@ -41,10 +33,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <img src="../image/profile.jpg" alt="image-profile">
       </div>
       <div class="name-profile">
-        <h2><?= $dataUser["nama"] ?></h2>
+        <h2><?= ucwords($dataUser["nama"]) ?></h2>
       </div>
       <div class="class-profile">
-        <p><?= $dataUser["kelas"] ?></p>
+        <p><?= $dataUser["nip"] ?></p>
       </div>
     </div>
     <div class="body-sidebar">
