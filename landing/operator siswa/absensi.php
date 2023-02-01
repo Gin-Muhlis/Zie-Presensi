@@ -68,7 +68,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <div class="container">
     <div class="wrapper">
       <h1>Absensi Kehadiran Siswa</h1>
-      <?php if (isset($done) || isset($_COOKIE["absen"])) : ?>
+      <?php if (isset($done) || isAbsensiDone($dataUser["nama"]) > 0) : ?>
         <div class="message">
           <i class="fa-solid fa-thumbs-up"></i>
           <p>Terimaksih Telah mengisi Absensi</p>

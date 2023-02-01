@@ -1,5 +1,5 @@
 <?php
-require "../functions/function_data_absensi.php";
+require "../../functions/function_data_absensi.php";
 
 $keyword = mysqli_real_escape_string($conn, strtolower($_GET["keyword"]));
 $kodeKelas = strtolower($_GET["dataKelas"]);

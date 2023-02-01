@@ -61,7 +61,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../logout.php">Keluar</a>
+                <a href="../../../logout.php">Keluar</a>
             </div>
         </div>
     </div>

@@ -28,8 +28,6 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
     <link rel="stylesheet" href="../../../css/base.css">
     <link rel="stylesheet" href="../../../css/sidebar.css">
     <link rel="stylesheet" href="../../../css/data_absensi.css">
-    <script src="../../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../../js/script.js"></script>
     <title>halaman operator siswa</title>
 </head>
 
@@ -65,7 +63,7 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../logout.php">Keluar</a>
+                <a href="../../../logout.php">Keluar</a>
             </div>
         </div>
     </div>
@@ -124,6 +122,8 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
         </div>
     </div>
 
+    <script src="../../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../../js/script.js"></script>
 </body>
 
 </html>
