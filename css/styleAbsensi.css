@@ -125,6 +125,10 @@ label .keterangan-field {
   -o-border-radius: 5px;
 }
 
+#keterangan.keterangan_guru {
+  height: 150px;
+}
+
 form .button-area {
   width: 100%;
   display: flex;

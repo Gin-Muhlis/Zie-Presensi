@@ -26,10 +26,10 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/../base.css">
-    <link rel="stylesheet" href="../../css/../sidebar.css">
-    <link rel="stylesheet" href="../../css/../styleAbsensi.css">
-    <link rel="stylesheet" href="../../css/../editAbsensi.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/styleAbsensi.css">
+    <link rel="stylesheet" href="../../../css/editAbsensi.css">
     <title>Halaman edit data absensi</title>
 </head>
 
