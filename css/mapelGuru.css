@@ -1,0 +1,42 @@
+.wrapper h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #080808;
+}
+
+.wrapper .tambah-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.tambah-area button {
+    padding: 10px 25px;
+    outline: none;
+    border: none;
+    background-color: #080808;
+    border-radius: 5px;
+}
+
+.tambah-area button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.wrapper table {
+    width: 100%;
+}
+
+table th {
+    padding: 7px;
+    font-size: 1.1rem;
+}
+
+table td {
+    padding: 5px;
+    font-size: 1rem;
+    text-align: center;
+}

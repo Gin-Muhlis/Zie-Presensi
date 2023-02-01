@@ -95,19 +95,27 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE id = $id");
                     <div class="jenis-status">
                         <label for="hadir">
                             <span class="label">Hadir</span>
-                            <input type="radio" name="status" id="hadir" value="hadir" required>
+                            <input type="radio" name="status" id="hadir" value="hadir" required <?php if ($dataAbsensi[0]["status"] == "hadir") {
+                                                                                                    echo "checked";
+                                                                                                } ?>>
                         </label>
                         <label for="izin">
                             <span class="label">Izin</span>
-                            <input type="radio" name="status" id="izin" value="izin" required>
+                            <input type="radio" name="status" id="izin" value="izin" required <?php if ($dataAbsensi[0]["status"] == "izin") {
+                                                                                                    echo "checked";
+                                                                                                } ?>>
                         </label>
                         <label for="sakit">
                             <span class="label">Sakit</span>
-                            <input type="radio" name="status" id="sakit" value="sakit" required>
+                            <input type="radio" name="status" id="sakit" value="sakit" required <?php if ($dataAbsensi[0]["status"] == "sakit") {
+                                                                                                    echo "checked";
+                                                                                                } ?>>
                         </label>
                         <label for="tanpaKeterangan">
                             <span class="label">Tanpa Keterangan</span>
-                            <input type="radio" name="status" id="tanpaKeterangan" value="tanpa keterangan" required>
+                            <input type="radio" name="status" id="tanpaKeterangan" value="tanpa keterangan" required <?php if ($dataAbsensi[0]["status"] == "tanpa keterangan") {
+                                                                                                                            echo "checked";
+                                                                                                                        } ?>>
                         </label>
                     </div>
                 </div>
