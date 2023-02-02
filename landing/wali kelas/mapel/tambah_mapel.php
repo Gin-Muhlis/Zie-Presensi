@@ -17,9 +17,6 @@ $dataMapel = getFullMapel($dataUser["kelas"]);
 $dataGuru = getDataGuru();
 $dataHari = getHari();
 
-$id = $_GET["id"];
-
-$jadwal = findMapel($id);
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +34,7 @@ $jadwal = findMapel($id);
 </head>
 
 <body>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
                 <img src="../../../image/profile.jpg" alt="image-profile">
@@ -71,20 +68,18 @@ $jadwal = findMapel($id);
                 <a href="../../../logout.php">Keluar</a>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container">
         <div class="wrapper">
-            <h1>Edit Mata Pelajaran <?= $dataUser["kelas"] ?></h1>
+            <h1>Tambah Mata Pelajaran <?= $dataUser["kelas"] ?></h1>
             <form action="" method="POST">
                 <label for="mapel">
                     <span class="label">Mata Pelajaran</span>
                     <span class="two-point">:</span>
                     <select name="mapel" id="mapel">
                         <?php for ($i = 0; $i < count($dataMapel); $i++) : ?>
-                            <option value="<?= $i + 1 ?>" <?php if ($dataMapel[$i]["nama"] == $jadwal[0]["nama_mapel"]) {
-                                                                echo "selected";
-                                                            } ?>><?= $dataMapel[$i]["nama"]; ?></option>
+                            <option value="<?= $i + 1 ?>"><?= $dataMapel[$i]["nama"]; ?></option>
                         <?php endfor; ?>
 
                     </select>
@@ -94,46 +89,41 @@ $jadwal = findMapel($id);
                     <span class="two-point">:</span>
                     <select name="guru" id="guru">
                         <?php for ($i = 0; $i < count($dataGuru); $i++) : ?>
-                            <option value="<?= $i + 1 ?>" <?php if ($dataGuru[$i]["nama"] == $jadwal[0]["nama_guru"]) {
-                                                                echo "selected";
-                                                            } ?>><?= ucwords($dataGuru[$i]["nama"]); ?></option>
+                            <option value="<?= $i + 1 ?>"><?= ucwords($dataGuru[$i]["nama"]); ?></option>
                         <?php endfor; ?>
                     </select>
                 </label>
                 <label for="jam_mulai">
                     <span class="label">Jam Mulai</span>
                     <span class="two-point">:</span>
-                    <input type="text" name="jam_mulai" id="jam_mulai" value="<?= $jadwal[0]["jam_mulai"] ?>">
+                    <input type="text" name="jam_mulai" id="jam_mulai">
                 </label>
                 <label for="jam_selesai">
                     <span class="label">Jam Selesai</span>
                     <span class="two-point">:</span>
-                    <input type="text" name="jam_selesai" id="jam_selesai" value="<?= $jadwal[0]["jam_selesai"] ?>">
+                    <input type="text" name="jam_selesai" id="jam_selesai">
                 </label>
                 <label for="hari">
                     <span class="label">Hari</span>
                     <span class="two-point">:</span>
                     <select name="hari" id="hari">
                         <?php for ($i = 0; $i < count($dataHari); $i++) : ?>
-                            <option value="<?= $i + 1 ?>" <?php if ($dataHari[$i]["nama"] == $jadwal[0]["nama_hari"]) {
-                                                                echo "selected";
-                                                            } ?>><?= ucwords($dataHari[$i]["nama"]); ?></option>
+                            <option value="<?= $i + 1 ?>"><?= ucwords($dataHari[$i]["nama"]); ?></option>
                         <?php endfor; ?>
                     </select>
                 </label>
                 <div class="button-area">
-                    <button type="submit" name="editMapel">Edit</button>
+                    <button type="submit" name="tambahMapel">Tambah</button>
                 </div>
             </form>
         </div>
     </div>
-
     <?php
-    if (isset($_POST["editMapel"])) {
-        if (editMapel($id) > 0) {
-            echo "hellowww";
+    if (isset($_POST["tambahMapel"])) {
+        echo " haalo";
+        if (tambahMapel($dataUser["kelas"]) > 0) {
             echo "<script>
-                alert('Data berhasil diedit');
+                alert('Data berhasil ditambahkan');
                 document.location.href = '../mapel.php';
             </script>";
         }

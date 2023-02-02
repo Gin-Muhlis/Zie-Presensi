@@ -73,7 +73,7 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
             <h1>Mata Pelajaran <?= strtoupper($dataUser["kelas"]) ?></h1>
             <div class="tambah-area">
                 <button>
-                    <a href="tambah_mapel.php">Tambah Mapel</a>
+                    <a href="mapel/tambah_mapel.php">Tambah Mapel</a>
                 </button>
             </div>
             <table border="1" cellspacing="0">
@@ -95,7 +95,7 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
                             <td><?= $mapel["jam_mulai"] ?> <?= $mapel["jam_selesai"] ?></td>
                             <td><?= $mapel["nama_hari"] ?></td>
                             <td>
-                                <a href="edit_mapel.php">Edit</a> | <a href="mapel/hapus_mapel.php?id=<?= $mapel["id"] ?>" onclick="return confirm('Apakah anda yakin?')">hapus</a>
+                                <a href="mapel/edit_mapel.php?id=<?= $mapel["id"] ?>">Edit</a> | <a href="mapel/hapus_mapel.php?id=<?= $mapel["id"] ?>" onclick="return confirm('Apakah anda yakin?')">hapus</a>
                             </td>
                         </tr>
                         <?php $no++ ?>

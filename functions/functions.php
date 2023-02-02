@@ -239,3 +239,34 @@ function getDataFromSession() // !function untuk mengambil data dari database se
 
   return false; // !keluar dari function ketika tidak ada cookie yang sesuai
 }
+
+
+function getDataGuru()
+{
+  global $conn;
+
+  $result = $conn->query("SELECT * FROM guru");
+
+  $data = [];
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+  }
+
+  return $data;
+}
+
+function getHari()
+{
+  global $conn;
+
+  $result = $conn->query("SELECT * FROM hari");
+
+  $data = [];
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+  }
+
+  return $data;
+}
