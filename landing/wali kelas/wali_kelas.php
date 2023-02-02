@@ -40,17 +40,20 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
       </div>
     </div>
     <div class="body-sidebar">
-      <div class="menu" class="active">
+      <div class="menu" id="active">
         <a href="#">Home</a>
       </div>
       <div class="menu">
-        <a href="absensi.php">Isi Absensi</a>
+        <a href="absensi.php">Absensi</a>
       </div>
       <div class="menu">
-        <a href="mapel.php">Jadwal Pelajaran</a>
+        <a href="mapel.php">Mata Pelajaran</a>
       </div>
       <div class="menu">
-        <a href="#">Edit Data</a>
+        <a href="absensi/data_absensi.php">Absensi Kelas</a>
+      </div>
+      <div class="menu">
+        <a href="agenda/agenda.php">Agenda Kelas</a>
       </div>
     </div>
     <div class="footer-sidebar">

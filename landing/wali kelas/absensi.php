@@ -49,13 +49,13 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                 <a href="#">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="mapel.php">Mata Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
+                <a href="absensi/data_absensi.php">Absensi Kelas</a>
             </div>
             <div class="menu">
-                <a href="agenda/agenda.php">Agenda</a>
+                <a href="agenda/agenda.php">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -78,7 +78,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                     <label class="field disable">
                         <span class="label">Nama</span>
                         <span class="two-point">:</span>
-                        <input type="text" name="nama" id="nama" autocomplete="off" value="<?= $dataUser["nama"] ?>">
+                        <input type="text" name="nama" id="nama" autocomplete="off" value="<?= ucwords($dataUser["nama"]); ?>">
                     </label>
                     <label class="field disable">
                         <span class="label">NIP</span>

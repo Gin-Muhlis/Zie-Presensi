@@ -1,6 +1,7 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
 require "../../functions/function_absensi_guru.php"; // !memanggil file function_absensi.php
+require "../../functions/functionMapel.php";
 
 checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
 
@@ -11,6 +12,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 } else { // !ketika function getDataFromCookie mengembalikan false
     $dataUser = getDataFromSession();
 }
+
+$dataMapel = getAllMapel($dataUser["kelas"]);
 
 ?>
 
@@ -45,17 +48,17 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
             <div class="menu">
                 <a href="wali_kelas.php">Home</a>
             </div>
+            <div class="menu">
+                <a href="absensi.php">Absensi</a>
+            </div>
             <div class="menu" id="active">
-                <a href="#">Absensi</a>
+                <a href="mapel.php">Mata Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="absensi/data_absensi.php">Absensi Kelas</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
-            </div>
-            <div class="menu">
-                <a href="agenda/agenda.php">Agenda</a>
+                <a href="agenda/agenda.php">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -67,7 +70,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
     <div class="container">
         <div class="wrapper">
-            <h1>Jadwal Pelajaran <?= strtoupper($dataUser["kelas"]) ?></h1>
+            <h1>Mata Pelajaran <?= strtoupper($dataUser["kelas"]) ?></h1>
             <div class="tambah-area">
                 <button>
                     <a href="tambah_mapel.php">Tambah Mapel</a>
@@ -75,48 +78,28 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
             </div>
             <table border="1" cellspacing="0">
                 <thead>
-                    <th>Hari</th>
-                    <th>Jam</th>
-                    <th>Mapel</th>
+                    <th>No</th>
+                    <th>Mata Pelajaran</th>
                     <th>Guru</th>
+                    <th>Jam</th>
+                    <th>Hari</th>
                     <th>Aksi</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td rowspan="2">Senin</td>
-                        <td>07.00 - 09.00</td>
-                        <td>Matematika</td>
-                        <td>Novi Siswayanti</td>
-                        <td>
-                            <a href="edit_mapel.php">Edit</a> | <a href="hapus_mapel.php">hapus</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>09.00 - 11.00</td>
-                        <td>Bahasa Indonesia</td>
-                        <td>Tedi hadiansyah</td>
-                        <td>
-                            <a href="edit_mapel.php">Edit</a> | <a href="hapus_mapel.php">hapus</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">Senin</td>
-                        <td>07.00 - 09.00</td>
-                        <td>Matematika</td>
-                        <td>Novi Siswayanti</td>
-                        <td>
-                            <a href="edit_mapel.php">Edit</a> | <a href="hapus_mapel.php">hapus</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>09.00 - 11.00</td>
-                        <td>Bahasa Indonesia</td>
-                        <td>Tedi hadiansyah</td>
-                        <td>
-                            <a href="edit_mapel.php">Edit</a> | <a href="hapus_mapel.php">hapus</a>
-                        </td>
-                    </tr>
-
+                    <?php $no = 1 ?>
+                    <?php foreach ($dataMapel as $mapel) : ?>
+                        <tr>
+                            <td><?= $no ?></td>
+                            <td><?= $mapel["nama_mapel"] ?></td>
+                            <td><?= ucwords($mapel["nama_guru"]) ?></td>
+                            <td><?= $mapel["jam_mulai"] ?> <?= $mapel["jam_selesai"] ?></td>
+                            <td><?= $mapel["nama_hari"] ?></td>
+                            <td>
+                                <a href="edit_mapel.php">Edit</a> | <a href="mapel/hapus_mapel.php?id=<?= $mapel["id"] ?>" onclick="return confirm('Apakah anda yakin?')">hapus</a>
+                            </td>
+                        </tr>
+                        <?php $no++ ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
