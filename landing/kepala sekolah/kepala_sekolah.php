@@ -1,5 +1,5 @@
 <?php
-require "../../../functions/functions.php"; // !memanggil file functions.php
+require "../../functions/functions.php"; // !memanggil file functions.php
 
 checkSession("login_kepala sekolah"); // !menjalankan fungi untuk mengecek session
 
@@ -8,15 +8,7 @@ $dataUser = ""; // !membuat variabel untuk menyimpan data user
 if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
   $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
 } else { // !ketika function getDataFromCookie mengembalikan false
-  $nama = $_SESSION["nama"]; // !menyimpan value dari session dengan nama nama kedalam variabel
-
-  foreach ($table_database as $table) { // !me looping array nama table
-    $result = mysqli_query($conn, "SELECT * FROM $table WHERE nama = '$nama'"); // !membuat query untuk mengambil data dari database yang sesuai dengan variabel nama
-
-    if (mysqli_num_rows($result) === 1) { // !mengecek apakah variabel $result ada isinya
-      $dataUser = mysqli_fetch_assoc($result); // !simpan data yang sesuai kedalam variabel dataUser
-    }
-  }
+  $dataUser = getDataFromSession();
 }
 
 ?>
@@ -31,7 +23,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <link rel="stylesheet" href="../../css/base.css">
   <link rel="stylesheet" href="../../css/sidebar.css">
   <link rel="stylesheet" href="../../css/siswa.css">
-  <title>halaman siswa</title>
+  <title>halaman kepala sekolah</title>
 </head>
 
 <body>
@@ -41,22 +33,23 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <img src="../../image/profile.jpg" alt="image-profile">
       </div>
       <div class="name-profile">
-        <h2><?= $dataUser["nama"] ?></h2>
+        <h2><?= ucwords($dataUser["nama"]) ?></h2>
       </div>
       <div class="class-profile">
-        <p><?= $dataUser["nip"] ?></p>
+        <p><?= ucwords($dataUser["level"]) ?></p>
       </div>
     </div>
     <div class="body-sidebar">
-      <div class="menu">
-        <a href="#">Isi Absensi</a>
+      <div class="menu" id="active">
+        <a href="#">Home</a>
       </div>
       <div class="menu">
-        <a href="#">Jadwal Pelajaran</a>
+        <a href="absensi_guru.php">Absensi Guru</a>
       </div>
       <div class="menu">
-        <a href="#">Edit Data</a>
+        <a href="absensi_siswa.php">Absensi Siswa</a>
       </div>
+
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">
@@ -66,7 +59,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   </div>
 
   <div class="container">
-    <img src="../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
+    <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
     <h1>Selamat Datang di Zie Presensi</h1>
     <p>Jangan lupa untuk mengisi absen setiap pagi</p>
   </div>

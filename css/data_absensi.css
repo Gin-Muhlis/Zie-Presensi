@@ -30,6 +30,10 @@
     margin-bottom: 30px;
 }
 
+.wrapper form#filter-kepala {
+    justify-content: flex-start;
+}
+
 form input {
     font-size: 1rem;
     padding: 7px;
@@ -75,4 +79,14 @@ table td {
 
 table .status {
     color: #fff;
+}
+
+#allData {
+    padding: 10px 32px;
+    outline: none;
+    border: none;
+    font-size: .9rem;
+    background-color: #080808;
+    border-radius: 5px;
+    cursor: pointer;
 }

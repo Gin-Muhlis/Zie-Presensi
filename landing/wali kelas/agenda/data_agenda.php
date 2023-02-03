@@ -74,6 +74,7 @@ $dataAgenda = getDataAgenda("SELECT * FROM agenda WHERE kelas = '$kodeKelas'");
             <h1>Data Absensi <?= strtoupper($dataUser["kelas"]) ?></h1>
             <form action="" method="post">
                 <input type="date" name="search" id="keyword">
+                <button id="allData">Tampikan semua</button>
             </form>
             <div class="data-field" data-kelas="<?= $dataUser["kelas"] ?>">
                 <table border="" 1 cellspacing="0">

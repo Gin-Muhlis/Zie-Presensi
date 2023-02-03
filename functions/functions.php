@@ -270,3 +270,18 @@ function getHari()
 
   return $data;
 }
+
+function getKelas()
+{
+  global $conn;
+
+  $result = $conn->query("SELECT * FROM kelas");
+
+  $data = [];
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+  }
+
+  return $data;
+}
