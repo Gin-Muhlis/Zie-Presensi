@@ -52,13 +52,13 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
                 <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu" id="active">
-                <a href="mapel.php">Mata Pelajaran</a>
+                <a href="#">Mata Pelajaran</a>
             </div>
             <div class="menu">
                 <a href="absensi/data_absensi.php">Absensi Kelas</a>
             </div>
             <div class="menu">
-                <a href="agenda/agenda.php">Agenda Kelas</a>
+                <a href="agenda/data_agenda.php">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">

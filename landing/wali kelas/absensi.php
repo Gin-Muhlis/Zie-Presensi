@@ -55,7 +55,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                 <a href="absensi/data_absensi.php">Absensi Kelas</a>
             </div>
             <div class="menu">
-                <a href="agenda/agenda.php">Agenda Kelas</a>
+                <a href="agenda/data_agenda.php">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">
