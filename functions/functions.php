@@ -16,16 +16,19 @@ function checkCookie()
   global $conn; // !membuat variabel $conn bisa diakses
   global $table_database; // !membuat variabel $table_database bisa diakses
 
-  if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) { // !mengecek apakah ada cookie dengan nama "id" dan "key"
-    $id = $_COOKIE["id"]; // !menyimpan nilai cookie id didalam variabel
-    $nama = $_COOKIE["key"]; // !menyimpan nilai cookie key didalam variabel
+  $dataCookie = [];
 
+  $query = $conn->query("SELECT * FROM cookie");
+
+  if (mysqli_num_rows($query) > 0) {
+    $dataCookie[] = mysqli_fetch_assoc($query);
+    $nama = $dataCookie[0]["user_nama"];
     foreach ($table_database as $table) { // !me looping array tabel database
-      $result = mysqli_query($conn, "SELECT * FROM $table WHERE id = $id"); // !mencari kolom yang sesuai dengan variabel id
+      $result = mysqli_query($conn, "SELECT * FROM $table WHERE nama = '$nama'"); // !mencari kolom yang sesuai dengan variabel id
       if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result); // !menyimpan data dalam bentuk array associative didalam variabel row
         $level = $row["level"]; // !menyimpan data level dalam variabel
-        if ($nama === hash("sha384", $row["nama"])) { // !mengecek apakah nama yang ada di cookie sama dengan nama yang ada di database
+        if ($nama === $row["nama"]) { // !mengecek apakah nama yang ada di cookie sama dengan nama yang ada di database
           $_SESSION["login_$level"] = true; // !jika ada set session dengan nama login_level dari datanya
         }
       }
@@ -80,6 +83,15 @@ function checkIsSession()
   }
 }
 
+function setDataCookie($nama, $id)
+{
+  global $conn;
+
+  $conn->query("INSERT INTO cookie VALUES ('',$id, '$nama')");
+
+  return mysqli_affected_rows($conn);
+}
+
 // !---------- function untuk mengecek data user yang diinputkan ----------!
 function checkUser($tables)
 {
@@ -103,8 +115,9 @@ function checkUser($tables)
         $_SESSION["nama"] = $user["nama"]; // !mengeset session dengan nama nama yang diisi nama dari user
 
         if (isset($_POST["remember"])) { // !mengecek ketika user menekan checkbox remember me
-          setcookie("id", $user["id"], time() + 30000); // !mengeset cookie dengan nama id diisi dengan id user
-          setcookie("key", hash("sha384", $user["nama"]), time() + 30000); // !mengeset cookie dengan nama key diisi dengan hash dari nama user
+          // setcookie("id", $user["id"], time() + 30000); 
+          // setcookie("key", hash("sha384", $user["nama"]), time() + 30000);
+          setDataCookie($user["nama"], $user["id"]);
         }
 
         switch ($user["level"]) { // !mengecek level dari user yang login lalu arahkan ke halaman yang sesuai dengan level/jabatannya
@@ -158,9 +171,13 @@ function getDataFromCookie() // !function untuk mengambil data dari database ses
   global $conn; // !membuat variabel $conn bisa diakses
   global $table_database; // !membuat variabel $table_database bisa diakses
 
-  if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) { // !mengecek apakah ada cookie dengan nama "id" dan "key"
-    $id = $_COOKIE["id"]; // !menyimpan nilai cookie yang namanya id ke dalam variabel 
-    $namaCookie = $_COOKIE["key"]; // !menyimpan nilai cooke yang namanya key ke dalam variabel
+  $dataCookie = [];
+
+  $query = $conn->query("SELECT * FROM cookie");
+
+  if (mysqli_num_rows($query)) { // !mengecek apakah ada cookie dengan nama "id" dan "key"
+    $dataCookie[] = mysqli_fetch_assoc($query);
+    $namaCookie = $dataCookie[0]["user_nama"]; // !menyimpan nilai cooke yang namanya key ke dalam variabel
     $data = null;
 
     for ($i = 0; $i < count($table_database); $i++) {
@@ -170,23 +187,23 @@ function getDataFromCookie() // !function untuk mengambil data dari database ses
                FROM siswa 
                JOIN kelas
                ON siswa.id_kelas = kelas.id
-               WHERE siswa.id = $id";
+               WHERE siswa.nama = '$namaCookie'";
 
         $resultSiswa = $conn->query($queryForSiswa);
         if (mysqli_num_rows($resultSiswa) > 0) {
           $data = mysqli_fetch_assoc($resultSiswa);
-          if ($namaCookie == hash("sha384", $data["nama"])) {
+          if ($namaCookie == $data["nama"]) {
             return $data;
           }
         }
       } else {
-        $queryForElse = "SELECT * FROM $table_database[$i] WHERE id = $id";
+        $queryForElse = "SELECT * FROM $table_database[$i] WHERE nama = '$namaCookie'";
         $resultElse = $conn->query($queryForElse);
 
         if (mysqli_num_rows($resultElse) > 0) {
           $data = mysqli_fetch_assoc($resultElse);
 
-          if ($namaCookie == hash("sha384", $data["nama"])) {
+          if ($namaCookie == $data["nama"]) {
             return $data;
           }
         }
