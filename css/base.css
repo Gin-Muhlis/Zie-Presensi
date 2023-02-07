@@ -39,3 +39,74 @@ body {
   -o-border-radius: 15px;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
 }
+
+.wrapper-popup {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+    opacity: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999999;
+}
+
+.popup {
+  max-width: 720px;
+  width:  100%;
+  height: 350px;
+  background-color: #fff;
+  border-radius: 20px;
+  position: relative;
+}
+
+.wrapper-popup.show {
+  pointer-events: auto;
+  opacity:  1;
+}
+
+.popup #image {
+  display: none;
+}
+
+.popup form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup form input {
+  cursor: pointer;
+}
+
+.popup .close-popup {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+.popup form label {
+  display: flex; 
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 30px;
+  border-radius: 5px;
+  background-color: orange;
+  color: #fff;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.popup form label span {
+  font-size: .9rem;
+}

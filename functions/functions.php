@@ -302,3 +302,55 @@ function getKelas()
 
   return $data;
 }
+
+function uploadImage($nama)
+{
+  global $conn;
+  global $table_database;
+
+  $tabel = null;
+
+  foreach ($table_database as $table) {
+    $tabel = $table;
+
+    $result = $conn->query("SELECT * FROM $tabel WHERE nama = '$nama'");
+
+    if (mysqli_num_rows($result) > 0) {
+      $file_name = $_FILES["image"]["name"];
+      $file_directory = $_FILES["image"]["tmp_name"];
+      $file_size = $_FILES["image"]["size"];
+      $error = $_FILES["image"]["error"];
+
+      if ($error === 4) {
+        echo "<script>
+        alert ('File tidak ditemukan!');
+        </script>";
+        return false;
+      }
+
+      $validExtension = array("jpg", "jpeg", "png");
+      $extension = explode(".", $file_name);
+      $extension = strtolower(end($extension));
+
+      if (!in_array($extension, $validExtension)) {
+        echo "<script>
+        alert ('Anda hanya bisa mengupload gambar!');
+        </script>";
+        return false;
+      }
+
+      if ($file_size > 1000000) {
+        echo "<script>
+        alert ('Gambar terlalu besar!');
+        </script>";
+        return false;
+      }
+
+      move_uploaded_file($file_directory, '../../image/' . $file_name);
+
+      $conn->query("UPDATE $tabel SET foto = '$file_name' WHERE nama = '$nama'");
+
+      return mysqli_affected_rows($conn);
+    }
+  }
+}

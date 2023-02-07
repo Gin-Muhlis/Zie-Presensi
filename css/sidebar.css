@@ -27,6 +27,35 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.head-sidebar .image-profile:hover .text-foto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.head-sidebar .image-profile .text-foto {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 99;
+  cursor: pointer;
+  transition: .5s;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.text-foto span {
+  font-size: .8rem;
+  color: #efefef;
+  font-style: italic;
 }
 
 .image-profile img {
