@@ -40,7 +40,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                 echo "src='../../image/profile.jpg'";
               } ?> alt="image-profile">
         <div class="text-foto">
-          <span>Tambah Foto</span>
+          <span>Edit Foto</span>
         </div>
       </div>
       <div class="name-profile">
@@ -89,9 +89,10 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
   <?php
   if (isset($_FILES["image"])) {
-    if (uploadImage($dataUser["nama"]) > 0) {
+    if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]") > 0) {
       echo "<script>
-        alert ('Foto profile berhasil ditambahkan!');
+        alert ('Foto profile berhasil diedit!');
+        document.location.href = './siswa.php';
         </script>";
     }
   }

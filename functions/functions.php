@@ -303,7 +303,7 @@ function getKelas()
   return $data;
 }
 
-function uploadImage($nama)
+function uploadImage($nama, $fotoLama)
 {
   global $conn;
   global $table_database;
@@ -346,9 +346,14 @@ function uploadImage($nama)
         return false;
       }
 
-      move_uploaded_file($file_directory, '../../image/' . $file_name);
+      $newName = uniqid();
+      $newName = $newName . "." . $extension;
 
-      $conn->query("UPDATE $tabel SET foto = '$file_name' WHERE nama = '$nama'");
+      unlink($fotoLama);
+
+      move_uploaded_file($file_directory, '../../image/' . $newName);
+
+      $conn->query("UPDATE $tabel SET foto = '$newName' WHERE nama = '$nama'");
 
       return mysqli_affected_rows($conn);
     }
