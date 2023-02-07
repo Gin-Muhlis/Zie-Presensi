@@ -109,27 +109,27 @@ function checkUser($tables)
 
         switch ($user["level"]) { // !mengecek level dari user yang login lalu arahkan ke halaman yang sesuai dengan level/jabatannya
           case "siswa":
-            header("Location: ../zie presensi/landing/siswa/siswa.php");
+            header("Location: landing/siswa/siswa.php");
             exit;
 
             break;
           case "operator siswa":
-            header("Location: ../zie presensi/landing/operator siswa/operator_siswa.php");
+            header("Location: landing/operator siswa/operator_siswa.php");
             exit;
 
             break;
           case "guru":
-            header("Location: ../zie presensi/landing/guru/guru.php");
+            header("Location: landing/guru/guru.php");
             exit;
 
             break;
           case "wali kelas":
-            header("Location: ../zie presensi/landing/wali kelas/wali_kelas.php");
+            header("Location: landing/wali kelas/wali_kelas.php");
             exit;
 
             break;
           case "kepala sekolah":
-            header("Location: ../zie presensi/landing/kepala sekolah/kepala_sekolah.php");
+            header("Location: landing/kepala sekolah/kepala_sekolah.php");
             exit;
 
             break;

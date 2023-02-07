@@ -66,7 +66,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   </div>
 
   <div class="container">
-    <img src="../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
+    <img src="../../image/faviconSmakzie.png" alt="logo smakzie" class="logo-image">
     <h1>Selamat Datang di Zie Presensi</h1>
     <p>Jangan lupa untuk mengisi absen setiap pagi</p>
   </div>

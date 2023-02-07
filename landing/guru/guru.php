@@ -44,7 +44,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
         <a href="#">Isi Absensi</a>
       </div>
       <div class="menu">
-        <a href="#">Jadwal Pelajaran</a>
+        <a href="jadwalMengajar.php">Jadwal Mengajar</a>
       </div>
       <div class="menu">
         <a href="#">Edit Data</a>
@@ -58,7 +58,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   </div>
 
   <div class="container">
-    <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
+    <img src="../../image/faviconSmakzie.png" alt="logo smakzie" class="logo-image">
     <h1>Selamat Datang di Zie Presensi</h1>
     <p>Jangan lupa untuk mengisi absen setiap pagi</p>
   </div>
