@@ -89,7 +89,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
   <?php
   if (isset($_FILES["image"])) {
-    if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]") > 0) {
+    if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]", "../../image/") > 0) {
       echo "<script>
         alert ('Foto profile berhasil diedit!');
         document.location.href = './siswa.php';

@@ -303,7 +303,7 @@ function getKelas()
   return $data;
 }
 
-function uploadImage($nama, $fotoLama)
+function uploadImage($nama, $fotoLama, $path)
 {
   global $conn;
   global $table_database;
@@ -349,9 +349,11 @@ function uploadImage($nama, $fotoLama)
       $newName = uniqid();
       $newName = $newName . "." . $extension;
 
-      unlink($fotoLama);
+      if (strlen($fotoLama)) {
+        unlink($fotoLama);
+      }
 
-      move_uploaded_file($file_directory, '../../image/' . $newName);
+      move_uploaded_file($file_directory, $path . $newName);
 
       $conn->query("UPDATE $tabel SET foto = '$newName' WHERE nama = '$nama'");
 

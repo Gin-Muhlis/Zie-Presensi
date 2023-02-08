@@ -27,7 +27,9 @@ $kelas = getKelas();
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/data_absensi.css">
+    <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/upload.js"></script>
     <script src="../../js/script-for-absensi-siswa.js"></script>
     <title>halaman kepala sekolah</title>
 </head>
@@ -36,7 +38,14 @@ $kelas = getKelas();
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img <?php if (strlen($dataUser["foto"]) > 0) {
+                            echo "src='../../image/$dataUser[foto]'";
+                        } else {
+                            echo "src='../../image/profile.jpg'";
+                        } ?> alt="image-profile">
+                <div class="text-foto">
+                    <span>Edit Foto</span>
+                </div>
             </div>
             <div class="name-profile">
                 <h2><?= ucwords($dataUser["nama"]) ?></h2>
@@ -63,6 +72,20 @@ $kelas = getKelas();
             </div>
         </div>
     </div>
+
+    <div class="wrapper-popup">
+        <div class="popup">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <label for="image">
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Upload Image</span>
+                </label>
+                <input type="file" name="image" id="image" onchange="this.form.submit()">
+            </form>
+            <i class="fa-solid fa-xmark close-popup"></i>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="wrapper">
@@ -109,6 +132,18 @@ $kelas = getKelas();
             </div>
         </div>
     </div>
+    <?php
+    if (isset($_FILES["image"])) {
+        if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]", "../../image/") > 0) {
+            echo "<script>
+        alert ('Foto profile berhasil diedit!');
+        document.locat
+        ion.href = './absensi_siswa.php';
+        </script>";
+        }
+    }
+
+    ?>
 </body>
 
 </html>

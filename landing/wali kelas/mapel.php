@@ -28,6 +28,9 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/mapelGuru.css">
+    <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
+    <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/upload.js"></script>
     <title>halaman absensi</title>
 </head>
 
@@ -35,7 +38,14 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img <?php if (strlen($dataUser["foto"]) > 0) {
+                            echo "src='../../image/$dataUser[foto]'";
+                        } else {
+                            echo "src='../../image/profile.jpg'";
+                        } ?> alt="image-profile">
+                <div class="text-foto">
+                    <span>Edit Foto</span>
+                </div>
             </div>
             <div class="name-profile">
                 <h2><?= ucwords($dataUser["nama"]) ?></h2>
@@ -68,6 +78,20 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
         </div>
     </div>
 
+    <div class="wrapper-popup">
+        <div class="popup">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <label for="image">
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Upload Image</span>
+                </label>
+                <input type="file" name="image" id="image" onchange="this.form.submit()">
+            </form>
+            <i class="fa-solid fa-xmark close-popup"></i>
+        </div>
+    </div>
+
+
     <div class="container">
         <div class="wrapper">
             <h1>Mata Pelajaran <?= strtoupper($dataUser["kelas"]) ?></h1>
@@ -92,7 +116,7 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
                             <td><?= $no ?></td>
                             <td><?= $mapel["nama_mapel"] ?></td>
                             <td><?= ucwords($mapel["nama_guru"]) ?></td>
-                            <td><?= $mapel["jam_mulai"] ?> <?= $mapel["jam_selesai"] ?></td>
+                            <td><?= $mapel["jam_mulai"] ?> - <?= $mapel["jam_selesai"] ?></td>
                             <td><?= $mapel["nama_hari"] ?></td>
                             <td>
                                 <a href="mapel/edit_mapel.php?id=<?= $mapel["id"] ?>">Edit</a> | <a href="mapel/hapus_mapel.php?id=<?= $mapel["id"] ?>" onclick="return confirm('Apakah anda yakin?')">hapus</a>
@@ -105,6 +129,17 @@ $dataMapel = getAllMapel($dataUser["kelas"]);
         </div>
     </div>
 
+    <?php
+    if (isset($_FILES["image"])) {
+        if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]", "../../image/") > 0) {
+            echo "<script>
+        alert ('Foto profile berhasil diedit!');
+        document.location.href = './mapel.php';
+        </script>";
+        }
+    }
+
+    ?>
 
 
 </body>
