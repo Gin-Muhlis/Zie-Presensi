@@ -369,3 +369,18 @@ function uploadImage($nama, $fotoLama, $path)
     }
   }
 }
+
+function getNIS()
+{
+  global $conn;
+
+  $result = $conn->query("SELECT nis FROM siswa");
+
+  $data = [];
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+  }
+
+  return $data;
+}

@@ -11,6 +11,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
+$bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/siswa.css">
+    <link rel="stylesheet" href="../../css/konsultasi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../js/jquery-3.6.3.min.js"></script>
     <script src="../../js/upload.js"></script>
@@ -83,7 +85,38 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
     <div class="container">
         <div class="wrapper">
+            <h1>Catatan Konsultasi Siswa</h1>
+            <form action="" class="filter-field">
+                <select name="bulan" id="bulan">
+                    <?php for ($i = 0; $i < count($bulan); $i++) : ?>
+                        <option value="<?= $i + 1 ?>"><?= $bulan[$i] ?></option>
+                    <?php endfor; ?>
+                </select>
 
+                <a href="tambahCatatan.php">Tambah Catatan</a>
+            </form>
+            <div class="catatan">
+                <div class="row">
+                    <h3>Gin Gin Nurilham Muhlis</h3>
+                    <p>2023-01-909</p>
+                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
+                </div>
+                <div class="row">
+                    <h3>Gin Gin Nurilham Muhlis</h3>
+                    <p>2023-01-909</p>
+                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
+                </div>
+                <div class="row">
+                    <h3>Gin Gin Nurilham Muhlis</h3>
+                    <p>2023-01-909</p>
+                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
+                </div>
+                <div class="row">
+                    <h3>Gin Gin Nurilham Muhlis</h3>
+                    <p>2023-01-909</p>
+                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
+                </div>
+            </div>
         </div>
     </div>
 
