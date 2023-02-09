@@ -1,9 +1,8 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
-require "../../functions/functionMapel.php";
+require "../../functions/function_absensi_guru.php"; // !memanggil file function_absensi.php
 
-checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
+checkSession("login_bk"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
@@ -13,11 +12,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
-$nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
-$hariIni = $nama_hari[date("w")];
-
-$mataPelajaran = getDataMapel($dataUser["kode"], $hariIni);
-$dataHari = getHari();
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +24,11 @@ $dataHari = getHari();
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/mapel.css">
+    <link rel="stylesheet" href="../../css/styleAbsensi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../js/jquery-3.6.3.min.js"></script>
     <script src="../../js/upload.js"></script>
-    <script src="../../js/script-for-mapel.js"></script>
-    <title>halaman mata pelajaran</title>
+    <title>halaman absensi</title>
 </head>
 
 <body>
@@ -60,19 +53,13 @@ $dataHari = getHari();
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="operator_siswa.php">Home</a>
-            </div>
-            <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="bk.php">Home</a>
             </div>
             <div class="menu" id="active">
-                <a href="#">Jadwal Pelajaran</a>
+                <a href="#">Absensi</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
-            </div>
-            <div class="menu">
-                <a href="agenda/agenda.php">Agenda</a>
+                <a href="konsultasi.php">Konsultasi Siswa</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -96,52 +83,57 @@ $dataHari = getHari();
     </div>
 
 
+
     <div class="container">
         <div class="wrapper">
-            <h1>Jadwal Pelajaran</h1>
-            <form action="" method="POST">
-                <div class="select-field">
-                    <h2>Hari : </h2>
-                    <select name="hari" id="hari">
-                        <?php foreach ($dataHari as $hari) : ?>
-                            <option value="<?= $hari["nama"] ?>" <?php if ($hari["nama"] == $hariIni) {
-                                                                        echo "selected";
-                                                                    } ?>><?= $hari["nama"] ?></option>
-                        <?php endforeach; ?>
-                    </select>
+            <h1>Absensi Kehadiran Guru</h1>
+            <?php if (isset($done) || isAbsensiDone($dataUser["nama"]) > 0) : ?>
+                <div class="message">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <p>Terimaksih Telah mengisi Absensi</p>
                 </div>
-            </form>
-            <div class="data-field" data-kelas="<?= $dataUser["kode"] ?>">
-                <table border="1" cellspacing="0">
-                    <thead>
-                        <th>No</th>
-                        <th>Jam</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Pengajar</th>
-                    </thead>
-                    <?php if (date("w") == 0 || date("w") == 6) : ?>
-                        <tbody>
-                            <tr>
-                                <td colspan="4">Tidak ada jadwal pelajaran hari ini</td>
-                            </tr>
-                        </tbody>
-
-                    <?php else : ?>
-                        <tbody>
-                            <?php $no = 1 ?>
-                            <?php foreach ($mataPelajaran as $mapel) : ?>
-                                <tr>
-                                    <td><?= $no ?></td>
-                                    <td><?= $mapel["jam_mulai"] ?> - <?= $mapel["jam_selesai"] ?></td>
-                                    <td><?= $mapel["nama_mapel"] ?></td>
-                                    <td><?= ucwords($mapel["nama_guru"]) ?></td>
-                                </tr>
-                                <?php $no++; ?>
-                            <?php endforeach; ?>
-                        </tbody>
-                    <?php endif; ?>
-                </table>
-            </div>
+            <?php else : ?>
+                <form action="#" method="POST">
+                    <label class="field disable">
+                        <span class="label">Nama</span>
+                        <span class="two-point">:</span>
+                        <input type="text" name="nama" id="nama" autocomplete="off" value="<?= ucwords($dataUser["nama"]); ?>">
+                    </label>
+                    <label class="field disable">
+                        <span class="label">NIP</span>
+                        <span class="two-point">:</span>
+                        <input type="text" name="nip" id="kelas" autocomplete="off" value="<?= $dataUser["nip"] ?>">
+                    </label>
+                    <div id="status">
+                        <span class="status-field label">Status</span>
+                        <span class="two-point">:</span>
+                        <div class="jenis-status">
+                            <label for="hadir">
+                                <span class="label">Hadir</span>
+                                <input type="radio" name="status" id="hadir" value="hadir" required>
+                            </label>
+                            <label for="izin">
+                                <span class="label">Izin</span>
+                                <input type="radio" name="status" id="izin" value="izin" required>
+                            </label>
+                            <label for="sakit">
+                                <span class="label">Sakit</span>
+                                <input type="radio" name="status" id="sakit" value="sakit" required>
+                            </label>
+                        </div>
+                    </div>
+                    <label for="keterangan">
+                        <div class="field keterangan-field">
+                            <span class="label">keterangan</span>
+                            <span class="two-point">:</span>
+                        </div>
+                        <textarea name="keterangan" id="keterangan" class="keterangan_guru"></textarea>
+                    </label>
+                    <div class="button-area">
+                        <button type="submit" name="kirim-absensi">Kirim</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -150,7 +142,7 @@ $dataHari = getHari();
         if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]", "../../image/") > 0) {
             echo "<script>
         alert ('Foto profile berhasil diedit!');
-        document.location.href = './mapel.php';
+        document.location.href = './absensi.php';
         </script>";
         }
     }

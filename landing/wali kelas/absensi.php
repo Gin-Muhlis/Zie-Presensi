@@ -92,7 +92,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
     <div class="container">
         <div class="wrapper">
-            <h1>Absensi Kehadiran Siswa</h1>
+            <h1>Absensi Kehadiran Guru</h1>
             <?php if (isset($done) || isAbsensiDone($dataUser["nama"]) > 0) : ?>
                 <div class="message">
                     <i class="fa-solid fa-thumbs-up"></i>

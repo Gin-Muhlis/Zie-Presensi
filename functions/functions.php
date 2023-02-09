@@ -3,7 +3,7 @@ session_start(); // !memulai session
 
 $conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 $table_database = array("guru", "kepala_sekolah", "siswa"); // !menyimpan nama tabel di dalam array
-$levels = array("siswa", "guru", "kepala sekolah", "wali kelas", "operator siswa"); // !menyimpan jabatan di dalam array
+$levels = array("siswa", "guru", "kepala sekolah", "wali kelas", "operator siswa", "bk"); // !menyimpan jabatan di dalam array
 $error = null; // !membuat variabel untuk ketika ada error
 
 if (isset($_POST["login"])) { // !mengecek apakah button login di klik
@@ -73,6 +73,11 @@ function checkIsSession()
           exit;
 
           break;
+        case "bk": // !jika nilai dari variabel check adalah kepala sekolah
+          header("Location: landing/bk/bk.php"); // !arahkan ke halaman kepala sekolah
+          exit;
+
+          break;
         default: // !cek ketika level dari data user tidak sesuai
           header("Location: landing/errorLevel.php"); // !arahkan ke halaman error
           exit;
@@ -115,8 +120,6 @@ function checkUser($tables)
         $_SESSION["nama"] = $user["nama"]; // !mengeset session dengan nama nama yang diisi nama dari user
 
         if (isset($_POST["remember"])) { // !mengecek ketika user menekan checkbox remember me
-          // setcookie("id", $user["id"], time() + 30000); 
-          // setcookie("key", hash("sha384", $user["nama"]), time() + 30000);
           setDataCookie($user["nama"], $user["id"]);
         }
 
@@ -127,22 +130,27 @@ function checkUser($tables)
 
             break;
           case "operator siswa":
-            header("Location: ../zie presensi/landing/operator siswa/operator_siswa.php");
+            header("Location: landing/operator siswa/operator_siswa.php");
             exit;
 
             break;
           case "guru":
-            header("Location: ../zie presensi/landing/guru/guru.php");
+            header("Location: landing/guru/guru.php");
             exit;
 
             break;
           case "wali kelas":
-            header("Location: ../zie presensi/landing/wali kelas/wali_kelas.php");
+            header("Location: landing/wali kelas/wali_kelas.php");
             exit;
 
             break;
           case "kepala sekolah":
-            header("Location: ../zie presensi/landing/kepala sekolah/kepala_sekolah.php");
+            header("Location: landing/kepala sekolah/kepala_sekolah.php");
+            exit;
+
+            break;
+          case "bk":
+            header("Location: landing/bk/bk.php");
             exit;
 
             break;

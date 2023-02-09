@@ -16,6 +16,7 @@
 form h2 {
     font-size: 1rem;
     color: #080808;
+    margin-right: 5px;
 }
 form select,
 select option {
@@ -46,4 +47,9 @@ tbody td {
     font-weight: 500;
 }
 
-
+form .select-field {
+    width: 100%;   
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
