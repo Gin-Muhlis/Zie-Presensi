@@ -1,8 +1,8 @@
-# Branch main untuk projek utama dan branch base adalah gambaran dari logika yang telah dibuat
+## Branch main untuk projek utama dan branch base adalah gambaran dari logika yang telah dibuat
 
-# **</-- JIKA INGIN MENJALANKAN PROJECT YANG DI BRANCH BASE DOWNLOAD TERLEBIH DAHULU FILE school.sql DAN IMPORT DI PHPMYADMIN --/**
+## **</-- JIKA INGIN MENJALANKAN PROJECT YANG DI BRANCH BASE DOWNLOAD TERLEBIH DAHULU FILE school.sql DAN IMPORT DI PHPMYADMIN --/**
 
-### (anak anak front end): untuk CDN Bootstrap bisa copy di bawah ini
+#### (anak anak front end): untuk CDN Bootstrap bisa copy di bawah ini
 
 ````
 Di taruh di head
@@ -43,6 +43,6 @@ Di taruh di head
     ```
 ````
 
-# jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
+#### jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
 
-# Semangat!
+#### Semangat!
