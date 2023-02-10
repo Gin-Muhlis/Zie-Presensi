@@ -55,6 +55,8 @@ Rules:
 - jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
 </p>
 
+#### Semangat!
+
 ![image](https://user-images.githubusercontent.com/106357977/218130635-00f46839-96b1-4d28-a144-b86e5d255bf7.png)
 
-#### Semangat!
+
