@@ -43,6 +43,16 @@ Di taruh di head
     ```
 ````
 
-#### jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
+### Rules:
+
+<p>
+Setiap mau ngerjain, wajib pull dan sync terlebih dahulu repo kalian dan project yang udah di clone supaya selalu up to date sama perubahan Repo Utama.
+
+Rules:
+
+- Penamaan files jangan ngasal, liat contoh dari branch "base"
+- jangan otak atik struktur file yang udah ada
+- jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
+</p>
 
 #### Semangat!
