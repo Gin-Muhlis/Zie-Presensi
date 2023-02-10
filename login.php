@@ -47,7 +47,7 @@
             <form action="login.php" method="post">
                 <div class="form-container">
                     <div class="user input">
-                        <input placeholder="Username" class="inputelement" type="text" id="username" name="username" required>
+                        <input placeholder="Username" class="inputelement" type="text" id="username" name="nama" required>
                     </div>
                     <div class="pass input">
                         <input placeholder="Password" class="inputelement" type="password" id="password" name="password" required>
@@ -57,7 +57,7 @@
                         <label for="rememberme">Remember Me</label>
                     </div>
                     <div class="button">
-                        <button type="submit">LOGIN</button>
+                        <button name="login" type="submit">LOGIN</button>
                     </div>
 
 
