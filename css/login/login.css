@@ -72,6 +72,15 @@ header .logform {
   border-radius: 20px;
   padding-bottom: 14.3em;
 }
+header .buledan {
+  position: absolute;
+  left: 40%;
+  top: -3em;
+}
+header .buledan img {
+  height: 100%;
+  width: 6em;
+}
 header .hero {
   position: absolute;
   top: 50%;
@@ -104,4 +113,4 @@ header .text-container p {
   header .text-container p {
     font-size: 3.3rem;
   }
-} /*# sourceMappingURL=login.css.map */
+}/*# sourceMappingURL=login.css.map */

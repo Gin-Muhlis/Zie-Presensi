@@ -41,6 +41,9 @@
             </div>
         </div>
         <div class="wrapper logform">
+            <div class="buledan">
+                <img src="image/EllipseTest.png" alt="" srcset="">
+            </div>
             <form action="login.php" method="post">
                 <div class="form-container">
                     <div class="user input">
