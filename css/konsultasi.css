@@ -5,7 +5,8 @@
     color: #080808;
 }
 
-.wrapper .filter-field {
+.wrapper .filter-field,
+.wrapper .edit-field {
     width:  100%;
     display: flex;
     align-items: center;
@@ -14,14 +15,20 @@
     margin-bottom: 35px;
 }
 
-.wrapper form a {
+.wrapper .edit-field {
+    justify-content: flex-end;
+}
+
+.wrapper form a,
+.wrapper .edit-field a {
     font-size: .9rem;
     text-decoration: none;
     color: #fff;
-    padding: 8px 25px;
+    padding: 9px 25px;
     background-color: #080808;
     border-radius: 5px;
 }
+
 
 .wrapper .catatan {
     width: 100%;
@@ -35,9 +42,16 @@
 .catatan .row {
     width: 100%;
     padding: 10px;
-    background-color: #9D9D9D;
     border-radius: 5px;
     position: relative;
+}
+
+.catatan .diproses {
+    background-color: #393E46;
+}
+
+.catatan .selesai {
+    background-color: #54B435;
 }
 
 .row h3 {
@@ -57,4 +71,82 @@
     transform: translateY(-50%);
     color: #fff;
     cursor: pointer;
+}
+
+.wrapper .form-tambah {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.form-tambah label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.form-tambah label span,
+.dok label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.dok label {
+    margin-bottom: 5px;
+}
+
+.form-tambah label input,
+.form-tambah label select,
+.form-tambah label textarea {
+    width: 100%;
+    padding: 7px;
+    outline: none;
+    font-size: .95rem;
+}
+
+.form-tambah label textarea {
+    height: 100px;
+}
+
+.form-tambah label img {
+    width: 50%;
+}
+
+.form-tambah label p {
+    font-size: 1rem;
+    color: #080808;
+    font-style: italic;
+}
+
+.form-tambah .button-area {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.form-tambah .button-area button {
+    background-color: none;
+    outline: 0;
+    background: #080808;
+    padding: 8px 30px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.wrapper #bulan {
+    padding: 7px;
+    flex-basis: 20%;
+    font-size: 1rem;
+}
+
+.form-tambah label.disable {
+    pointer-events: none;
 }

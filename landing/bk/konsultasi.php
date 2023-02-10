@@ -1,5 +1,6 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
+require "../../functions/function_konsultasi.php"; // !memanggil file functions.php
 
 checkSession("login_bk"); // !menjalankan fungi untuk mengecek session
 
@@ -12,6 +13,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 }
 
 $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+$dataCatatan = getDataKonsultasi("SELECT id, nama_siswa, tanggal, status FROM konsultasi");
 
 ?>
 
@@ -27,6 +30,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
     <link rel="stylesheet" href="../../css/konsultasi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/script-for-catatan.js"></script>
     <script src="../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
@@ -88,6 +92,7 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
             <h1>Catatan Konsultasi Siswa</h1>
             <form action="" class="filter-field">
                 <select name="bulan" id="bulan">
+                    <option value="semua">Semua</option>
                     <?php for ($i = 0; $i < count($bulan); $i++) : ?>
                         <option value="<?= $i + 1 ?>"><?= $bulan[$i] ?></option>
                     <?php endfor; ?>
@@ -96,26 +101,18 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
                 <a href="tambahCatatan.php">Tambah Catatan</a>
             </form>
             <div class="catatan">
-                <div class="row">
-                    <h3>Gin Gin Nurilham Muhlis</h3>
-                    <p>2023-01-909</p>
-                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
-                </div>
-                <div class="row">
-                    <h3>Gin Gin Nurilham Muhlis</h3>
-                    <p>2023-01-909</p>
-                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
-                </div>
-                <div class="row">
-                    <h3>Gin Gin Nurilham Muhlis</h3>
-                    <p>2023-01-909</p>
-                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
-                </div>
-                <div class="row">
-                    <h3>Gin Gin Nurilham Muhlis</h3>
-                    <p>2023-01-909</p>
-                    <i class="fa-sharp fa-solid fa-arrow-right detail"></i>
-                </div>
+                <?php foreach ($dataCatatan as $data) : ?>
+                    <div class="row <?php if ($data["status"] == "diproses") {
+                                        echo "diproses";
+                                    } else {
+                                        echo "selesai";
+                                    } ?>">
+                        <h3><?= ucwords($data["nama_siswa"]) ?></h3>
+                        <p><?= $data["tanggal"] ?></p>
+                        <a href="detailCatatan.php?id=<?= $data["id"] ?>" class="detail"><i class="fa-sharp fa-solid fa-arrow-right"></i></a>
+
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

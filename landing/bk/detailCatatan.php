@@ -12,11 +12,8 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     $dataUser = getDataFromSession();
 }
 
-
-$dataNIS = getNIS();
-$kelas = getKelas();
-
-
+$id = $_GET["id"];
+$dataCatatan = getDataKonsultasi("SELECT * FROM konsultasi WHERE id = $id");
 
 ?>
 
@@ -32,6 +29,7 @@ $kelas = getKelas();
     <link rel="stylesheet" href="../../css/konsultasi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/script-for-catatan.js"></script>
     <script src="../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
@@ -90,67 +88,59 @@ $kelas = getKelas();
 
     <div class="container">
         <div class="wrapper">
-            <h1>Tambah Catatan</h1>
-
+            <h1>Detail Catatan</h1>
+            <div class="edit-field">
+                <a href="editCatatan.php?id=<?= $id ?>" class="editCatatan">Edit Catatan</a>
+            </div>
             <form action="" method="POST" enctype="multipart/form-data" class="form-tambah">
-                <label for="nis">
+                <label for="tanggal" class="disable">
+                    <span>Tanggal Pembuatan Catatan</span>
+                    <input type="text" name="tanggal" id="tanggal" autocomplete="off" value="<?= $dataCatatan[0]["tanggal"] ?>">
+                </label>
+                <label for="nis" class="disable">
                     <span>NIS</span>
-                    <select name="nis" id="nis">
-                        <?php foreach ($dataNIS as $nis) : ?>
-                            <option value="<?= $nis["nis"] ?>"><?= $nis["nis"] ?></option>
-                        <?php endforeach ?>
-                    </select>
+                    <input type="text" name="nis" id="nis" autocomplete="off" value="<?= $dataCatatan[0]["nis_siswa"] ?>">
                 </label>
-                <label for="nama">
+                <label for="nama" class="disable">
                     <span>Nama</span>
-                    <input type="text" name="nama" id="nama" autocomplete="off">
+                    <input type="text" name="nama" id="nama" autocomplete="off" value="<?= ucwords($dataCatatan[0]["nama_siswa"]) ?>">
                 </label>
-                <label for="kelas">
+                <label for="kelas" class="disable">
                     <span>Kelas</span>
-                    <select name="kelas" id="kelas">
-                        <?php foreach ($kelas as $kelas) : ?>
-                            <option value="<?= $kelas["kode"] ?>"><?= strtoupper($kelas["kode"]) ?></option>
-                        <?php endforeach ?>
-                    </select>
+                    <input type="text" name="kelas" id="kelas" autocomplete="off" value="<?= strtoupper($dataCatatan[0]["kelas_siswa"]) ?>">
                 </label>
-                <label for="waliKelas">
+                <label for="waliKelas" class="disable">
                     <span>Wali Kelas</span>
-                    <input type="text" name="waliKelas" id="waliKelas" autocomplete="off">
+                    <input type="text" name="waliKelas" id="waliKelas" autocomplete="off" value="<?= ucwords($dataCatatan[0]["waliKelas_siswa"]) ?>">
                 </label>
-                <label for="guruBk">
+                <label for="guruBk" class="disable">
                     <span>Guru BK</span>
-                    <input type="text" name="guruBk" id="guruBk" autocomplete="off">
+                    <input type="text" name="guruBk" id="guruBk" autocomplete="off" value="<?= ucwords($dataCatatan[0]["guruBK_siswa"]) ?>">
                 </label>
-                <label for="jenis">
-                    <span>Jenis Konsutasi</span>
-                    <select name="jenis" id="jenis">
-                        <option value="Karir">Karir</option>
-                        <option value="Belajar">Belajar</option>
-                        <option value="Kasus">Kasus</option>
-                    </select>
+                <label for="jenisKonsul" class="disable">
+                    <span>Jenis Konsultasi</span>
+                    <input type="text" name="jenisKonsul" id="jenisKonsul" autocomplete="off" value="<?= ucWords($dataCatatan[0]["jenisKonsultasi"]) ?>">
                 </label>
-                <label for="rangkuman">
+                <label for="rangkuman" class="disable">
                     <span>Rangkuman Konsultasi</span>
-                    <textarea name="rangkuman" id="rangkuman"></textarea>
+                    <textarea name="rangkuman" id="rangkuman"><?= ucfirst($dataCatatan[0]["rangkumanKonsultasi"]) ?></textarea>
                 </label>
-                <label for="penanganan">
+                <label for="penanganan" class="disable">
                     <span>Penanganan</span>
-                    <input type="text" name="penanganan" id="penanganan" autocomplete="off">
+                    <input type="text" name="penanganan" id="penanganan" autocomplete="off" value="<?= ucfirst($dataCatatan[0]["penanganan"]) ?>">
                 </label>
-                <div class="dok">
-                    <label for="dokumentasi">Dokumentasi</label>
-                    <input type="file" name="dokumentasi" id="dokumentasi">
-                </div>
-                <label for="status">
+                <label for="status" class="disable">
                     <span>Status</span>
-                    <select name="status" id="status">
-                        <option value="Diproses">Diproses</option>
-                        <option value="Selesai">Selesai</option>
-                    </select>
+                    <input type="text" name="status" id="status" autocomplete="off" value="<?= ucwords($dataCatatan[0]["status"]) ?>">
                 </label>
-                <div class="button-area">
-                    <button type="submit" name="tambahCatatan">Tambah</button>
-                </div>
+                <label class="disable">
+                    <span>Dokumentasi</span>
+                    <?php if (strlen($dataCatatan[0]["dokumentasi"]) > 0) : ?>
+                        <img src="../../image/<?= $dataCatatan[0]["dokumentasi"] ?>" alt="Dokumentasi Catatan">
+                    <?php else : ?>
+                        <p>Tidak ada dokumentasi</p>
+                    <?php endif; ?>
+                </label>
             </form>
         </div>
     </div>
@@ -165,17 +155,6 @@ $kelas = getKelas();
         }
     }
 
-    ?>
-
-    <?php
-    if (isset($_POST["tambahCatatan"])) {
-        if (tambahCatatan($_POST) > 0) {
-            echo "<script>
-                    alert ('Catatan berhasil ditambahkan');
-                    document.location.href = 'konsultasi.php';
-                </script>";
-        }
-    }
     ?>
 
 </body>
