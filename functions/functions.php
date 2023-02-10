@@ -357,7 +357,7 @@ function uploadImage($nama, $fotoLama, $path)
       $newName = uniqid();
       $newName = $newName . "." . $extension;
 
-      if (strlen($fotoLama)) {
+      if (strlen($fotoLama) > 0) {
         unlink($fotoLama);
       }
 

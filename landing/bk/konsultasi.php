@@ -98,7 +98,7 @@ $dataCatatan = getDataKonsultasi("SELECT id, nama_siswa, tanggal, status FROM ko
                     <?php endfor; ?>
                 </select>
 
-                <a href="tambahCatatan.php">Tambah Catatan</a>
+                <a href="tambahCatatan.php" class="tambah">Tambah Catatan</a>
             </form>
             <div class="catatan">
                 <?php foreach ($dataCatatan as $data) : ?>

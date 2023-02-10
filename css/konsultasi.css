@@ -19,7 +19,7 @@
     justify-content: flex-end;
 }
 
-.wrapper form a,
+.wrapper form .tambah,
 .wrapper .edit-field a {
     font-size: .9rem;
     text-decoration: none;
@@ -29,6 +29,9 @@
     border-radius: 5px;
 }
 
+.wrapper .edit-field .hapus {
+    background-color: red;
+}
 
 .wrapper .catatan {
     width: 100%;
@@ -129,6 +132,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+    gap: 7px;
 }
 
 .form-tambah .button-area button {
@@ -139,6 +143,16 @@
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
+}
+
+.form-tambah .button-area .batal {
+    color: #080808;
+    text-decoration: none;
+        background: none;
+            border: 1px solid #080808;
+            padding: 8px 30px;
+            cursor: pointer;
+            border-radius: 5px;
 }
 
 .wrapper #bulan {
