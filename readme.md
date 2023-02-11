@@ -1,8 +1,8 @@
-# Branch main untuk projek utama dan branch base adalah gambaran dari logika yang telah dibuat
+## Branch main untuk projek utama dan branch base adalah gambaran dari logika yang telah dibuat
 
-# **</-- JIKA INGIN MENJALANKAN PROJECT YANG DI BRANCH BASE DOWNLOAD TERLEBIH DAHULU FILE school.sql DAN IMPORT DI PHPMYADMIN --/**
+## **</-- JIKA INGIN MENJALANKAN PROJECT YANG DI BRANCH BASE DOWNLOAD TERLEBIH DAHULU FILE school.sql DAN IMPORT DI PHPMYADMIN --/**
 
-### (anak anak front end): untuk CDN Bootstrap bisa copy di bawah ini
+#### (anak anak front end): untuk CDN Bootstrap bisa copy di bawah ini
 
 ````
 Di taruh di head
@@ -43,6 +43,20 @@ Di taruh di head
     ```
 ````
 
-# jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
+### Rules:
 
-# Semangat!
+<p>
+Setiap mau ngerjain, wajib pull dan sync terlebih dahulu repo kalian dan project yang udah di clone supaya selalu up to date sama perubahan Repo Utama.
+
+Rules:
+
+- Penamaan files jangan ngasal, liat contoh dari branch "base"
+- jangan otak atik struktur file yang udah ada
+- jangan ngoprek direktori yang udah ada, kalau mau ijin dulu dan di pastiin ga bikin rusak. Meminta ijin kepada yang contributor / lord Gin Gin
+</p>
+
+#### Semangat!
+
+![image](https://user-images.githubusercontent.com/106357977/218130635-00f46839-96b1-4d28-a144-b86e5d255bf7.png)
+
+
