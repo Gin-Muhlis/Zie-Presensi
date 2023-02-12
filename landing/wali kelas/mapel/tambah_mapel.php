@@ -3,7 +3,7 @@ require "../../../functions/functions.php"; // !memanggil file functions.php
 require "../../../functions/function_absensi_guru.php"; // !memanggil file function_absensi.php
 require "../../../functions/functionMapel.php";
 
-checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
+checkSession("login_wali kelas", "../../../login.php"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
@@ -100,7 +100,6 @@ $dataHari = getHari();
             <form action="" method="POST">
                 <label for="mapel">
                     <span class="label">Mata Pelajaran</span>
-                    <span class="two-point">:</span>
                     <select name="mapel" id="mapel">
                         <?php for ($i = 0; $i < count($dataMapel); $i++) : ?>
                             <option value="<?= $i + 1 ?>"><?= $dataMapel[$i]["nama"]; ?></option>
@@ -110,7 +109,6 @@ $dataHari = getHari();
                 </label>
                 <label for="guru">
                     <span class="label">Guru</span>
-                    <span class="two-point">:</span>
                     <select name="guru" id="guru">
                         <?php for ($i = 0; $i < count($dataGuru); $i++) : ?>
                             <option value="<?= $i + 1 ?>"><?= ucwords($dataGuru[$i]["nama"]); ?></option>
@@ -119,17 +117,14 @@ $dataHari = getHari();
                 </label>
                 <label for="jam_mulai">
                     <span class="label">Jam Mulai</span>
-                    <span class="two-point">:</span>
                     <input type="text" name="jam_mulai" id="jam_mulai">
                 </label>
                 <label for="jam_selesai">
                     <span class="label">Jam Selesai</span>
-                    <span class="two-point">:</span>
                     <input type="text" name="jam_selesai" id="jam_selesai">
                 </label>
                 <label for="hari">
                     <span class="label">Hari</span>
-                    <span class="two-point">:</span>
                     <select name="hari" id="hari">
                         <?php for ($i = 0; $i < count($dataHari); $i++) : ?>
                             <option value="<?= $i + 1 ?>"><?= ucwords($dataHari[$i]["nama"]); ?></option>

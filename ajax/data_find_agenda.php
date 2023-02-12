@@ -1,7 +1,6 @@
 <?php
 require "../functions/function_agenda.php"; // !memanggil file functions_data_absensi.php
 
-$conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 $dataKelas = $_GET["dataKelas"];
 $keyword = $_GET["keyword"];
 

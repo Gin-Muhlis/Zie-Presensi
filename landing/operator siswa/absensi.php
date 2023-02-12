@@ -2,7 +2,7 @@
 require "../../functions/functions.php"; // !memanggil file functions.php
 require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
 
-checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
+checkSession("login_operator siswa", "../../login.php"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 

@@ -1,7 +1,7 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
 
-checkSession("login_siswa"); // !menjalankan fungi untuk mengecek session
+  checkSession("login_siswa", "../../login.php"); // !menjalankan fungsi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 

@@ -3,7 +3,7 @@ require "../../functions/functions.php"; // !memanggil file functions.php
 require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
 require "../../functions/functionMapel.php";
 
-checkSession("login_siswa"); // !menjalankan fungsi untuk mengecek session
+checkSession("login_siswa", "../../login.php"); // !menjalankan fungsi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 

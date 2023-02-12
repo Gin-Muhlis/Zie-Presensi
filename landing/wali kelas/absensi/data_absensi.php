@@ -2,7 +2,7 @@
 require "../../../functions/functions.php"; // !memanggil file functions.php
 require "../../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
 
-checkSession("login_wali kelas"); // !menjalankan fungi untuk mengecek session
+checkSession("login_wali kelas", "../../../login.php"); // !menjalankan fungi untuk mengecek session
 
 $dataUser = ""; // !membuat variabel untuk menyimpan data user
 
@@ -63,7 +63,7 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
                 <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="../mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Mata Pelajaran</a>
             </div>
             <div class="menu" id="active">
                 <a href="#">Absensi Kelas</a>

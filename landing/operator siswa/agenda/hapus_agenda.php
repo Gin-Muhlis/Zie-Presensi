@@ -1,7 +1,7 @@
 <?php
 require "../../../functions/functions.php"; // !memanggil file functions.php
 
-checkSession("login_operator siswa"); // !menjalankan fungsi untuk mengecek session
+checkSession("login_operator siswa", "../../../login.php"); // !menjalankan fungi untuk mengecek session
 
 $conn = mysqli_connect("localhost", "root", "", "school");
 

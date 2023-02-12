@@ -1,8 +1,7 @@
 <?php
 require "../../functions/functions.php"; // !memanggil file functions.php
-$conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
 
-checkSession("login_bk"); // !menjalankan fungi untuk mengecek session
+checkSession("login_bk", "../../login.php"); // !menjalankan fungi untuk mengecek session
 
 $id = $_GET["id"];
 $gambar = $_GET["gambar"];
