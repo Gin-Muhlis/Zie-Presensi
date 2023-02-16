@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: red;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+header {
+  background-color: rgb(109, 109, 167);
+  height: 50.5em;
+  position: relative;
+  width: 100%;
+  border-radius: 0px 0px 50px 50px;
+}
+header form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5.4em;
+}
+header form .form-container {
+  font-size: 1.6rem;
+}
+header form .form-container .inputelement {
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+  width: 14em;
+  height: 2.3em;
+  border: 2px solid black;
+}
+header form .form-container .inputelement:focus {
+  outline: none;
+}
+header form .form-container .user.input {
+  margin-bottom: 2em;
+}
+header form .form-container .button {
+  text-align: center;
+  margin-top: 1.5em;
+}
+header form .form-container .button button {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 7em;
+  transition: 0.2s ease-in-out;
+}
+header form .form-container .button button:hover {
+  background: rgb(48, 48, 106);
+  color: white;
+}
+header form .form-container .rememberinput {
+  margin-top: 2.7em;
+}
+header .logform {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28em;
+  height: 31em;
+  background: #e7e7e7;
+  border-radius: 20px;
+  padding-bottom: 14.3em;
+}
+header .buledan {
+  position: absolute;
+  left: 40%;
+  top: -3em;
+}
+header .buledan img {
+  height: 100%;
+  width: 6em;
+}
+header .hero {
+  position: absolute;
+  top: 50%;
+  margin-top: -25px;
+  margin-left: 3.3em;
+}
+@media all and (min-width: 768px) {
+  header .hero {
+    position: static;
+    padding: 15em 1em 1em 1em;
+    margin: 0;
+    text-align: center;
+  }
+}
+header .text-container {
+  color: white;
+}
+header .text-container h1 {
+  font-size: 2.7rem;
+}
+@media all and (min-width: 768px) {
+  header .text-container h1 {
+    font-size: 5.5rem;
+  }
+}
+header .text-container p {
+  font-size: 2.5rem;
+}
+@media all and (min-width: 768px) {
+  header .text-container p {
+    font-size: 3.3rem;
+  }
+}/*# sourceMappingURL=login.css.map */
