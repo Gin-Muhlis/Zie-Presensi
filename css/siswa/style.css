@@ -6,9 +6,13 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  margin: 0;
+}
+
 @media all and (max-width: 768px) {
   .wrapper-desktop {
-    visibility: hidden;
+    display: none;
   }
 }
 .wrapper-desktop {
@@ -24,10 +28,17 @@ html {
   align-items: center;
 }
 
+.wrapper-kabehan {
+  height: 100vh;
+}
 @media all and (min-width: 768px) {
   .wrapper-kabehan {
     display: flex;
   }
+}
+.wrapper-kabehan .mobile {
+  height: 100%;
+  background: rgb(121, 106, 136);
 }
 @media all and (min-width: 768px) {
   .wrapper-kabehan .mobile {
@@ -88,11 +99,6 @@ html {
   justify-content: center;
   gap: 2.4em;
 }
-@media all and (min-width: 768px) {
-  .wrapper-kabehan .pilihan .pilihan-container {
-    margin-top: 70%;
-  }
-}
 .wrapper-kabehan .pilihan .pilihan-container button {
   width: 9.4em;
   height: 9.4em;
@@ -104,4 +110,8 @@ html {
 }
 .wrapper-kabehan .pilihan .pilihan-container .tombol h2 {
   padding-top: 0.8em;
+}
+
+footer {
+  background: black;
 }/*# sourceMappingURL=style.css.map */

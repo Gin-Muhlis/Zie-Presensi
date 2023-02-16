@@ -6,9 +6,13 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  margin: 0;
+}
+
 @media all and (max-width: 768px) {
   .wrapper-desktop {
-    visibility: hidden;
+    display: none;
   }
 }
 
@@ -31,11 +35,15 @@ html {
   @media all and (min-width: 768px) {
     display: flex;
   }
+  height: 100vh;
 
   .mobile {
     @media all and (min-width: 768px) {
       max-width: 290px;
     }
+    height: 100%;
+
+    background: rgb(121, 106, 136);
   }
 
   .wrapper {
@@ -100,7 +108,7 @@ html {
       gap: 2.4em;
 
       @media all and (min-width: 768px) {
-        margin-top: 70%;
+        // margin-top: 70%;
       }
 
       button {
@@ -118,4 +126,8 @@ html {
       }
     }
   }
+}
+
+footer {
+  background: black;
 }
