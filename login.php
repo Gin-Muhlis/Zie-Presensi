@@ -1,8 +1,18 @@
 <?php
-require_once("functions/functions.php"); // !memanggil file functions.php 
+require "koneksi.php";
+require "functions/login_function.php";
 
-checkCookie(); // !menjalankan fungsi untuk mengecek cookie
-checkIsSession(); // !menjalankan fungsi untuk mengecek session
+// require_once("functions/functions.php"); 
+
+// checkCookie(); 
+// checkIsSession();
+
+// cek user
+if (isset($_POST["login"])) {
+  login($_POST["username"], $_POST["password"], $conn);
+}
+checkCookie($conn);
+checkSession();
 
 ?>
 
@@ -22,13 +32,13 @@ checkIsSession(); // !menjalankan fungsi untuk mengecek session
   <div class="wrapper">
     <h1>Login</h1>
     <form action="#" method="POST">
-      <label for="nama" class="label-input-text">
-        <input type="text" id="nama" name="nama" autocomplete="off" required class="input-text">
-        <span>Nama : </span>
+      <label for="username" class="label-input-text">
+        <input type="text" id="username" name="username" autocomplete="off" required class="input-text">
+        <span>Username</span>
       </label>
       <label for="password" class="label-input-text">
         <input type="password" id="password" name="password" autocomplete="off" required class="input-text">
-        <span>Password : </span>
+        <span>Password</span>
       </label>
       <div class="remember">
         <input type="checkbox" name="remember" id="remember">

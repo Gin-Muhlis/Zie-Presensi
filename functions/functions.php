@@ -165,7 +165,7 @@ function checkUser($tables)
 }
 
 // !---------- cek session ----------!
-function checkSession($nameOfSession, $path) // !function untuk mengecek session di halaman landing page
+function checkSession($nameOfSession, $path) // !function  session di halaman landing page
 {
 
   if (!isset($_SESSION[$nameOfSession])) { // !mengecek ketika tidak ada session yang sesuai dengan argumen yang dikirim

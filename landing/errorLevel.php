@@ -27,6 +27,9 @@
 
 <body>
   <h1>Anda tidak terdaftar sebagai apapun!</h1>
+  <?php
+  session_start();
+  var_dump($_SESSION["user"]) ?>
 </body>
 
 </html>

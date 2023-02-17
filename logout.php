@@ -1,13 +1,14 @@
 <?php
 session_start(); // !Memulai session 
-
-$conn = mysqli_connect("localhost", "root", "", "school"); // !koneksi ke database
+require "koneksi.php";
 
 session_unset(); // !menghapus session
 session_destroy(); // !menghapus session
 
 $id = $_GET["id"];
 
-$conn->query("DELETE FROM cookie WHERE user_id = $id");
+setcookie("key", $id, time() - 3600);
+
+$conn->query("DELETE FROM cookie WHERE user_id = '$id'");
 
 header("Location: ./login.php"); // !untuk redirect ke halaman login

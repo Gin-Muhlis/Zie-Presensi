@@ -1,16 +1,29 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
+require "../../koneksi.php";
+require "../../functions/login_function.php";
+// require "../../functions/functions.php"; 
+// checkSession("login_siswa", "../../login.php"); 
 
-  checkSession("login_siswa", "../../login.php"); // !menjalankan fungsi untuk mengecek session
 
-$dataUser = ""; // !membuat variabel untuk menyimpan data user
-
-if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
-  $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
-} else { // !ketika function getDataFromCookie mengembalikan false
-  $dataUser = getDataFromSession();
+// cek user apakah sudah login atau belum
+if (!isLoggedIn()) {
+  Header("Location: ../../login.php");
+  exit();
 }
 
+// cek user apakah memiliki role yang benar
+if (!hasRole("siswa")) {
+  Header("Location: ../errorLevel.php");
+  exit();
+}
+
+$dataUser = "";
+
+if (isset($_COOKIE["key"])) {
+  $dataUser = getDataFromCookie($conn);
+} else {
+  $dataUser = $_SESSION["user"];
+}
 
 ?>
 
@@ -34,20 +47,16 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
   <div class="sidebar">
     <div class="head-sidebar">
       <div class="image-profile">
-        <img <?php if (strlen($dataUser["foto"]) > 0) {
-                echo "src='../../image/$dataUser[foto]'";
-              } else {
-                echo "src='../../image/profile.jpg'";
-              } ?> alt="image-profile">
+        <img src="../../image/profile.jpg" alt="image-profile">
         <div class="text-foto">
           <span>Edit Foto</span>
         </div>
       </div>
       <div class="name-profile">
-        <h2><?= ucwords($dataUser["nama"]) ?></h2>
+        <h2><?= ucwords($dataUser["username"]) ?></h2>
       </div>
       <div class="class-profile">
-        <p><?= ucwords($dataUser["level"]) ?></p>
+        <p><?= ucwords($dataUser["role"]) ?></p>
       </div>
     </div>
     <div class="body-sidebar">
@@ -63,7 +72,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">
-        <a href="../../logout.php?id=<?= $dataUser["id"] ?>">Keluar</a>
+        <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
       </div>
     </div>
   </div>

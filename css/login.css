@@ -76,7 +76,7 @@ label .input-text {
   color: #fff;
 }
 
-label input#nama,
+label input#username,
 label input#password {
   border-bottom: 1px solid rgba(255, 255, 255, .7);
 }
@@ -86,7 +86,7 @@ label input:focus~span {
   font-size: 14px;
 }
 
-label input#nama:valid~span,
+label input#username:valid~span,
 label input#password:valid~span {
   transform: translateY(0);
   font-size: 14px;
