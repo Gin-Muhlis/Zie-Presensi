@@ -9,8 +9,9 @@ require "functions/login_function.php";
 
 // cek user
 if (isset($_POST["login"])) {
-  login($_POST["username"], $_POST["password"], $conn);
+  login($conn);
 }
+
 checkCookie($conn);
 checkSession();
 

@@ -1,20 +1,29 @@
 <?php
-require "../../../functions/functions.php"; // !memanggil file functions.php
-require "../../../functions/function_data_absensi.php"; // !memanggil file functions_data_absensi.php
+require "../../../koneksi.php";
+require "../../../functions/login_function.php";
 
-checkSession("login_operator siswa", "../../../login.php"); // !menjalankan fungi untuk mengecek session
-
-$dataUser = ""; // !membuat variabel untuk menyimpan data user
-
-if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
-    $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
-} else { // !ketika function getDataFromCookie mengembalikan false
-    $dataUser = getDataFromSession();
+// cek user apakah sudah login atau belum
+if (!isLoggedIn()) {
+    Header("Location: ../../../login.php");
+    exit();
 }
 
-$kodeKelas = strtolower($dataUser["kode"]);
+// cek user apakah memiliki role yang benar
+if (!hasRole("operator siswa")) {
+    Header("Location: ../errorLevel.php");
+    exit();
+}
 
-$dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'");
+$dataUser = "";
+
+if (isset($_COOKIE["key"])) {
+    $dataUser = getDataFromCookie($conn);
+} else {
+    $dataUser = getDataFromSession($conn);
+}
+
+$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+$bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
 ?>
 
@@ -39,20 +48,16 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img <?php if (strlen($dataUser["foto"]) > 0) {
-                            echo "src='../../../image/$dataUser[foto]'";
-                        } else {
-                            echo "src='../../../image/profile.jpg'";
-                        } ?> alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
                 <div class="text-foto">
                     <span>Edit Foto</span>
                 </div>
             </div>
             <div class="name-profile">
-                <h2><?= ucwords($dataUser["nama"]) ?></h2>
+                <h2><?= ucwords($dataUser["username"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= ucwords($dataUser["level"]) ?></p>
+                <p><?= ucwords($dataUser["role"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
@@ -66,18 +71,19 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
                 <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu" id="active">
-                <a href="#">Data Absensi</a>
+                <a href="#">Isi Absensi</a>
             </div>
             <div class="menu">
-                <a href="../agenda/agenda.php">Agenda</a>
+                <a href="../agenda/agenda.php">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../../logout.php?id=<?= $dataUser["id"] ?>">Keluar</a>
+                <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
     </div>
+
 
     <div class="wrapper-popup">
         <div class="popup">
@@ -94,70 +100,15 @@ $dataAbsensi = getDataAbsensi("SELECT * FROM absensi WHERE kelas = '$kodeKelas'"
 
     <div class="container">
         <div class="wrapper">
-            <h1>Data Absensi</h1>
-            <form action="" method="post">
-                <input type="text" name="search" id="keyword" placeholder="Cari data absensi">
-                <a href="tambah_data_absensi.php">Tambah Data</a>
-            </form>
-            <div class="data-field" data-kelas="<?= $dataUser["kode"] ?>">
-                <table border="1" cellspacing="0">
-                    <thead>
-                        <th>No</th>
-                        <th>No Absen</th>
-                        <th>Nama</th>
-                        <th>Tanggal</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1 ?>
-                        <?php foreach ($dataAbsensi as $data) : ?>
-                            <tr>
-                                <td><?= $no ?></td>
-                                <td><?= $data["no_absen"] ?></td>
-                                <td><?= ucwords($data["nama"]) ?></td>
-                                <td><?= $data["tanggal"] ?></td>
-                                <td class="status" <?php
-                                                    switch ($data["status"]) {
-                                                        case "hadir":
-                                                            echo "style='background: #54B435;'";
-                                                            break;
-                                                        case "izin":
-                                                            echo "style='background: #4B56D2;'";
-                                                            break;
-                                                        case "sakit":
-                                                            echo "style='background: #FF1E1E;'";
-                                                            break;
-                                                        default:
-                                                            echo "style='background: #2C3333;'";
-                                                    }
-                                                    ?>><?= ucwords($data["status"]) ?></td>
-                                <td><?= ucfirst($data["keterangan"]) ?></td>
-                                <td>
-                                    <a href="edit_absensi.php?id=<?= $data['id'] ?>">Edit</a> | <a href="hapus_absensi.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">Hapus</a>
-                                </td>
-                            </tr>
-                            <?php $no++ ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="text-date">
+                <h1>Isi Absensi <?= $dataUser["tingkat"] ?> <?= ucwords($dataUser["bidang_keahlian"]) ?> <?= $dataUser["rombel"] ?></h1>
+                <p><?= $hari[date("w")] ?>, <?= date("d") ?> <?= $bulan[date("n") - 1] ?> <?= date("Y") ?></p>
+            </div>
+            <div class="button-tambah-absensi">
+                <a href="tambah_data_absensi.php">Isi Absensi</a>
             </div>
         </div>
     </div>
-
-    <?php
-    if (isset($_FILES["image"])) {
-        if (uploadImage($dataUser["nama"], "../../../image/$dataUser[foto]", "../../../image/") > 0) {
-            echo "<script>
-        alert ('Foto profile berhasil diedit!');
-        document.location.href = './data_absensi.php';
-        </script>";
-        }
-    }
-
-    ?>
-
 
 </body>
 

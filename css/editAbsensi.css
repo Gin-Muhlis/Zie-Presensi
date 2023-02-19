@@ -1,5 +1,91 @@
-.container .wrapper .field input {
-    background: #fff;
-    border-radius: 0px;
-    color: #000;
+.wrapper h1 {
+    font-size: 2rem;
+    color: #080808;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.wrapper form {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form > label,
+form #status {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form > label span,
+#status span {
+    font-size: 1.1rem;
+    color: #080808;
+    font-weight: 600;
+}
+
+label select {
+    width: 100%;
+    padding: 7px;
+    font-size: 1rem;
+}
+
+label select option {
+    padding: 7px;
+    font-size: 1rem;
+}
+
+#status .jenis-status {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.jenis-status label {
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+    gap: 5px;
+}
+
+#status .jenis-status label span {
+    order: 2;
+    font-weight: 400;
+}
+
+label textarea {
+    width: 100%;
+    height: 150px;
+    padding: 7px;
+    font-family: "Poppins", sans-serif;
+    outline: none;
+    font-size: 1rem;
+}
+
+form .button-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+
+.button-area button {
+    outline: 0;
+    border: none;
+    background: #080808;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 30px;
+    cursor: pointer;
 }

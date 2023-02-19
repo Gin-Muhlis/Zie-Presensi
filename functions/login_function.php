@@ -16,7 +16,7 @@ function hasRole($role)
 {
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
-        if ($user['role'] == $role) {
+        if ($user['hak_akses'] == $role) {
             return true;
         }
     }
@@ -24,8 +24,11 @@ function hasRole($role)
 }
 
 // Fungsi untuk melakukan login
-function login($username, $password, $conn)
+function login($conn)
 {
+    // ambil username dan password
+    $username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["username"]));
+    $password = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["password"]));
     // cari data
     $query = "SELECT * FROM user WHERE username='$username' AND password = '$password'";
     $result = mysqli_query($conn, $query);
@@ -80,14 +83,6 @@ function login($username, $password, $conn)
     } else {
         return false;
     }
-}
-
-// Fungsi untuk logout
-function logout()
-{
-    unset($_SESSION['user']);
-    header('location: login.php');
-    exit();
 }
 
 function checkSession()
@@ -181,7 +176,15 @@ function getDataFromCookie($conn)
         $dataCookie = mysqli_fetch_assoc($query);
         $userID = $dataCookie["user_id"];
 
-        $result = mysqli_query($conn, "SELECT * FROM user WHERE id_operator = '$userID'");
+        $query = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
+                FROM user
+                JOIN siswa ON user.id = siswa.id
+                JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
+                JOIN kelas ON kelas.id = siswa_kelas.id_kelas
+                JOIN jurusan ON kelas.id = jurusan.id
+                WHERE user.id_operator = '$userID'";
+
+        $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
@@ -189,6 +192,33 @@ function getDataFromCookie($conn)
             if ($userID === $row["id_operator"]) {
                 return $row;
             }
+        }
+    }
+
+    return false;
+}
+
+// ambil data from session
+function getDataFromSession($conn)
+{
+    $dataSession = $_SESSION["user"];
+    $userID = $dataSession["id_operator"];
+
+    $query = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
+                FROM user
+                JOIN siswa ON user.id = siswa.id
+                JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
+                JOIN kelas ON kelas.id = siswa_kelas.id_kelas
+                JOIN jurusan ON kelas.id =jurusan.id
+                WHERE id_operator = '$userID'";
+
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        if ($userID === $row["id_operator"]) {
+            return $row;
         }
     }
 

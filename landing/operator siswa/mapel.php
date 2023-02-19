@@ -1,23 +1,27 @@
 <?php
-require "../../functions/functions.php"; // !memanggil file functions.php
-require "../../functions/function_absensi.php"; // !memanggil file function_absensi.php
-require "../../functions/functionMapel.php";
+require "../../koneksi.php";
+require "../../functions/login_function.php";
 
-checkSession("login_operator siswa", "../../login.php"); // !menjalankan fungi untuk mengecek session
-
-$dataUser = ""; // !membuat variabel untuk menyimpan data user
-
-if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
-    $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
-} else { // !ketika function getDataFromCookie mengembalikan false
-    $dataUser = getDataFromSession();
+// cek user apakah sudah login atau belum
+if (!isLoggedIn()) {
+    Header("Location: ../../login.php");
+    exit();
 }
 
-$nama_hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
-$hariIni = $nama_hari[date("w")];
+// cek user apakah memiliki role yang benar
+if (!hasRole("operator siswa")) {
+    Header("Location: ../errorLevel.php");
+    exit();
+}
 
-$mataPelajaran = getDataMapel($dataUser["kode"], $hariIni);
-$dataHari = getHari();
+$dataUser = "";
+
+if (isset($_COOKIE["key"])) {
+    $dataUser = getDataFromCookie($conn);
+} else {
+    $dataUser = $_SESSION["user"];
+}
+
 ?>
 
 <!DOCTYPE html>

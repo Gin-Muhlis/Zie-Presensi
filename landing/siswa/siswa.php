@@ -12,7 +12,7 @@ if (!isLoggedIn()) {
 }
 
 // cek user apakah memiliki role yang benar
-if (!hasRole("siswa")) {
+if (!hasRole("siswa kelas")) {
   Header("Location: ../errorLevel.php");
   exit();
 }

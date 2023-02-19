@@ -1,19 +1,31 @@
 <?php
-require "../../../functions/functions.php"; // !memanggil file functions.php
-require "../../../functions/function_tambah_data_absensi.php"; // !memanggil file function_absensi.php
+require "../../../koneksi.php";
+require "../../../functions/login_function.php";
+require "../../../functions/absensi_siswa_functioin.php";
 
-checkSession("login_operator siswa", "../../../login.php"); // !menjalankan fungi untuk mengecek session
-
-$dataUser = ""; // !membuat variabel untuk menyimpan data user
-
-if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
-    $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
-} else { // !ketika function getDataFromCookie mengembalikan false
-    $dataUser = getDataFromSession();
+// cek user apakah sudah login atau belum
+if (!isLoggedIn()) {
+    Header("Location: ../../../login.php");
+    exit();
 }
 
-?>
+// cek user apakah memiliki role yang benar
+if (!hasRole("operator siswa")) {
+    Header("Location: ../errorLevel.php");
+    exit();
+}
 
+$dataUser = "";
+
+if (isset($_COOKIE["key"])) {
+    $dataUser = getDataFromCookie($conn);
+} else {
+    $dataUser = getDataFromSession($conn);
+}
+
+$dataSiswa = getDataSiswa($conn, $dataUser["bidang_keahlian"], $dataUser["tingkat"]);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +36,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../../css/base.css">
     <link rel="stylesheet" href="../../../css/sidebar.css">
-    <link rel="stylesheet" href="../../../css/styleAbsensi.css">
     <link rel="stylesheet" href="../../../css/editAbsensi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../../js/jquery-3.6.3.min.js"></script>
@@ -36,20 +47,16 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img <?php if (strlen($dataUser["foto"]) > 0) {
-                            echo "src='../../../image/$dataUser[foto]'";
-                        } else {
-                            echo "src='../../../image/profile.jpg'";
-                        } ?> alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
                 <div class="text-foto">
                     <span>Edit Foto</span>
                 </div>
             </div>
             <div class="name-profile">
-                <h2><?= ucwords($dataUser["nama"]) ?></h2>
+                <h2><?= ucwords($dataUser["username"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= ucwords($dataUser["level"]) ?></p>
+                <p><?= ucwords($dataUser["role"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
@@ -66,12 +73,12 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                 <a href="data_absensi.php">Data Absensi</a>
             </div>
             <div class="menu">
-                <a href="agenda.php">Agenda</a>
+                <a href="../agenda/agenda.php">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../../logout.ph?id=<?= $dataUser["id"] ?>">Keluar</a>
+                <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
     </div>
@@ -91,31 +98,27 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
 
     <div class="container">
         <div class="wrapper">
-            <h1>Absensi Kehadiran Siswa</h1>
+            <h1>Siswa Yang Tidak Hadir</h1>
             <form action="#" method="POST">
                 <label class="field">
                     <span class="label">Nama</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="nama" id="nama" autocomplete="off">
-                </label>
-                <label class="field">
-                    <span class="label">Kelas</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="kelas" id="kelas" autocomplete="off">
+                    <select name="nama" id="nama">
+                        <?php foreach ($dataSiswa as $siswa) : ?>
+                            <option value="<?= $siswa["id"] ?>"><?= ucwords($siswa["nama"]) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </label>
                 <label class="field">
                     <span class="label">No Absen</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="no_absen" id="no_absen" autocomplete="off">
+                    <select name="no_absen" id="no_absen">
+                        <?php foreach ($dataSiswa as $siswa) : ?>
+                            <option value="<?= $siswa["no_absen"] ?>"><?= $siswa["no_absen"] ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </label>
                 <div id="status">
                     <span class="status-field label">Status</span>
-                    <span class="two-point">:</span>
                     <div class="jenis-status">
-                        <label for="hadir">
-                            <span class="label">Hadir</span>
-                            <input type="radio" name="status" id="hadir" value="hadir" required>
-                        </label>
                         <label for="izin">
                             <span class="label">Izin</span>
                             <input type="radio" name="status" id="izin" value="izin" required>
@@ -133,7 +136,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
                 <label for="keterangan">
                     <div class="field keterangan-field">
                         <span class="label">keterangan</span>
-                        <span class="two-point">:</span>
                     </div>
                     <textarea name="keterangan" id="keterangan"></textarea>
                 </label>
@@ -148,7 +150,7 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     <?php
 
     if (isset($_POST["tambah-absensi"])) {
-        if (tambahDataAbsensi() > 0) {
+        if (tambahDataAbsensi($conn) > 0) {
             echo "<script>
                 alert('Data absensi berhasil ditambahkan');
                 document.location.href = './data_absensi.php';
@@ -157,19 +159,6 @@ if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCoo
     }
 
     ?>
-
-    <?php
-    if (isset($_FILES["image"])) {
-        if (uploadImage($dataUser["nama"], "../../../image/$dataUser[foto]", "../../../image/") > 0) {
-            echo "<script>
-        alert ('Foto profile berhasil diedit!');
-        document.location.href = './data_absensi.php';
-        </script>";
-        }
-    }
-
-    ?>
-
 
 </body>
 
