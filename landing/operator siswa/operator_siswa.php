@@ -70,7 +70,7 @@ if (isset($_COOKIE["key"])) {
                 <a href="absensi/data_absensi.php">Data Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Isi Agenda</a>
+                <a href="agenda/agenda.php">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">

@@ -38,9 +38,6 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
     <link rel="stylesheet" href="../../../css/sidebar.css">
     <link rel="stylesheet" href="../../../css/data_absensi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../../js/upload.js"></script>
-    <script src="../../../js/script.js"></script>
     <title>halaman operator siswa</title>
 </head>
 

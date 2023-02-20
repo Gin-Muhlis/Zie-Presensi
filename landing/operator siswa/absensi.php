@@ -1,6 +1,7 @@
 <?php
 require "../../koneksi.php";
 require "../../functions/login_function.php";
+require "../../functions/absensi_siswa_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
@@ -21,6 +22,13 @@ if (isset($_COOKIE["key"])) {
 } else {
   $dataUser = getDataFromSession($conn);
 }
+
+
+$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+$bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+$kehadiran = cekKehadiran($conn, $dataUser['id']);
+
 
 ?>
 
@@ -56,19 +64,19 @@ if (isset($_COOKIE["key"])) {
     </div>
     <div class="body-sidebar">
       <div class="menu">
-        <a href="../operator_siswa.php">Home</a>
-      </div>
-      <div class="menu">
-        <a href="../absensi.php">Absensi</a>
-      </div>
-      <div class="menu">
-        <a href="../mapel.php">Jadwal Pelajaran</a>
+        <a href="operator_siswa.php">Home</a>
       </div>
       <div class="menu" id="active">
-        <a href="#">Isi Absensi</a>
+        <a href="#">Absensi</a>
       </div>
       <div class="menu">
-        <a href="../agenda/agenda.php">Isi Agenda</a>
+        <a href="mapel.php">Jadwal Pelajaran</a>
+      </div>
+      <div class="menu">
+        <a href="absensi/data_absensi.php">Isi Absensi</a>
+      </div>
+      <div class="menu">
+        <a href="agenda/agenda.php">Isi Agenda</a>
       </div>
     </div>
     <div class="footer-sidebar">
@@ -81,6 +89,19 @@ if (isset($_COOKIE["key"])) {
 
   <div class="container">
     <div class="wrapper">
+      <div class="text-date">
+        <h1>Absensi</h1>
+        <p><?= $hari[date("w")] ?>, <?= date("d") ?> <?= $bulan[date("n") - 1] ?> <?= date("Y") ?></p>
+      </div>
+      <div class="icon-field">
+        <?php if ($kehadiran !== false) : ?>
+          <i class="fas fa-frown icon sad"></i>
+          <p>Anda <?= $kehadiran["kehadiran"] ?> hari ini</p>
+        <?php else : ?>
+          <i class="fas fa-smile icon"></i>
+          <p>Anda berada di kelas</p>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 

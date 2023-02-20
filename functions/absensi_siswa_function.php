@@ -42,3 +42,22 @@ function tambahDataAbsensi($conn)
 
     return mysqli_affected_rows($conn);
 }
+
+// cek apakah hadir atau tidak hari ini
+function cekKehadiran($conn, $id_siswa)
+{
+
+    $current_date = date("Y-m-d");
+    $query = "SELECT kehadiran.* FROM kehadiran
+            JOIN siswa ON siswa.id = kehadiran.id_siswa
+            WHERE kehadiran.id_siswa = $id_siswa AND tanggal = '$current_date'";
+
+    $result = $conn->query($query);
+    $data = false;
+
+    if (mysqli_num_rows($result) > 0) {
+        $data = mysqli_fetch_assoc($result);
+    }
+
+    return $data;
+}

@@ -5,7 +5,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 75px;
 }
 
 .text-date h1 {
@@ -32,4 +32,27 @@
     padding: 10px 32px;
     background: orange;
     border-radius: 5px;
+}
+
+.wrapper .icon-field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.icon-field .icon {
+    font-size: 3.5rem;
+    color: aqua;
+}
+
+.icon-field .icon.sad {
+    color: orange;
+}
+
+.icon-field p {
+    font-size: 1.1rem;
+    font-weight: 600;
 }

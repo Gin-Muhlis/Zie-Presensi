@@ -1,7 +1,7 @@
 <?php
 require "../../../koneksi.php";
 require "../../../functions/login_function.php";
-require "../../../functions/absensi_siswa_functioin.php";
+require "../../../functions/absensi_siswa_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
