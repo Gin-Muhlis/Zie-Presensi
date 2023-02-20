@@ -21,11 +21,14 @@ body {
   padding: 1.5em;
 }
 .wrapper-desktop .img-container-desktop {
+  width: 100%;
+  height: 100%;
   display: flex;
-}
-.wrapper-desktop .img-container-desktop img {
   justify-content: center;
   align-items: center;
+}
+.wrapper-desktop .img-container-desktop img {
+  width: 300px;
 }
 
 .wrapper-kabehan {

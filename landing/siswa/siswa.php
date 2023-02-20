@@ -69,11 +69,9 @@
         </div>
 
         <div class="wrapper-desktop">
-            <section id="desktop" class="desktop">
-                <div class="img-container-desktop">
-                    <img class="img-fluid" src="../../image/image_2023-02-02_102310781-removebg-preview.png" alt="" c>
-                </div>
-            </section>
+            <div class="img-container-desktop">
+                <img src="../../image/fubuki.png" alt="" c>
+            </div>
         </div>
     </div>
     <footer>
