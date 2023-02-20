@@ -82,19 +82,6 @@ $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
     </div>
 
 
-    <div class="wrapper-popup">
-        <div class="popup">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <label for="image">
-                    <i class="fa-solid fa-upload"></i>
-                    <span>Upload Image</span>
-                </label>
-                <input type="file" name="image" id="image" onchange="this.form.submit()">
-            </form>
-            <i class="fa-solid fa-xmark close-popup"></i>
-        </div>
-    </div>
-
     <div class="container">
         <div class="wrapper">
             <div class="text-date">
