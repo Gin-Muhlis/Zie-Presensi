@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+}
+
+@media all and (max-width: 768px) {
+  .wrapper-desktop {
+    display: none;
+  }
+}
+.wrapper-desktop {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 1.5em;
+}
+.wrapper-desktop .img-container-desktop {
+  display: flex;
+}
+.wrapper-desktop .img-container-desktop img {
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-kabehan {
+  height: 100vh;
+}
+@media all and (min-width: 768px) {
+  .wrapper-kabehan {
+    display: flex;
+  }
+}
+.wrapper-kabehan .mobile {
+  height: 100%;
+  background: rgb(121, 106, 136);
+}
+@media all and (min-width: 768px) {
+  .wrapper-kabehan .mobile {
+    max-width: 290px;
+  }
+}
+.wrapper-kabehan .wrapper {
+  padding: 1.5em;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.wrapper-kabehan .profile {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background: #b6aae1;
+  padding: 1.5em;
+}
+.wrapper-kabehan .profile .profile-container {
+  display: flex;
+  align-items: center;
+  gap: 1.7em;
+}
+.wrapper-kabehan .profile .profile-container .img-container {
+  border-radius: 50%;
+}
+@media all and (min-width: 768px) {
+  .wrapper-kabehan .profile .profile-container .img-container {
+    order: 1;
+  }
+  .wrapper-kabehan .profile .profile-container .info-profile {
+    order: 2;
+  }
+}
+.wrapper-kabehan .profile .profile-container .info-profile p {
+  font-size: 1.6rem;
+}
+@media all and (max-width: 768px) {
+  .wrapper-kabehan .profile .profile-container .info-profile p {
+    text-align: end;
+  }
+}
+.wrapper-kabehan section {
+  margin-top: 5.8em;
+}
+@media all and (min-width: 768px) {
+  .wrapper-kabehan section {
+    margin-top: 0;
+  }
+}
+.wrapper-kabehan .pilihan {
+  margin-inline: auto;
+}
+.wrapper-kabehan .pilihan .pilihan-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4em;
+}
+.wrapper-kabehan .pilihan .pilihan-container button {
+  width: 9.4em;
+  height: 9.4em;
+  background: rgb(134, 134, 205);
+  border-radius: 8px;
+}
+.wrapper-kabehan .pilihan .pilihan-container .tombol {
+  text-align: center;
+}
+.wrapper-kabehan .pilihan .pilihan-container .tombol h2 {
+  padding-top: 0.8em;
+}
+
+footer {
+  background: black;
+}/*# sourceMappingURL=style.css.map */

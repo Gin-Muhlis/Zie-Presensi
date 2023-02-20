@@ -37,6 +37,7 @@ header form .form-container .inputelement {
   width: 14em;
   height: 2.3em;
   border: 2px solid black;
+  padding-left: 0.5em;
 }
 header form .form-container .inputelement:focus {
   outline: none;

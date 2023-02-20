@@ -24,7 +24,7 @@
 
             link.type = "text/css";
             link.rel = "stylesheet";
-            link.href = "bootstrap-5.2.3-dist/css/bootstrap.min.css";
+            link.href = "bootstrap-5.2.3-dist/css/bootstrapSSSSS.min.css";
 
             document.head.appendChild(link);
         }
@@ -32,7 +32,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="hero">
             <div class="text-container">
@@ -65,12 +64,6 @@
             </form>
         </div>
     </header>
-
-
-
-
-
-
 
 
     <!-- JS bootstrap -->
