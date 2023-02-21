@@ -1,55 +1,35 @@
 .wrapper h1 {
-    font-size: 2rem;
-    text-align: center;
-    color: #080808;
-    margin-bottom: 30px;
+  font-size: 2rem;
+  text-align: center;
+  color: #080808;
+  margin-bottom: 3px;
 }
 
-.wrapper form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
+.wrapper p {
+  font-size: 1rem;
+  text-align: center;
+  color: #080818;
+  margin-bottom: 50px;
 }
 
-form h2 {
-    font-size: 1rem;
-    color: #080808;
-    margin-right: 5px;
-}
-form select,
-select option {
-    font-size: 1rem;
-    padding: 3px;
+.button-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-table {
-    width: 100%;
-    border-color: #080808;
+.btn {
+  outline: 0;
+  padding: 8px 30px;
+  color: #fff;
+  text-decoration: none;
+  background: #080808;
+  border-radius: 5px;
+  font-size: 0.9rem;
 }
 
-table thead,
-table tbody {
-    width: 100%;
-}
-
-thead th {
-    font-size: 1.1rem;
-    color: #080808;
-    padding: 7px;
-}
-
-tbody td {
-    padding: 5px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-form .select-field {
-    width: 100%;   
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+#pageNum {
+  font-size: 1.1rem;
+  font-weight: 600;
 }

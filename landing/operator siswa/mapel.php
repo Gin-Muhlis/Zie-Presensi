@@ -22,6 +22,8 @@ if (isset($_COOKIE["key"])) {
     $dataUser = $_SESSION["user"];
 }
 
+// pdf viewer
+
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +35,9 @@ if (isset($_COOKIE["key"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/siswa.css">
+    <link rel="stylesheet" href="../../css/mapel.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../js/upload.js"></script>
+    <script src="../../js/build/pdf.js"></script>
     <title>halaman siswa</title>
 </head>
 
@@ -83,11 +84,16 @@ if (isset($_COOKIE["key"])) {
 
     <div class="container">
         <div class="wrapper">
+            <h1>Jadwal Pelajaran</h1>
 
+
+            <canvas id="canvas"></canvas>
         </div>
     </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.3.122/pdf.min.js"></script>
+    <script src="pdfView.js"></script>
 </body>
 
 </html>
