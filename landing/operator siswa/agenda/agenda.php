@@ -59,24 +59,24 @@ $dataAgenda = getAgenda($conn, $dataUser["id"]);
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
+                <a href="../absensi/data_absensi.php">Data Absensi</a>
             </div>
             <div class="menu" id="active">
-                <a href="agenda/agenda.php">Isi Agenda</a>
+                <a href="#">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
+                <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
     </div>
@@ -99,16 +99,22 @@ $dataAgenda = getAgenda($conn, $dataUser["id"]);
                     <th>Keterangan</th>
                 </thead>
                 <tbody>
-                    <?php $no = 1; ?>
-                    <?php foreach ($dataAgenda as $data) : ?>
-                        <td><?= $no ?></td>
-                        <td><?= $data["tgl"] ?></td>
-                        <td><?= $data["jp"] ?></td>
-                        <td><?= ucwords($data["nama_mapel"]) ?></td>
-                        <td><?= ucwords($data["nama"]) ?></td>
-                        <td><?= ucfirst($data["materi"]) ?></td>
-                        <td><?= ucfirst($data["keterangan"]) ?></td>
-                    <?php endforeach; ?>
+                    <?php if ($dataAgenda !== false) : ?>
+                        <?php $no = 1; ?>
+                        <?php foreach ($dataAgenda as $data) : ?>
+                            <td><?= $no ?></td>
+                            <td><?= $data["tgl"] ?></td>
+                            <td><?= $data["jp"] ?></td>
+                            <td><?= ucwords($data["nama_mapel"]) ?></td>
+                            <td><?= ucwords($data["nama"]) ?></td>
+                            <td><?= ucfirst($data["materi"]) ?></td>
+                            <td><?= ucfirst($data["keterangan"]) ?></td>
+                        <?php endforeach; ?>
+
+                    <?php else : ?>
+                        <td colspan="7">Agenda hari ini belum diisi</td>
+                    <?php endif;; ?>
+
                 </tbody>
             </table>
         </div>

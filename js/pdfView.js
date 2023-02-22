@@ -5,14 +5,13 @@ const PDFStart = () => {
     let ctx = canvas.getContext("2d");
     let scale = 1.5;
     let numPage = 1;
-    console.log("Hii")
-
+    
     let generatePDF = numPage => {
         pdfDoc.getPage(numPage).then(page => {
             let viewport = page.getViewport({scale: scale});
             canvas.width = viewport.width;
             canvas.height = viewport.height;
-
+            
             let renderContext = {
                 canvasContext: ctx,
                 viewport: viewport

@@ -59,9 +59,13 @@ function getAgenda($conn, $id_siswa)
 
     $data = [];
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
-    return $data;
+    return false;
 }

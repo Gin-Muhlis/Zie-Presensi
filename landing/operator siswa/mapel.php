@@ -37,7 +37,6 @@ if (isset($_COOKIE["key"])) {
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/mapel.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/build/pdf.js"></script>
     <title>halaman siswa</title>
 </head>
 
@@ -93,7 +92,7 @@ if (isset($_COOKIE["key"])) {
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.3.122/pdf.min.js"></script>
-    <script src="pdfView.js"></script>
+    <script src="../../js/pdfView.js"></script>
 </body>
 
 </html>

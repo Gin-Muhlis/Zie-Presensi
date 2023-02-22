@@ -42,7 +42,7 @@ $dataGuru = getDataGuru($conn);
 </head>
 
 <body>
-    <!-- <div class="sidebar">
+    <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
                 <img src="../../../image/profile.jpg" alt="image-profile">
@@ -59,19 +59,19 @@ $dataGuru = getDataGuru($conn);
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="../operator_siswa.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="mapel.php">Jadwal Pelajaran</a>
+                <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
+                <a href="../absensi/data_absensi.php">Data Absensi</a>
             </div>
-            <div class="menu" id="active">
-                <a href="agenda/agenda.php">Isi Agenda</a>
+            <div class="menu">
+                <a href="agenda.php">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -79,7 +79,7 @@ $dataGuru = getDataGuru($conn);
                 <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <div class="container">
         <div class="wrapper tambah">
@@ -103,7 +103,7 @@ $dataGuru = getDataGuru($conn);
                 </label>
                 <label for="jp" class="field">
                     <span class="label">Jam Pelajaran</span>
-                    <input type="text" name="jp" id="jp">
+                    <input type="number" name="jp" id="jp">
                 </label>
                 <label for="keterangan" class="field">
                     <span class="label">Keterangan</span>
