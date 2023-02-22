@@ -1,18 +1,29 @@
 <?php
-require "../../../functions/functions.php"; // !memanggil file functions.php
-require "../../../functions/function_agenda.php"; // !memanggil file functions.php
+require "../../../koneksi.php";
+require "../../../functions/login_function.php";
+require "../../../functions/agenda_siswa_function.php";
 
-checkSession("login_operator siswa", "../../../login.php"); // !menjalankan fungi untuk mengecek session
-
-$dataUser = ""; // !membuat variabel untuk menyimpan data user
-
-if (getDataFromCookie() !== false) { // !mengecek apakah function getDataFromCookie tidak sama dengan false
-    $dataUser = getDataFromCookie(); // !menyimpan data yang dikembalikan ke dalam variabel dataUser
-} else { // !ketika function getDataFromCookie mengembalikan false
-    $dataUser = getDataFromSession();
+// cek user apakah sudah login atau belum
+if (!isLoggedIn()) {
+    Header("Location: ../../../login.php");
+    exit();
 }
 
-$kodeKelas = $dataUser["kode"];
+// cek user apakah memiliki role yang benar
+if (!hasRole("operator siswa")) {
+    Header("Location: ../errorLevel.php");
+    exit();
+}
+
+$dataUser = "";
+
+if (isset($_COOKIE["key"])) {
+    $dataUser = getDataFromCookie($conn);
+} else {
+    $dataUser = $_SESSION["user"];
+}
+
+$dataGuru = getDataGuru($conn);
 
 ?>
 
@@ -27,93 +38,75 @@ $kodeKelas = $dataUser["kode"];
     <link rel="stylesheet" href="../../../css/sidebar.css">
     <link rel="stylesheet" href="../../../css/agenda.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../../js/upload.js"></script>
-    <title>halaman operator siswa</title>
+    <title>halaman siswa</title>
 </head>
 
 <body>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img <?php if (strlen($dataUser["foto"]) > 0) {
-                            echo "src='../../../image/$dataUser[foto]'";
-                        } else {
-                            echo "src='../../../image/profile.jpg'";
-                        } ?> alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
                 <div class="text-foto">
                     <span>Edit Foto</span>
                 </div>
             </div>
             <div class="name-profile">
-                <h2><?= ucwords($dataUser["nama"]) ?></h2>
+                <h2><?= ucwords($dataUser["username"]) ?></h2>
             </div>
             <div class="class-profile">
-                <p><?= ucwords($dataUser["level"]) ?></p>
+                <p><?= ucwords($dataUser["role"]) ?></p>
             </div>
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="../operator_siswa.php">Home</a>
+                <a href="#">Home</a>
             </div>
             <div class="menu">
-                <a href="../absensi.php">Absensi</a>
+                <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="../mapel.php">Jadwal Pelajaran</a>
+                <a href="mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="data_absensi.php">Data Absensi</a>
+                <a href="absensi/data_absensi.php">Data Absensi</a>
             </div>
-            <div class="menu">
-                <a href="agenda.php">Agenda</a>
+            <div class="menu" id="active">
+                <a href="agenda/agenda.php">Isi Agenda</a>
             </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../../logout.php?id=<?= $dataUser["id"] ?>">Keluar</a>
+                <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
-    </div>
-
-
-    <div class="wrapper-popup">
-        <div class="popup">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <label for="image">
-                    <i class="fa-solid fa-upload"></i>
-                    <span>Upload Image</span>
-                </label>
-                <input type="file" name="image" id="image" onchange="this.form.submit()">
-            </form>
-            <i class="fa-solid fa-xmark close-popup"></i>
-        </div>
-    </div>
+    </div> -->
 
     <div class="container">
-        <div class="wrapper">
-            <h1>Tambah Agenda Kelas <?= $dataUser["kode"] ?></h1>
+        <div class="wrapper tambah">
+            <h1>Tambah Agenda Kelas</h1>
             <form action="" method="POST">
                 <label for="guru" class="field">
                     <span class="label">Nama Guru</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="nama_guru" id="guru" autocomplete="off">
+                    <select name="guru" id="guru">
+                        <?php foreach ($dataGuru as $data) : ?>
+                            <option value="<?= $data["id"] ?>"><?= ucwords($data["nama"]) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </label>
                 <label for="materi" class="field">
                     <span class="label">Materi</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="materi" id="materi" autocomplete="off">
+                    <input type="text" name="materi" id="materi">
                 </label>
-                <label for="jam" class="field">
-                    <span class="label">Jam</span>
-                    <span class="two-point">:</span>
-                    <input type="text" name="jam" id="jam" autocomplete="off">
+                <label for="jumlahMapel" class="field">
+                    <span class="label">Jumlah Mapel</span>
+                    <input type="number" name="jumlahMapel" id="jumlahMapel">
                 </label>
-                <label for="keterangan">
-                    <div class="keterangan-field">
-                        <span class="label">Keterangan</span>
-                        <span class="two-point">:</span>
-                    </div>
+                <label for="jp" class="field">
+                    <span class="label">Jam Pelajaran</span>
+                    <input type="text" name="jp" id="jp">
+                </label>
+                <label for="keterangan" class="field">
+                    <span class="label">Keterangan</span>
                     <textarea name="keterangan" id="keterangan"></textarea>
                 </label>
                 <div class="button-area">
@@ -126,7 +119,7 @@ $kodeKelas = $dataUser["kode"];
 
     <?php
     if (isset($_POST["tambah-agenda"])) {
-        if (tambahAgenda($kodeKelas) > 0) {
+        if (tambahAgenda($conn, $_POST, $dataUser["id"]) > 0) {
             echo "<script>
                 alert('Data berhasil ditambahkan');
                 document.location.href = 'agenda.php';
@@ -135,17 +128,6 @@ $kodeKelas = $dataUser["kode"];
     }
     ?>
 
-    <?php
-    if (isset($_FILES["image"])) {
-        if (uploadImage($dataUser["nama"], "../../../image/$dataUser[foto]", "../../../image/") > 0) {
-            echo "<script>
-        alert ('Foto profile berhasil diedit!');
-        document.location.href = './agenda.php';
-        </script>";
-        }
-    }
-
-    ?>
 
 </body>
 

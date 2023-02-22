@@ -33,3 +33,19 @@
   font-size: 1.1rem;
   font-weight: 600;
 }
+
+.container .wrapper.mapel {
+  padding: 30px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  background: none;
+  box-shadow: none;
+}
+
+body {
+  overflow-y: hidden;
+  background: #fff;
+}

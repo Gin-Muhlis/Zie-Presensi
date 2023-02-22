@@ -1,148 +1,138 @@
 .wrapper h1 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 50px;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.wrapper .tambah-agenda {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
+.wrapper > .button-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
 }
 
-.tambah-agenda a {
-    font-size: .9rem;
-    color: #fff;
-    padding: 7px 25px;
-    background-color: #080808;
-    border-radius: 5px;
-    text-decoration: none;
+.wrapper > .button-area a {
+  text-decoration: none;
+  color: #fff;
+  padding: 9px 30px;
+  font-size: 0.9rem;
+  background: #080808;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .wrapper table {
-    width:  100%;
-    border-color: #080808;
-    color: #080808;
+  width: 100%;
+  border-color: #080808;
+  color: #080808;
 }
 
 table th {
-    font-size: 1.1rem;
-    padding: 7px;
+  font-size: 1.1rem;
+  padding: 7px;
 }
 
 table td {
-    font-size: 1rem;
-    padding: 5px;
-    text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+  text-align: center;
 }
 
 .wrapper form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-form>* {
-    width: 100%;
+form > * {
+  width: 100%;
 }
 
 form .field {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .field .label {
-    flex-basis: 15%;
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.field .two-point {
-    font-weight: 600;
-    margin-right: 15px;
+.field input,
+.field select {
+  width: 100%;
+  outline: none;
+  border: 1px solid #080808;
+  background: #fff;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 0.1px;
+  opacity: 0.8;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
-
-.field input {
-    flex: 1;
-    width: 100%;
-    outline: none;
-    background: #fff;
-    border: none;
-    padding: 5px;
-    font-size: 1rem;
-    letter-spacing: .1px;
-    opacity: .8;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-
-.field #guru,
-.field #materi,
-.field #jam {
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
-}
-
 
 label .keterangan-field {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
 }
 
 .keterangan-field .label {
-    font-weight: 600;
-    font-size:  1.1rem;
-    flex-basis: 15%;
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-basis: 15%;
 }
 
 .keterangan-field .two-point {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 #keterangan {
-    font-family: "Poppins", sans-serif;
-    height: 160px;
-    width: 100%;
-    outline: none;
-    padding: 5px;
-    font-size: 1rem;
-    letter-spacing: .1px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  height: 160px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #080808;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 0.1px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 form .button-area {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .button-area button {
-    padding: 7px 25px;
-    outline: none;
-    border: none;
-    font-size: .9rem;
-    background: #080808;
-    color: #fff;
-    font-weight: 600;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    cursor: pointer;
+  padding: 7px 25px;
+  outline: none;
+  border: none;
+  font-size: 0.9rem;
+  background: #080808;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
 }

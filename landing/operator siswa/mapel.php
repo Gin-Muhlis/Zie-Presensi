@@ -83,7 +83,7 @@ if (isset($_COOKIE["key"])) {
 
 
     <div class="container">
-        <div class="wrapper">
+        <div class="wrapper mapel">
             <h1>Jadwal Pelajaran</h1>
 
 
