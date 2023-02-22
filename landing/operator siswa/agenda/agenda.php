@@ -20,7 +20,7 @@ $dataUser = "";
 if (isset($_COOKIE["key"])) {
     $dataUser = getDataFromCookie($conn);
 } else {
-    $dataUser = $_SESSION["user"];
+    $dataUser = getDataFromSession($conn);
 }
 
 $dataAgenda = getAgenda($conn, $dataUser["id"]);

@@ -75,7 +75,7 @@ $kehadiran = cekKehadiran($conn, $dataUser['id']);
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">
-        <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
+        <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
       </div>
     </div>
   </div>

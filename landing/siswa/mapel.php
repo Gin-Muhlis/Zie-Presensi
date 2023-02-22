@@ -40,7 +40,7 @@ if (isset($_COOKIE["key"])) {
     <title>halaman siswa</title>
 </head>
 
-<body>
+<body class="siswa-mapel">
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
@@ -76,17 +76,16 @@ if (isset($_COOKIE["key"])) {
 
 
     <div class="container">
-        <div class="wrapper mapel">
-            <h1>Jadwal Pelajaran</h1>
+        <div class="wrapper siswa">
+            <h1 class="siswaJudul">Jadwal Pelajaran</h1>
 
-
-            <canvas id="canvas"></canvas>
+            <div class="button-area">
+                <a href="jadwal.php" class="btn" target="_blank">Lihat Jadwal</a>
+            </div>
         </div>
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.3.122/pdf.min.js"></script>
-    <script src="../../js/pdfView.js"></script>
 </body>
 
 </html>

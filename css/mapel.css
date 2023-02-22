@@ -5,6 +5,10 @@
   margin-bottom: 3px;
 }
 
+.wrapper .siswaJudul {
+  margin-bottom: 50px;
+}
+
 .wrapper p {
   font-size: 1rem;
   text-align: center;
@@ -47,5 +51,13 @@
 
 body {
   overflow-y: hidden;
+  background: #fff;
+}
+
+.siswa-mapel {
+  background: #efefef;
+}
+
+.wrapper.siswa {
   background: #fff;
 }
