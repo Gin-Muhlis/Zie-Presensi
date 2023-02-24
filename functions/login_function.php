@@ -61,7 +61,7 @@ function login($conn)
                 exit;
 
                 break;
-            case "wali kelas": // !jika nilai dari variabel check adalah wali kelas
+            case "walas": // !jika nilai dari variabel check adalah wali kelas
                 header("Location: landing/wali kelas/wali_kelas.php"); // !arahkan ke halaman wali kelas
                 exit;
 
@@ -106,7 +106,7 @@ function checkSession()
                 exit;
 
                 break;
-            case "wali kelas": // !jika nilai dari variabel check adalah wali kelas
+            case "walas": // !jika nilai dari variabel check adalah wali kelas
                 header("Location: landing/wali kelas/wali_kelas.php"); // !arahkan ke halaman wali kelas
                 exit;
 
@@ -166,51 +166,44 @@ function setDataCookie($idOperator, $username, $conn)
     return mysqli_affected_rows($conn);
 }
 
-// mengambil data from cookie
-function getDataFromCookie($conn)
+// mengambil user_id dari cookie user
+function getIdCookie($conn)
 {
-    $key = $_COOKIE["key"];
-    $query = $conn->query("SELECT * FROM cookie WHERE uniq_key = '$key'");
+    if (isset($_COOKIE["key"])) {
+        $key = $_COOKIE["key"];
+        $query = $conn->query("SELECT * FROM cookie WHERE uniq_key = '$key'");
 
-    if (mysqli_num_rows($query) > 0) {
-        $dataCookie = mysqli_fetch_assoc($query);
-        $userID = $dataCookie["user_id"];
+        if (mysqli_num_rows($query) > 0) {
+            $dataCookie = mysqli_fetch_assoc($query);
 
-        $query = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
-                FROM user
-                JOIN siswa ON user.id = siswa.id
-                JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
-                JOIN kelas ON kelas.id = siswa_kelas.id_kelas
-                JOIN jurusan ON kelas.id = jurusan.id
-                WHERE user.id_operator = '$userID'";
-
-        $result = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-
-            if ($userID === $row["id_operator"]) {
-                return $row;
-            }
+            return $dataCookie;
         }
     }
+}
+
+// mengambil data from cookie
+function getDataFromCookie($conn, $queryData, $dataCookie)
+{
+
+    $userID = $dataCookie["user_id"];
+
+    $result = mysqli_query($conn, $queryData);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        if ($userID === $row["id_operator"]) {
+            return $row;
+        }
+    }
+
 
     return false;
 }
 
 // ambil data from session
-function getDataFromSession($conn)
+function getDataFromSession($conn, $query, $userID)
 {
-    $dataSession = $_SESSION["user"];
-    $userID = $dataSession["id_operator"];
-
-    $query = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
-                FROM user
-                JOIN siswa ON user.id = siswa.id
-                JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
-                JOIN kelas ON kelas.id = siswa_kelas.id_kelas
-                JOIN jurusan ON kelas.id =jurusan.id
-                WHERE id_operator = '$userID'";
 
     $result = mysqli_query($conn, $query);
 

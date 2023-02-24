@@ -14,17 +14,7 @@ if (!hasRole("operator siswa")) {
     Header("Location: ../errorLevel.php");
     exit();
 }
-
-$dataUser = "";
-
-if (isset($_COOKIE["key"])) {
-    $dataUser = getDataFromCookie($conn);
-} else {
-    $dataUser = getDataFromSession($conn);
-}
-
-$dataAgenda = getAgenda($conn, $dataUser["id"]);
-
+include("../../data/data_siswa.php")
 ?>
 
 <!DOCTYPE html>

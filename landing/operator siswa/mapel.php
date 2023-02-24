@@ -14,15 +14,7 @@ if (!hasRole("operator siswa")) {
     exit();
 }
 
-$dataUser = "";
-
-if (isset($_COOKIE["key"])) {
-    $dataUser = getDataFromCookie($conn);
-} else {
-    $dataUser = $_SESSION["user"];
-}
-
-// pdf viewer
+include("../../data/data_siswa.php")
 
 ?>
 

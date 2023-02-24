@@ -15,16 +15,7 @@ if (!hasRole("operator siswa")) {
     exit();
 }
 
-$dataUser = "";
-
-if (isset($_COOKIE["key"])) {
-    $dataUser = getDataFromCookie($conn);
-} else {
-    $dataUser = $_SESSION["user"];
-}
-
-$dataGuru = getDataGuru($conn);
-
+include("../../data/data_siswa.php")
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +67,7 @@ $dataGuru = getDataGuru($conn);
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
+                <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
     </div>

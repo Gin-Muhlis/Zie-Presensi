@@ -17,11 +17,7 @@ if (!hasRole("operator siswa")) {
 
 $dataUser = "";
 
-if (isset($_COOKIE["key"])) {
-    $dataUser = getDataFromCookie($conn);
-} else {
-    $dataUser = getDataFromSession($conn);
-}
+include("../../data/data_siswa.php");
 
 $dataSiswa = getDataSiswa($conn, $dataUser["bidang_keahlian"], $dataUser["tingkat"]);
 

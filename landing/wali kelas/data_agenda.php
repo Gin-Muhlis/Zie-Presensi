@@ -9,13 +9,12 @@ if (!isLoggedIn()) {
 }
 
 // cek user apakah memiliki role yang benar
-if (!hasRole("siswa kelas")) {
+if (!hasRole("walas")) {
     Header("Location: ../errorLevel.php");
     exit();
 }
 
-include("../../data/data_siswa.php");
-
+include("../../data/data_guru.php");
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +26,14 @@ include("../../data/data_siswa.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/mapel.css">
+    <link rel="stylesheet" href="../../css/siswa.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <title>halaman siswa</title>
+    <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/upload.js"></script>
+    <title>halaman walas</title>
 </head>
 
-<body class="siswa-mapel">
+<body>
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
@@ -50,13 +51,16 @@ include("../../data/data_siswa.php");
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="siswa.php">Home</a>
+                <a href="wali_kelas.php">Home</a>
             </div>
             <div class="menu">
                 <a href="absensi.php">Absensi</a>
             </div>
+            <div class="menu">
+                <a href="data_absensi.php">Absensi Kelas</a>
+            </div>
             <div class="menu" id="active">
-                <a href="#">Jadwal Pelajaran</a>
+                <a href="#">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -68,15 +72,10 @@ include("../../data/data_siswa.php");
 
 
     <div class="container">
-        <div class="wrapper siswa">
-            <h1 class="siswaJudul">Jadwal Pelajaran</h1>
-
-            <div class="button-area">
-                <a href="jadwal.php" class="btn" target="_blank">Lihat Jadwal</a>
-            </div>
-        </div>
+        <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
+        <h1>Selamat Datang di Zie Presensi</h1>
+        <p>Jangan lupa untuk mengisi absen setiap pagi</p>
     </div>
-
 
 </body>
 

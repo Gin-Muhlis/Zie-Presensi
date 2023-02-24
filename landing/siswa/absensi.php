@@ -15,14 +15,7 @@ if (!hasRole("siswa kelas")) {
   exit();
 }
 
-$dataUser = "";
-
-if (isset($_COOKIE["key"])) {
-  $dataUser = getDataFromCookie($conn);
-} else {
-  $dataUser = getDataFromSession($conn);
-}
-
+include("../../data/data_siswa.php");
 
 $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
 $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
