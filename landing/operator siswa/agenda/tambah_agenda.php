@@ -11,11 +11,11 @@ if (!isLoggedIn()) {
 
 // cek user apakah memiliki role yang benar
 if (!hasRole("operator siswa")) {
-    Header("Location: ../errorLevel.php");
+    Header("Location: ../../errorLevel.php");
     exit();
 }
 
-include("../../data/data_siswa.php")
+include("../../../ata/data_siswa.php")
 ?>
 
 <!DOCTYPE html>

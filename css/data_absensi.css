@@ -1,58 +1,78 @@
 .wrapper .text-date {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 75px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 75px;
 }
 
-.text-date h1 {
-    font-size: 2rem;
-    color: #080808;
+.text-date h1,
+.wrapper h1 {
+  font-size: 2rem;
+  color: #080808;
 }
 
 .text-date p {
-    font-size: 1.1rem;
-    color: #080818;
+  font-size: 1.1rem;
+  color: #080818;
 }
 
 .button-tambah-absensi {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button-tambah-absensi a {
-    text-decoration: none;
-    font-size: 1rem;
-    color: #fff;
-    padding: 10px 32px;
-    background: orange;
-    border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #fff;
+  padding: 10px 32px;
+  background: orange;
+  border-radius: 5px;
 }
 
 .wrapper .icon-field {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .icon-field .icon {
-    font-size: 3.5rem;
-    color: aqua;
+  font-size: 3.5rem;
+  color: aqua;
 }
 
 .icon-field .icon.sad {
-    color: orange;
+  color: orange;
 }
 
 .icon-field p {
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.wrapper h1 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.wrapper table {
+  width: 100%;
+}
+
+.wrapper table th,
+.wrapper table td {
+  padding: 7px;
+}
+
+.wrapper table td {
+  font-size: 1rem;
+  text-align: center;
 }

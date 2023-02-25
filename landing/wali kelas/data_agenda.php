@@ -1,6 +1,8 @@
 <?php
 require "../../koneksi.php";
 require "../../functions/login_function.php";
+require "../../functions/walas_function.php";
+require "../../functions/agenda_siswa_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
@@ -15,6 +17,10 @@ if (!hasRole("walas")) {
 }
 
 include("../../data/data_guru.php");
+$dataWalas = getDataWalas($conn, $dataUser["nama"]);
+
+$dataAgenda = getDataAgendaKelas($conn, $dataWalas["tingkat"], $dataWalas["rombel"], $dataWalas["bidang_keahlian"]);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +32,8 @@ include("../../data/data_guru.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/siswa.css">
+    <link rel="stylesheet" href="../../css/agenda.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../js/upload.js"></script>
     <title>halaman walas</title>
 </head>
 
@@ -72,9 +76,36 @@ include("../../data/data_guru.php");
 
 
     <div class="container">
-        <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
-        <h1>Selamat Datang di Zie Presensi</h1>
-        <p>Jangan lupa untuk mengisi absen setiap pagi</p>
+        <div class="wrapper">
+            <h1>Absensi <?= $dataWalas["tingkat"] ?> <?= $dataWalas["bidang_keahlian"] ?> <?= $dataWalas["rombel"] ?></h1>
+
+            <table border="1" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Mapel</th>
+                        <th>Pemateri</th>
+                        <th>Materi</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1 ?>
+                    <?php foreach ($dataAgenda as $data) : ?>
+                        <tr>
+                            <td><?= $no ?></td>
+                            <td><?= $data["tgl"] ?></td>
+                            <td><?= ucwords($data["nama_mapel"]) ?></td>
+                            <td><?= ucwords($data["nama"]) ?></td>
+                            <td><?= ucwords($data["materi"]) ?></td>
+                            <td><?= ucfirst($data["keterangan"]) ?></td>
+                        </tr>
+                        <?php $no++; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>

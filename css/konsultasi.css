@@ -1,166 +1,166 @@
 .wrapper h1 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 50px;
-    color: #080808;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #080808;
 }
 
 .wrapper .filter-field,
 .wrapper .edit-field {
-    width:  100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 35px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 35px;
 }
 
 .wrapper .edit-field {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
-.wrapper form .tambah,
+.wrapper .filter-field .tambah,
 .wrapper .edit-field a {
-    font-size: .9rem;
-    text-decoration: none;
-    color: #fff;
-    padding: 9px 25px;
-    background-color: #080808;
-    border-radius: 5px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #fff;
+  padding: 9px 25px;
+  background-color: #080808;
+  border-radius: 5px;
 }
 
 .wrapper .edit-field .hapus {
-    background-color: red;
+  background-color: red;
 }
 
 .wrapper .catatan {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .catatan .row {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    position: relative;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
 }
 
 .catatan .diproses {
-    background-color: #393E46;
+  background-color: #393e46;
 }
 
 .catatan .selesai {
-    background-color: #54B435;
+  background-color: #54b435;
 }
 
 .row h3 {
-    font-size: 1rem;
-    color: #fff;
+  font-size: 1rem;
+  color: #fff;
 }
 
 .row p {
-    font-size: .9rem;
-    color: #ffffff80;
+  font-size: 0.9rem;
+  color: #ffffff80;
 }
 
 .row .detail {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  cursor: pointer;
 }
 
 .wrapper .form-tambah {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .form-tambah label {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .form-tambah label span,
 .dok label {
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .dok label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .form-tambah label input,
 .form-tambah label select,
 .form-tambah label textarea {
-    width: 100%;
-    padding: 7px;
-    outline: none;
-    font-size: .95rem;
+  width: 100%;
+  padding: 7px;
+  outline: none;
+  font-size: 0.95rem;
 }
 
 .form-tambah label textarea {
-    height: 100px;
+  height: 100px;
 }
 
 .form-tambah label img {
-    width: 50%;
+  width: 50%;
 }
 
 .form-tambah label p {
-    font-size: 1rem;
-    color: #080808;
-    font-style: italic;
+  font-size: 1rem;
+  color: #080808;
+  font-style: italic;
 }
 
 .form-tambah .button-area {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 30px;
-    gap: 7px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  gap: 7px;
 }
 
 .form-tambah .button-area button {
-    background-color: none;
-    outline: 0;
-    background: #080808;
-    padding: 8px 30px;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+  background-color: none;
+  outline: 0;
+  background: #080808;
+  padding: 8px 30px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .form-tambah .button-area .batal {
-    color: #080808;
-    text-decoration: none;
-        background: none;
-            border: 1px solid #080808;
-            padding: 8px 30px;
-            cursor: pointer;
-            border-radius: 5px;
+  color: #080808;
+  text-decoration: none;
+  background: none;
+  border: 1px solid #080808;
+  padding: 8px 30px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .wrapper #bulan {
-    padding: 7px;
-    flex-basis: 20%;
-    font-size: 1rem;
+  padding: 7px;
+  flex-basis: 20%;
+  font-size: 1rem;
 }
 
 .form-tambah label.disable {
-    pointer-events: none;
+  pointer-events: none;
 }

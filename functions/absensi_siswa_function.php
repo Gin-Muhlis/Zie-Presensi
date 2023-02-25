@@ -27,7 +27,6 @@ function tambahDataAbsensi($conn)
 
     // ambil data input
     $nama = $_POST["nama"];
-    $no_absen = $_POST["no_absen"];
     $status = strtolower($_POST["status"]);
     $keterangan = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["keterangan"]));
     $current_date = date("Y-m-d");
@@ -36,7 +35,7 @@ function tambahDataAbsensi($conn)
         $keterangan = "-";
     }
 
-    $query = "INSERT INTO kehadiran VALUES('', $no_absen, $nama, '$status', '$keterangan', '$current_date')";
+    $query = "INSERT INTO kehadiran VALUES('', $nama, '$status', '$keterangan', '$current_date')";
 
     $conn->query($query);
 
@@ -60,4 +59,32 @@ function cekKehadiran($conn, $id_siswa)
     }
 
     return $data;
+}
+
+// ambil data absensi siswa
+function getDataAbsensiSiswa($conn, $tingkat, $rombel, $bidangKeahlian)
+{
+    $query = "SELECT siswa.nama, siswa.no_absen,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'izin' THEN 1 END) AS izin,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'sakit' THEN 1 END) AS sakit,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'tanpa Keterangan' THEN 1 END) AS tanpa_keterangan
+            FROM siswa
+            JOIN kehadiran ON siswa.id = kehadiran.id_siswa
+            JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
+            JOIN kelas ON kelas.id = siswa_kelas.id_kelas
+            JOIN jurusan ON jurusan.id = kelas.id_jurusan
+            WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.bidang_keahlian = '$bidangKeahlian'
+            GROUP BY siswa.nama
+            
+            ";
+
+    $result = $conn->query($query);
+
+    $allData = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $allData[] = $row;
+    }
+
+    return $allData;
 }

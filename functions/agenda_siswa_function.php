@@ -51,9 +51,38 @@ function getAgenda($conn, $id_siswa)
     $query = "SELECT pembelajaran.*, mata_pelajaran.nama_mapel, guru.nama FROM guru 
     JOIN pengampu ON guru.id = pengampu.id_guru 
     JOIN mata_pelajaran ON mata_pelajaran.id = pengampu.id_mapel 
-    JOIN pembelajaran ON pengampu.id = pembelajaran.id 
+    JOIN pembelajaran ON pengampu.id = pembelajaran.id_pengampu
     JOIN siswa ON siswa.id = pembelajaran.id_siswa 
     WHERE id_siswa = $id_siswa AND pembelajaran.tgl = '$current_date';";
+
+    $result = $conn->query($query);
+
+    $data = [];
+
+    if (mysqli_num_rows($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    return false;
+}
+
+// ambil semua data agenda berdasarkan kelas
+function getDataAgendaKelas($conn, $tingkat, $rombel, $bidangKeahlian)
+{
+
+    $query = "SELECT pembelajaran.*, mata_pelajaran.nama_mapel, guru.nama FROM guru 
+    JOIN pengampu ON guru.id = pengampu.id_guru 
+    JOIN mata_pelajaran ON mata_pelajaran.id = pengampu.id_mapel 
+    JOIN pembelajaran ON pengampu.id = pembelajaran.id_pengampu
+    JOIN siswa ON siswa.id = pembelajaran.id_siswa 
+    JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
+    JOIN kelas ON kelas.id = siswa_kelas.id_kelas
+    JOIN jurusan ON jurusan.id = kelas.id_jurusan
+    WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.bidang_keahlian = '$bidangKeahlian'";
 
     $result = $conn->query($query);
 

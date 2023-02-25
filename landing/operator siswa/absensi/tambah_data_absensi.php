@@ -17,7 +17,7 @@ if (!hasRole("operator siswa")) {
 
 $dataUser = "";
 
-include("../../data/data_siswa.php");
+include("../../../data/data_siswa.php");
 
 $dataSiswa = getDataSiswa($conn, $dataUser["bidang_keahlian"], $dataUser["tingkat"]);
 
@@ -101,14 +101,6 @@ $dataSiswa = getDataSiswa($conn, $dataUser["bidang_keahlian"], $dataUser["tingka
                     <select name="nama" id="nama">
                         <?php foreach ($dataSiswa as $siswa) : ?>
                             <option value="<?= $siswa["id"] ?>"><?= ucwords($siswa["nama"]) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </label>
-                <label class="field">
-                    <span class="label">No Absen</span>
-                    <select name="no_absen" id="no_absen">
-                        <?php foreach ($dataSiswa as $siswa) : ?>
-                            <option value="<?= $siswa["no_absen"] ?>"><?= $siswa["no_absen"] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>

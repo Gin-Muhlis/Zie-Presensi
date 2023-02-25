@@ -14,7 +14,7 @@ if (!hasRole("operator siswa")) {
     exit();
 }
 
-include("../../data/data_siswa.php");
+include("../../../data/data_siswa.php");
 
 $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
 $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");

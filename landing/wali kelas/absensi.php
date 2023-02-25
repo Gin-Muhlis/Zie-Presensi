@@ -69,7 +69,7 @@ $kehadiran = cekKehadiran($conn, $dataUser["nama"]);
                 <a href="data_absensi.php">Absensi Kelas</a>
             </div>
             <div class="menu">
-                <a href="data_php.php">Agenda Kelas</a>
+                <a href="data_agenda.php">Agenda Kelas</a>
             </div>
         </div>
         <div class="footer-sidebar">
