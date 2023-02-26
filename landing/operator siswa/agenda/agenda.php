@@ -14,7 +14,9 @@ if (!hasRole("operator siswa")) {
     Header("Location: ../../errorLevel.php");
     exit();
 }
-include("../../../data/data_siswa.php")
+include("../../../data/data_siswa.php");
+
+$dataAgenda = getAgenda($conn, $dataUser["id"])
 ?>
 
 <!DOCTYPE html>
@@ -92,17 +94,23 @@ include("../../../data/data_siswa.php")
                     <?php if ($dataAgenda !== false) : ?>
                         <?php $no = 1; ?>
                         <?php foreach ($dataAgenda as $data) : ?>
-                            <td><?= $no ?></td>
-                            <td><?= $data["tgl"] ?></td>
-                            <td><?= $data["jp"] ?></td>
-                            <td><?= ucwords($data["nama_mapel"]) ?></td>
-                            <td><?= ucwords($data["nama"]) ?></td>
-                            <td><?= ucfirst($data["materi"]) ?></td>
-                            <td><?= ucfirst($data["keterangan"]) ?></td>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $data["tgl"] ?></td>
+                                <td><?= $data["jp"] ?></td>
+                                <td><?= ucwords($data["nama_mapel"]) ?></td>
+                                <td><?= ucwords($data["nama"]) ?></td>
+                                <td><?= ucfirst($data["materi"]) ?></td>
+                                <td><?= ucfirst($data["keterangan"]) ?></td>
+
+                            </tr>
                         <?php endforeach; ?>
 
                     <?php else : ?>
-                        <td colspan="7">Agenda hari ini belum diisi</td>
+                        <tr>
+                            <td colspan="7">Agenda hari ini belum diisi</td>
+
+                        </tr>
                     <?php endif;; ?>
 
                 </tbody>

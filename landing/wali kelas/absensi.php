@@ -22,7 +22,14 @@ $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
 $bulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
 
-$kehadiran = cekKehadiran($conn, $dataUser["nama"]);
+
+
+$dataKehadiran = ambilDataKehadiran($conn, $dataUser["nama"]);
+
+tambahKehadiran($conn, $dataKehadiran, $dataUser["id"]);
+
+$kehadiran = cekKehadiran($conn, $dataUser["id"]);
+
 
 ?>
 

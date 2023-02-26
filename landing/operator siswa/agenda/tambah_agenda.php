@@ -15,7 +15,9 @@ if (!hasRole("operator siswa")) {
     exit();
 }
 
-include("../../../ata/data_siswa.php")
+include("../../../data/data_siswa.php");
+
+$dataGuru = getDataGuru($conn);
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +95,7 @@ include("../../../ata/data_siswa.php")
                     <input type="number" name="jumlahMapel" id="jumlahMapel">
                 </label>
                 <label for="jp" class="field">
-                    <span class="label">Jam Pelajaran</span>
+                    <span class="label">Jumlah Jam Pelajaran</span>
                     <input type="number" name="jp" id="jp">
                 </label>
                 <label for="keterangan" class="field">

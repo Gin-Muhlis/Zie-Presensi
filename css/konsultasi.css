@@ -155,6 +155,11 @@
   border-radius: 5px;
 }
 
+.batal {
+  text-decoration: nonee;
+  color: #080808;
+}
+
 .wrapper #bulan {
   padding: 7px;
   flex-basis: 20%;

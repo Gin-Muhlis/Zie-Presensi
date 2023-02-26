@@ -86,16 +86,60 @@ function validasiImage()
     return $newName;
 }
 
-// ambil data catatan
-function getDataKonsultasi($conn, $query)
+// edit catatan konsultasi
+
+function editCatatan($conn, $post, $id)
 {
-    $result = mysqli_query($conn, $query);
+    global $conn;
 
-    $data = [];
+    $thn_ajaran = htmlspecialchars(mysqli_real_escape_string($conn, $post["tahunAjaran"]));
+    $nama = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["nama"])));
+    $waliKelas = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["waliKelas"])));
+    $kasus = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["kasus"])));
+    $penanganan = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["penanganan"])));
+    $status = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["status"])));
+    $gambarLama = $post["gambarLama"];
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
+    if ($_FILES["dokumentasi"]["error"] == 4) {
+        $dokumentasi = $gambarLama;
+    } else {
+        $dokumentasi = validasiImage();
     }
 
-    return $data;
+    // !Validasi Form
+    if (empty($kasus) || empty($penanganan)) {
+        echo "<script>
+            alert ('Field tidak boloh kosong!');
+        </script>";
+        return false;
+    }
+
+    if (!preg_match('/^[a-zA-Z0-9\s.,]+$/', $kasus) || !preg_match('/^[a-zA-Z0-9\s.,]+$/', $penanganan)) {
+        echo "<script>
+            alert ('Anda memasukkan karakter yang tidak diperbolehkan!');
+        </script>";
+        return false;
+    }
+
+    if (!$dokumentasi) {
+        return false;
+    }
+
+    if (!$_FILES["dokumentasi"]["error"] == 4) {
+        unlink("../../image/$gambarLama");
+    }
+
+    $query = "UPDATE konsultasi
+             SET id_th_ajaran = $thn_ajaran,
+             id_siswa = '$nama',
+             id_walas = '$waliKelas',
+             kasus = '$kasus',
+             penanganan = '$penanganan',
+             status = '$status',
+             dokumentasi = '$dokumentasi'
+             WHERE id = $id";
+
+    $conn->query($query);
+
+    return mysqli_affected_rows($conn);
 }

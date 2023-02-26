@@ -88,3 +88,35 @@ function getDataAbsensiSiswa($conn, $tingkat, $rombel, $bidangKeahlian)
 
     return $allData;
 }
+
+
+// ambil data absensi siswa
+function getFullAbsensiSiswa($conn, $query)
+{
+
+    $result = $conn->query($query);
+
+    $allData = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $allData[] = $row;
+    }
+
+    return $allData;
+}
+
+// ambil data kelas
+function getDataKelas($conn)
+{
+
+    $query = "SELECT kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian FROM jurusan JOIN kelas ON jurusan.id = kelas.id_jurusan";
+
+    $result = $conn->query($query);
+    $data = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
+}

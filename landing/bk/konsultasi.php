@@ -17,7 +17,7 @@ if (!hasRole("bk")) {
 
 include("../../data/data_guru.php");
 
-$dataKonsul = getDataKonsultasi($conn, "SELECT konsultasi.id, konsultasi.tanggal, konsultasi.status, siswa.nama FROM siswa JOIN konsultasi ON siswa.id = konsultasi.id_siswa");
+$dataKonsul = getDataForm($conn, "SELECT konsultasi.id, konsultasi.tanggal, konsultasi.status, siswa.nama FROM konsultasi JOIN siswa ON siswa.id = konsultasi.id_siswa");
 
 ?>
 
@@ -53,13 +53,13 @@ $dataKonsul = getDataKonsultasi($conn, "SELECT konsultasi.id, konsultasi.tanggal
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="bk.php">Home</a>
             </div>
             <div class="menu">
                 <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu" id="active">
-                <a href="konsultassi.php">Konsultasi Siswa</a>
+                <a href="#">Konsultasi Siswa</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -82,7 +82,7 @@ $dataKonsul = getDataKonsultasi($conn, "SELECT konsultasi.id, konsultasi.tanggal
                                     } else {
                                         echo "selesai";
                                     } ?>">
-                        <h3><?= $data["nama"] ?></h3>
+                        <h3><?= ucwords($data["nama"]) ?></h3>
                         <p><?= $data["tanggal"] ?></p>
                         <a href="detailCatatan.php?id=<?= $data["id"] ?>" class="detail"><i class="fa-sharp fa-solid fa-arrow-right"></i></a>
 

@@ -23,10 +23,6 @@ $dataWalas = getDataForm($conn, "SELECT guru.nama, wali_kelas.id_walas
               JOIN guru ON user.id = guru.id
               JOIN wali_kelas ON guru.id = wali_kelas.id_guru
               WHERE user.hak_akses = 'walas'");
-$dataGuru = getDataFOrm($conn, "SELECT guru.nama, guru.id
-              FROM user
-              JOIN guru ON user.id = guru.id
-              WHERE user.hak_akses != 'walas' AND user.hak_akses != 'siswa kelas' AND user.hak_akses != 'operator siswa'");
 $tahunAjaran = getDataForm($conn, "SELECT id, thn_ajaran FROM tahun_ajaran")
 
 ?>
@@ -69,7 +65,7 @@ $tahunAjaran = getDataForm($conn, "SELECT id, thn_ajaran FROM tahun_ajaran")
                 <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="konsultassi.php">Konsultasi Siswa</a>
+                <a href="konsultasi.php">Konsultasi Siswa</a>
             </div>
         </div>
         <div class="footer-sidebar">

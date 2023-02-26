@@ -60,6 +60,9 @@
 
 .wrapper h1 {
   text-align: center;
+}
+
+.wrapper h1.data-absensi {
   margin-bottom: 50px;
 }
 
@@ -75,4 +78,23 @@
 .wrapper table td {
   font-size: 1rem;
   text-align: center;
+}
+
+.wrapper .filter-field {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.filter-field select {
+  flex-basis: 50%;
+}
+
+.filter-field select,
+.filter-field select option {
+  padding: 7px;
+  font-size: 1.1rem;
 }

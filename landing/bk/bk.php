@@ -58,7 +58,7 @@ include("../../data/data_guru.php");
                 <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="konsultassi.php">Konsultasi Siswa</a>
+                <a href="konsultasi.php">Konsultasi Siswa</a>
             </div>
         </div>
         <div class="footer-sidebar">
@@ -68,18 +68,7 @@ include("../../data/data_guru.php");
         </div>
     </div>
 
-    <div class="wrapper-popup">
-        <div class="popup">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <label for="image">
-                    <i class="fa-solid fa-upload"></i>
-                    <span>Upload Image</span>
-                </label>
-                <input type="file" name="image" id="image" onchange="this.form.submit()">
-            </form>
-            <i class="fa-solid fa-xmark close-popup"></i>
-        </div>
-    </div>
+
 
 
     <div class="container">
@@ -88,17 +77,6 @@ include("../../data/data_guru.php");
         <p>Jangan lupa untuk mengisi absen setiap pagi</p>
     </div>
 
-    <?php
-    if (isset($_FILES["image"])) {
-        if (uploadImage($dataUser["nama"], "../../image/$dataUser[foto]", "../../image/") > 0) {
-            echo "<script>
-        alert ('Foto profile berhasil diedit!');
-        document.location.href = './bk.php';
-        </script>";
-        }
-    }
-
-    ?>
 
 </body>
 

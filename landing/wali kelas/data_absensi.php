@@ -77,7 +77,7 @@ $dataAbsensi = getDataAbsensiSiswa($conn, $dataWalas["tingkat"], $dataWalas["rom
 
     <div class="container">
         <div class="wrapper">
-            <h1>Absensi <?= $dataWalas["tingkat"] ?> <?= $dataWalas["bidang_keahlian"] ?> <?= $dataWalas["rombel"] ?></h1>
+            <h1 class="data-absensi">Absensi <?= $dataWalas["tingkat"] ?> <?= $dataWalas["bidang_keahlian"] ?> <?= $dataWalas["rombel"] ?></h1>
 
             <table border="1" cellspacing="0">
                 <thead>
