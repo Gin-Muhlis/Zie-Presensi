@@ -1,6 +1,7 @@
 <?php
 require "../../koneksi.php";
 require "../../functions/login_function.php";
+require "../../functions/absensi_guru_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
@@ -16,6 +17,8 @@ if (!hasRole("kepala sekolah")) {
 
 include("../../data/data_guru.php");
 
+$dataAbsensi = getFullAbsensiGuru($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,10 +30,8 @@ include("../../data/data_guru.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/siswa.css">
+    <link rel="stylesheet" href="../../css/data_absensi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
 
@@ -69,12 +70,39 @@ include("../../data/data_guru.php");
     </div>
 
 
-
-
     <div class="container">
-        <img src="../../image/logoSmakzie.jpg" alt="logo smakzie" class="logo-image">
-        <h1>Selamat Datang di Zie Presensi</h1>
-        <p>Jangan lupa untuk mengisi absen setiap pagi</p>
+        <div class="wrapper">
+            <h1 class="data-absensi">Absensi Guru</h1>
+
+            <div class="data-field">
+                <table border="1" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Nama Lengkap</th>
+                            <th colspan="2">Kehadiran</th>
+                        </tr>
+                        <tr>
+                            <th>Masuk</th>
+                            <th>Tidak Masuk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1 ?>
+                        <?php foreach ($dataAbsensi as $data) : ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= ucwords($data["nama"]) ?></td>
+                                <td><?= $data["masuk"] ?></td>
+                                <td><?= $data["tidak_masuk"] ?></td>
+                            </tr>
+                            <?php $no++ ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
 
 

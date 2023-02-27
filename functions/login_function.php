@@ -56,7 +56,7 @@ function login($conn)
                 exit; // !keluar dari function
 
                 break;
-            case "guru": // !jika nilai dari variabel check adalah guru 
+            case "umum": // !jika nilai dari variabel check adalah guru 
                 header("Location: landing/guru/guru.php"); // !arahkan ke halaman guru
                 exit;
 
@@ -101,7 +101,7 @@ function checkSession()
                 exit; // !keluar dari function
 
                 break;
-            case "guru": // !jika nilai dari variabel check adalah guru 
+            case "umum": // !jika nilai dari variabel check adalah guru 
                 header("Location: landing/guru/guru.php"); // !arahkan ke halaman guru
                 exit;
 

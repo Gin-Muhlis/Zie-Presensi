@@ -6,13 +6,13 @@ $userID = $dataSession["id_operator"];
 if (isset($_COOKIE["key"])) {
     $dataCookie = getIdCookie($conn);
 
-    $queryDataCookie = "SELECT user.username, user.role, user.id_operator, guru.*
+    $queryDataCookie = "SELECT user.username, user.role, user.id_operator, user.password, guru.*
               FROM user
               JOIN guru ON user.id = guru.id
               WHERE user.id_operator = '$dataCookie[user_id]'";
 }
 
-$queryDataSession = "SELECT user.username, user.role, user.id_operator, guru.*
+$queryDataSession = "SELECT user.username, user.role, user.id_operator, user.password, guru.*
               FROM user
               JOIN guru ON user.id = guru.id
               WHERE user.id_operator = '$userID'";

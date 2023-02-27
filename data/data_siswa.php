@@ -6,7 +6,7 @@ $userID = $dataSession["id_operator"];
 if (isset($_COOKIE["key"])) {
     $dataCookie = getIdCookie($conn);
 
-    $queryDataCookie = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
+    $queryDataCookie = "SELECT user.username, user.role, user.id_operator, user.hak_akses, user.password, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
                 FROM user
                 JOIN siswa ON user.id = siswa.id
                 JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
@@ -15,7 +15,7 @@ if (isset($_COOKIE["key"])) {
                 WHERE user.id_operator = '$dataCookie[user_id]'";
 }
 
-$queryDataSession = "SELECT user.username, user.role, user.id_operator, user.hak_akses, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
+$queryDataSession = "SELECT user.username, user.role, user.id_operator, user.hak_akses, user.password, siswa.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian, jurusan.kompetensi_keahlian
                 FROM user
                 JOIN siswa ON user.id = siswa.id
                 JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa

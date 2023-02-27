@@ -1,0 +1,80 @@
+.wrapper h1 {
+  font-size: 2rem;
+  color: #080808;
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.wrapper .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form .form-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.form-head .text {
+  font-size: 1.1rem;
+  color: orange;
+  font-weight: 600;
+  text-align: center;
+  flex-basis: 50%;
+}
+
+.text span {
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.text .active {
+  border-bottom: 3px solid orange;
+  border-radius: 2px;
+}
+
+.form .form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-body label {
+  display: flex;
+  flex-direction: inherit;
+  gap: 7px;
+}
+
+.form-body label span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #080808;
+}
+
+.form-body label input {
+  padding: 7px;
+  font-size: 1rem;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #08080880;
+}
+
+.form .button-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.button-area button {
+  padding: 7px 30px;
+  color: #fff;
+  background-color: #080808;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}

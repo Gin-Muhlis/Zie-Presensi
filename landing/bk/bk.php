@@ -29,8 +29,6 @@ include("../../data/data_guru.php");
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/siswa.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
 
@@ -39,9 +37,6 @@ include("../../data/data_guru.php");
         <div class="head-sidebar">
             <div class="image-profile">
                 <img src="../../image/profile.jpg" alt="image-profile">
-                <div class="text-foto">
-                    <span>Edit Foto</span>
-                </div>
             </div>
             <div class="name-profile">
                 <h2><?= ucwords($dataUser["username"]) ?></h2>
@@ -59,6 +54,9 @@ include("../../data/data_guru.php");
             </div>
             <div class="menu">
                 <a href="konsultasi.php">Konsultasi Siswa</a>
+            </div>
+            <div class="menu">
+                <a href="editData.php?id=<?= $dataUser["id"] ?>">Edit Data</a>
             </div>
         </div>
         <div class="footer-sidebar">

@@ -52,3 +52,23 @@ function cekKehadiran($conn, $id)
 
     return $data;
 }
+
+// ambil data absensi guru
+function getFullAbsensiGuru($conn)
+{
+    $query = "SELECT guru.nama, kehadiran_guru.*,
+            COUNT(CASE WHEN kehadiran_guru.kehadiran = 'masuk' THEN 1 END) AS masuk,
+            COUNT(CASE WHEN kehadiran_guru.kehadiran = 'tidak masuk' THEN 1 END) AS tidak_masuk
+            FROM guru
+            JOIN kehadiran_guru ON guru.id = kehadiran_guru.id_guru
+            GROUP BY guru.nama";
+
+    $result = $conn->query($query);
+    $data = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
