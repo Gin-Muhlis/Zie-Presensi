@@ -66,10 +66,13 @@ $dataSiswa = getDataSiswa($conn, $dataUser["bidang_keahlian"], $dataUser["tingka
                 <a href="../mapel.php">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="data_absensi.php">Data Absensi</a>
+                <a href="data_absensi.php">Isi Absensi</a>
             </div>
             <div class="menu">
                 <a href="../agenda/agenda.php">Isi Agenda</a>
+            </div>
+            <div class="menu">
+                <a href="../editData/editData.php">Edit Data</a>
             </div>
         </div>
         <div class="footer-sidebar">

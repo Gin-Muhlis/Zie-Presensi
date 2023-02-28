@@ -21,19 +21,35 @@ function ambilDataKehadiran($conn, $namaGuru)
 
 function tambahKehadiran($conn, $dataKehadiran, $idGuru)
 {
+    $current_date = date("Y-m-d");
+    $queryCek = "SELECT * FROM kehadiran_guru WHERE id_guru = $idGuru AND tanggal = '$current_date'";
+
+    $resultCek = $conn->query($queryCek);
+
     if ($dataKehadiran !== "tidak masuk") {
-        $query = "INSERT INTO kehadiran_guru VALUES ('', '$dataKehadiran[id]', '$dataKehadiran[keterangan]', '$dataKehadiran[tgl]')";
+        if (mysqli_num_rows($resultCek) <= 0) {
+            $query = "INSERT INTO kehadiran_guru VALUES ('', '$dataKehadiran[id]', '$dataKehadiran[keterangan]', '$dataKehadiran[tgl]')";
 
-        $conn->query($query);
+            $conn->query($query);
 
-        return mysqli_affected_rows($conn);
+            return mysqli_affected_rows($conn);
+        } else {
+            $dataTabel = mysqli_fetch_assoc($resultCek);
+
+            $queryUpdate = "UPDATE kehadiran_guru SET kehadiran = '$dataKehadiran[keterangan]' WHERE id = $dataTabel[id]";
+
+            $conn->query($queryUpdate);
+            return mysqli_affected_rows($conn);
+        }
     } else {
-        $current_date = date("Y-m-d");
-        $query = "INSERT INTO kehadiran_guru VALUES ('', $idGuru, '$dataKehadiran', '$current_date')";
+        if (mysqli_num_rows($resultCek) <= 0) {
 
-        $conn->query($query);
+            $query = "INSERT INTO kehadiran_guru VALUES ('', $idGuru, '$dataKehadiran', '$current_date')";
 
-        return mysqli_affected_rows($conn);
+            $conn->query($query);
+
+            return mysqli_affected_rows($conn);
+        }
     }
 }
 

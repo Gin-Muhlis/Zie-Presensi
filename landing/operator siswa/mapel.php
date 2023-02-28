@@ -59,10 +59,13 @@ include("../../data/data_siswa.php")
                 <a href="#">Jadwal Pelajaran</a>
             </div>
             <div class="menu">
-                <a href="absensi/data_absensi.php">Data Absensi</a>
+                <a href="absensi/data_absensi.php">Isi Absensi</a>
             </div>
             <div class="menu">
                 <a href="agenda/agenda.php">Isi Agenda</a>
+            </div>
+            <div class="menu">
+                <a href="editData/editData.php">Edit Data</a>
             </div>
         </div>
         <div class="footer-sidebar">

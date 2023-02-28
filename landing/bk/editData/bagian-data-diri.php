@@ -1,11 +1,12 @@
    <?php
-    require "../../koneksi.php";
-    require "../../functions/login_function.php";
+    require "../../../koneksi.php";
+    require "../../../functions/login_function.php";
 
 
-    include("../../data/data_guru.php");
+    include("../../../data/data_guru.php");
 
     ?>
+
 
    <div class="form-head">
        <div class="text">
@@ -17,12 +18,12 @@
    </div>
    <form action="" method="POST" enctype="multipart/form-data" class="form-body">
        <label for="nama">
-           <span>nama</span>
-           <input type="text" name="nama" id="nama" value="<?= $dataUser["nama"] ?>">
+           <span>Nama Lengkap</span>
+           <input type="text" name="nama" id="nama" value="<?= ucwords($dataUser["nama"]) ?>">
        </label>
        <label for="alamat">
            <span>Alamat</span>
-           <input type="text" name="alamat" id="alamat" value="<?= $dataUser["alamat"] ?>">
+           <input type="text" name="alamat" id="alamat" value="<?= ucwords($dataUser["alamat"]) ?>">
        </label>
        </label>
        <label for="kontak">
@@ -47,7 +48,6 @@
                $.get("bagian-profile.php", function(data) {
                    $(".form").html(data);
                })
-               console.log("hello")
            })
 
 

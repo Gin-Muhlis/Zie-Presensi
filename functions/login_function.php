@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$error = null;
+
 // Fungsi untuk mengecek apakah user telah login atau belum
 function isLoggedIn()
 {
@@ -26,6 +28,7 @@ function hasRole($role)
 // Fungsi untuk melakukan login
 function login($conn)
 {
+    global $error;
     // ambil username dan password
     $username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["username"]));
     $password = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["password"]));
@@ -81,7 +84,7 @@ function login($conn)
                 exit;
         }
     } else {
-        return false;
+        $error = true;
     }
 }
 

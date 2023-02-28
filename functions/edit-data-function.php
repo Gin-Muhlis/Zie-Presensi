@@ -52,9 +52,9 @@ function editPribadi($conn, $post, $user)
 
     $role = $user["role"];
 
-    $nama = htmlspecialchars(mysqli_real_escape_string($conn, $post["nama"]));
-    $alamat = htmlspecialchars(mysqli_real_escape_string($conn, $post["alamat"]));
-    $kontak = htmlspecialchars(mysqli_real_escape_string($conn, $post["kontak"]));
+    $nama = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["nama"])));
+    $alamat = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["alamat"])));
+    $kontak = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["kontak"])));
 
 
     if (empty($nama)) {
@@ -68,6 +68,14 @@ function editPribadi($conn, $post, $user)
 
     if (empty($kontak)) {
         $kontak = $kontakUser;
+    }
+
+    if (!is_numeric($kontak)) {
+        echo "<script>
+                alert('Kontak hanya boleh berisi angka!')
+            </script>";
+
+        return false;
     }
 
 

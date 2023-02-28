@@ -70,6 +70,9 @@ $kehadiran = cekKehadiran($conn, $dataUser["id"]);
             <div class="menu" id="active">
                 <a href="#">Absensi</a>
             </div>
+            <div class="menu">
+                <a href="editData/editData.php">Edit Data</a>
+            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">

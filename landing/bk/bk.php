@@ -53,10 +53,10 @@ include("../../data/data_guru.php");
                 <a href="absensi.php">Absensi</a>
             </div>
             <div class="menu">
-                <a href="konsultasi.php">Konsultasi Siswa</a>
+                <a href="catatan/konsultasi.php">Konsultasi Siswa</a>
             </div>
             <div class="menu">
-                <a href="editData.php?id=<?= $dataUser["id"] ?>">Edit Data</a>
+                <a href="editData/editData.php?id=<?= $dataUser["id"] ?>">Edit Data</a>
             </div>
         </div>
         <div class="footer-sidebar">

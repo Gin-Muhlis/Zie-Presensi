@@ -61,6 +61,9 @@ $dataAbsensi = getFullAbsensiGuru($conn);
             <div class="menu">
                 <a href="absensi_siswa.php">Absensi Siswa</a>
             </div>
+            <div class="menu">
+                <a href="editData/editData.php">Edit Data</a>
+            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">

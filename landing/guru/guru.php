@@ -57,6 +57,9 @@ include("../../data/data_guru.php");
       <div class="menu">
         <a href="absensi.php">Absensi</a>
       </div>
+      <div class="menu">
+        <a href="editData/editData.php">Edit Data</a>
+      </div>
     </div>
     <div class="footer-sidebar">
       <div class="menu-logout">

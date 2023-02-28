@@ -66,6 +66,9 @@ $dataAbsensi = getDataAbsensiSiswa($conn, $dataWalas["tingkat"], $dataWalas["rom
             <div class="menu">
                 <a href="data_agenda.php">Agenda Kelas</a>
             </div>
+            <div class="menu">
+                <a href="editData/editData.php">Edit Data</a>
+            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">

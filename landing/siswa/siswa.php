@@ -44,7 +44,7 @@ include("../../data/data_siswa.php")
         </div>
       </div>
       <div class="name-profile">
-        <h2><?= ucwords($dataUser["username"]) ?></h2>
+        <h2><?= $dataUser["username"] ?></h2>
       </div>
       <div class="class-profile">
         <p><?= ucwords($dataUser["role"]) ?></p>
@@ -59,6 +59,9 @@ include("../../data/data_siswa.php")
       </div>
       <div class="menu">
         <a href="mapel.php">Jadwal Pelajaran</a>
+      </div>
+      <div class="menu">
+        <a href="editData/editData.php">Edit Data</a>
       </div>
     </div>
     <div class="footer-sidebar">

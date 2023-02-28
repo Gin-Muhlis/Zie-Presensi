@@ -1,25 +1,25 @@
 <?php
-require "../../koneksi.php";
-require "../../functions/login_function.php";
-require "../../functions/konsultasi_function.php";
+require "../../../koneksi.php";
+require "../../../functions/login_function.php";
+require "../../../functions/konsultasi_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
-    Header("Location: ../../login.php");
+    Header("Location: ../../../login.php");
     exit();
 }
 
 // cek user apakah memiliki role yang benar
 if (!hasRole("bk")) {
-    Header("Location: ../errorLevel.php");
+    Header("Location: ../../errorLevel.php");
     exit();
 }
 
-include("../../data/data_guru.php");
+include("../../../data/data_guru.php");
 
 $id = $_GET["id"];
 
-$query = "SELECT konsultasi.*, siswa.nama as nama_siswa, guru.nama as nama_guru, tahun_ajaran.thn_ajaran
+$query = "SELECT konsultasi.*, siswa.nama as nama_siswa, guru.nama as nama_guru, tahun_ajaran.thn_ajaran, tahun_ajaran.semester
             FROM guru
             JOIN wali_kelas ON guru.id = wali_kelas.id_guru
             JOIN konsultasi ON wali_kelas.id_walas = konsultasi.id_walas
@@ -28,15 +28,14 @@ $query = "SELECT konsultasi.*, siswa.nama as nama_siswa, guru.nama as nama_guru,
             WHERE konsultasi.id = $id";
 
 $dataKonsul = getDataForm($conn, $query)[0];
-
-$tahunAjaran = getDataForm($conn, "SELECT * FROM tahun_ajaran");
-$nama_siswa = getDataForm($conn, "SELECT id, nama FROM siswa");
+$nama_siswa  = getDataForm($conn, "SELECT nama, id FROM siswa");
 $dataWalas = getDataForm($conn, "SELECT guru.nama, wali_kelas.id_walas
               FROM user
               JOIN guru ON user.id = guru.id
               JOIN wali_kelas ON guru.id = wali_kelas.id_guru
               WHERE user.hak_akses = 'walas'");
-$status = ["diproses", "selesai"];
+$tahunAjaran = getDataForm($conn, "SELECT id, thn_ajaran, semester FROM tahun_ajaran");
+$status = ["diproses", "selesai"]
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +45,9 @@ $status = ["diproses", "selesai"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/konsultasi.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/konsultasi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <title>halaman wali kelas</title>
 </head>
@@ -57,7 +56,7 @@ $status = ["diproses", "selesai"];
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/profile.jpg" alt="image-profile">
                 <div class="text-foto">
                     <span>Edit Foto</span>
                 </div>
@@ -71,18 +70,21 @@ $status = ["diproses", "selesai"];
         </div>
         <div class="body-sidebar">
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="../bk.php">Home</a>
             </div>
             <div class="menu">
-                <a href="absensi.php">Absensi</a>
+                <a href="../absensi.php">Absensi</a>
             </div>
             <div class="menu">
                 <a href="konsultasi.php">Konsultasi Siswa</a>
             </div>
+            <div class="menu">
+                <a href="../editData/editData.php?id=<?= $dataUser["id"] ?>">Edit Data</a>
+            </div>
         </div>
         <div class="footer-sidebar">
             <div class="menu-logout">
-                <a href="../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
+                <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
     </div>
