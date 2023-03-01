@@ -9,6 +9,25 @@ function editProfile($conn, $post, $user)
     $passwordLama = htmlspecialchars(mysqli_real_escape_string($conn, $post["pwLama"]));;
     $passwordBaru = htmlspecialchars(mysqli_real_escape_string($conn, $post["pwBaru"]));;
 
+    $queryForCheck = "SELECT username FROM user";
+
+    $result = $conn->query($queryForCheck);
+    $dataCheck = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $dataCheck[] = $row;
+    }
+
+    foreach ($dataCheck as $data) {
+        if ($username === $data["username"]) {
+            echo "<script>
+                alert('Username telah digunakan!')
+            </script>";
+
+            return false;
+        }
+    }
+
     if (!empty($passwordLama) && !empty($passwordBaru)) {
         if ($passwordLama !== $passwordUser) {
             echo "<script>
@@ -32,6 +51,7 @@ function editProfile($conn, $post, $user)
     if (empty($username)) {
         $username = $usernameUser;
     }
+
 
     $query = "UPDATE user
               SET username = '$username',

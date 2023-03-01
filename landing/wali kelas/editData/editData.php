@@ -2,6 +2,7 @@
 require "../../../koneksi.php";
 require "../../../functions/login_function.php";
 require "../../../functions/edit-data-function.php";
+require "../../../functions/upload_image_function.php";
 
 // cek user apakah sudah login atau belum
 if (!isLoggedIn()) {
@@ -32,6 +33,7 @@ include("../../../data/data_guru.php");
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
     <script src="../../../js/jquery-3.6.3.min.js"></script>
     <script src="../../../js/script-for-editData.js"></script>
+    <script src="../../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
 
@@ -39,10 +41,13 @@ include("../../../data/data_guru.php");
     <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
-                <img src="../../../image/profile.jpg" alt="image-profile">
+                <img src="../../../image/<?= $dataUser["foto"] ?>" alt="image-profile">
+                <div class="text-foto">
+                    <span>Edit Foto</span>
+                </div>
             </div>
             <div class="name-profile">
-                <h2><?= ucwords($dataUser["username"]) ?></h2>
+                <h2><?= $dataUser["username"] ?></h2>
             </div>
             <div class="class-profile">
                 <p><?= ucwords($dataUser["role"]) ?></p>
@@ -105,6 +110,28 @@ include("../../../data/data_guru.php");
             </div>
         </div>
     </div>
+
+    <div class="wrapper-popup">
+        <div class="popup">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <label for="image">
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Upload Image</span>
+                </label>
+                <input type="file" name="image" id="image" onchange="this.form.submit()">
+            </form>
+            <i class="fa-solid fa-xmark close-popup"></i>
+        </div>
+    </div>
+
+    <?php if (isset($_FILES["image"])) {
+        if (uploadImage($conn, $dataUser["id"], "../../../image/", "../../../image/{$dataUser["foto"]}") > 0) {
+            echo "<script>
+        alert('Foto profile berhasil diganti!')
+        document.location.href = '../wali_kelas.php'
+      </script>";
+        }
+    } ?>
 
     <?php if (isset($_POST["editProfile"])) {
         if (editProfile($conn, $_POST, $dataUser) > 0) {

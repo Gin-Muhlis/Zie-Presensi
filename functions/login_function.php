@@ -33,55 +33,59 @@ function login($conn)
     $username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["username"]));
     $password = htmlspecialchars(mysqli_real_escape_string($conn, $_POST["password"]));
     // cari data
-    $query = "SELECT * FROM user WHERE username='$username' AND password = '$password'";
+    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($conn, $query);
 
     // cek apakah data ada atau tidak
     if (mysqli_num_rows($result) == 1) {
         $user = mysqli_fetch_assoc($result);
 
-        // set session
-        $_SESSION['user'] = $user;
+        if ($username === $user["username"] && $password === $user["password"]) {
+            // set session
+            $_SESSION['user'] = $user;
 
-        // set cookie
-        if (isset($_POST["remember"])) {
-            setDataCookie($user["id_operator"], $user["username"], $conn);
-        }
+            // set cookie
+            if (isset($_POST["remember"])) {
+                setDataCookie($user["id_operator"], $user["username"], $conn);
+            }
 
-        switch ($user["hak_akses"]) { // !mengecek isi variabel $check
-            case "siswa kelas": // !jika nilai dari variabel check adalah siswa
-                header("Location: landing/siswa/siswa.php"); // !arahkan ke halaman siswa
-                exit; // !keluar dari function
+            switch ($user["hak_akses"]) { // !mengecek isi variabel $check
+                case "siswa kelas": // !jika nilai dari variabel check adalah siswa
+                    header("Location: landing/siswa/siswa.php"); // !arahkan ke halaman siswa
+                    exit; // !keluar dari function
 
-                break;
-            case "operator siswa": // !jika nilai dari variabel check adalah operator siswa
-                header("Location: landing/operator siswa/operator_siswa.php"); // !arahkan ke halaman siswa
-                exit; // !keluar dari function
+                    break;
+                case "operator siswa": // !jika nilai dari variabel check adalah operator siswa
+                    header("Location: landing/operator siswa/operator_siswa.php"); // !arahkan ke halaman siswa
+                    exit; // !keluar dari function
 
-                break;
-            case "umum": // !jika nilai dari variabel check adalah guru 
-                header("Location: landing/guru/guru.php"); // !arahkan ke halaman guru
-                exit;
+                    break;
+                case "umum": // !jika nilai dari variabel check adalah guru 
+                    header("Location: landing/guru/guru.php"); // !arahkan ke halaman guru
+                    exit;
 
-                break;
-            case "walas": // !jika nilai dari variabel check adalah wali kelas
-                header("Location: landing/wali kelas/wali_kelas.php"); // !arahkan ke halaman wali kelas
-                exit;
+                    break;
+                case "walas": // !jika nilai dari variabel check adalah wali kelas
+                    header("Location: landing/wali kelas/wali_kelas.php"); // !arahkan ke halaman wali kelas
+                    exit;
 
-                break;
-            case "kepala sekolah": // !jika nilai dari variabel check adalah kepala sekolah
-                header("Location: landing/kepala sekolah/kepala_sekolah.php"); // !arahkan ke halaman kepala sekolah
-                exit;
+                    break;
+                case "kepala sekolah": // !jika nilai dari variabel check adalah kepala sekolah
+                    header("Location: landing/kepala sekolah/kepala_sekolah.php"); // !arahkan ke halaman kepala sekolah
+                    exit;
 
-                break;
-            case "bk": // !jika nilai dari variabel check adalah kepala sekolah
-                header("Location: landing/bk/bk.php"); // !arahkan ke halaman kepala sekolah
-                exit;
+                    break;
+                case "bk": // !jika nilai dari variabel check adalah kepala sekolah
+                    header("Location: landing/bk/bk.php"); // !arahkan ke halaman kepala sekolah
+                    exit;
 
-                break;
-            default: // !cek ketika level dari data user tidak sesuai
-                header("Location: landing/errorLevel.php"); // !arahkan ke halaman error
-                exit;
+                    break;
+                default: // !cek ketika level dari data user tidak sesuai
+                    header("Location: landing/errorLevel.php"); // !arahkan ke halaman error
+                    exit;
+            }
+        } else {
+            $error = true;
         }
     } else {
         $error = true;
