@@ -97,18 +97,24 @@ $dataAgenda = getDataAgendaKelas($conn, $dataWalas["tingkat"], $dataWalas["rombe
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1 ?>
-                    <?php foreach ($dataAgenda as $data) : ?>
+                    <?php if ($dataAgenda !== false) : ?>
+                        <?php $no = 1 ?>
+                        <?php foreach ($dataAgenda as $data) : ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $data["tgl"] ?></td>
+                                <td><?= ucwords($data["nama_mapel"]) ?></td>
+                                <td><?= ucwords($data["nama"]) ?></td>
+                                <td><?= ucwords($data["materi"]) ?></td>
+                                <td><?= ucfirst($data["keterangan"]) ?></td>
+                            </tr>
+                            <?php $no++; ?>
+                        <?php endforeach; ?>
+                    <?php else : ?>
                         <tr>
-                            <td><?= $no ?></td>
-                            <td><?= $data["tgl"] ?></td>
-                            <td><?= ucwords($data["nama_mapel"]) ?></td>
-                            <td><?= ucwords($data["nama"]) ?></td>
-                            <td><?= ucwords($data["materi"]) ?></td>
-                            <td><?= ucfirst($data["keterangan"]) ?></td>
+                            <td colspan="6">Belum ada agenda bulan ini</td>
                         </tr>
-                        <?php $no++; ?>
-                    <?php endforeach; ?>
+                    <?php endif ?>
                 </tbody>
             </table>
         </div>

@@ -54,7 +54,7 @@ function tambahCatatan($conn, $post)
 }
 
 
-function validasiImage()
+function validasiImageCatatan()
 {
     $file_name = $_FILES["dokumentasi"]["name"];
     $file_directory = $_FILES["dokumentasi"]["tmp_name"];
@@ -103,7 +103,7 @@ function editCatatan($conn, $post, $id)
     if ($_FILES["dokumentasi"]["error"] == 4) {
         $dokumentasi = $gambarLama;
     } else {
-        $dokumentasi = validasiImage();
+        $dokumentasi = validasiImageCatatan();
     }
 
     // !Validasi Form

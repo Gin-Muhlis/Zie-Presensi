@@ -70,14 +70,15 @@ function cekKehadiran($conn, $id)
 }
 
 // ambil data absensi guru
-function getFullAbsensiGuru($conn)
+function getFullAbsensiGuru($conn, $awalData, $jumlahDataPerHalaman)
 {
+
     $query = "SELECT guru.nama, kehadiran_guru.*,
             COUNT(CASE WHEN kehadiran_guru.kehadiran = 'masuk' THEN 1 END) AS masuk,
             COUNT(CASE WHEN kehadiran_guru.kehadiran = 'tidak masuk' THEN 1 END) AS tidak_masuk
             FROM guru
             JOIN kehadiran_guru ON guru.id = kehadiran_guru.id_guru
-            GROUP BY guru.nama";
+            GROUP BY guru.nama LIMIT $awalData, $jumlahDataPerHalaman";
 
     $result = $conn->query($query);
     $data = [];

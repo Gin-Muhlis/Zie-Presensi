@@ -17,8 +17,10 @@ if (!hasRole("kepala sekolah")) {
 }
 
 include("../../data/data_guru.php");
+include("../../data/pagination.php");
 
-$dataAbsensi = getFullAbsensiGuru($conn);
+
+$dataAbsensi = getFullAbsensiGuru($conn, $awalData, $jumlahDataPerHalaman);
 
 ?>
 
@@ -79,7 +81,13 @@ $dataAbsensi = getFullAbsensiGuru($conn);
     <div class="container">
         <div class="wrapper">
             <h1 class="data-absensi">Absensi Guru</h1>
-
+            <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                <?php if ($i == $halamanAktif) : ?>
+                    <a href="?hal=<?= $i ?>" style="color: red;"><?= $i ?></a>
+                <?php else : ?>
+                    <a href="?hal=<?= $i ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
             <div class="data-field">
                 <table border="1" cellspacing="0">
                     <thead>
@@ -94,16 +102,14 @@ $dataAbsensi = getFullAbsensiGuru($conn);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1 ?>
-                        <?php foreach ($dataAbsensi as $data) : ?>
+                        <?php for ($i = 1; $i <= count($dataAbsensi); $i++) : ?>
                             <tr>
-                                <td><?= $no ?></td>
-                                <td><?= ucwords($data["nama"]) ?></td>
-                                <td><?= $data["masuk"] ?></td>
-                                <td><?= $data["tidak_masuk"] ?></td>
+                                <td><?= $i + $awalData ?></td>
+                                <td><?= ucwords($dataAbsensi[$i - 1]["nama"]) ?></td>
+                                <td><?= $dataAbsensi[$i - 1]["masuk"] ?></td>
+                                <td><?= $dataAbsensi[$i - 1]["tidak_masuk"] ?></td>
                             </tr>
-                            <?php $no++ ?>
-                        <?php endforeach; ?>
+                        <?php endfor; ?>
                     </tbody>
                 </table>
 

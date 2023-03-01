@@ -74,6 +74,8 @@ function getAgenda($conn, $id_siswa)
 function getDataAgendaKelas($conn, $tingkat, $rombel, $bidangKeahlian)
 {
 
+    $date = date("m-Y");
+
     $query = "SELECT pembelajaran.*, mata_pelajaran.nama_mapel, guru.nama FROM guru 
     JOIN pengampu ON guru.id = pengampu.id_guru 
     JOIN mata_pelajaran ON mata_pelajaran.id = pengampu.id_mapel 
@@ -82,7 +84,7 @@ function getDataAgendaKelas($conn, $tingkat, $rombel, $bidangKeahlian)
     JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
     JOIN kelas ON kelas.id = siswa_kelas.id_kelas
     JOIN jurusan ON jurusan.id = kelas.id_jurusan
-    WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.bidang_keahlian = '$bidangKeahlian'";
+    WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.bidang_keahlian = '$bidangKeahlian' AND DATE_FORMAT(tgl, '%m-%Y') = '$date'";
 
     $result = $conn->query($query);
 

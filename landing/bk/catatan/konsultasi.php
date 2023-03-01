@@ -18,7 +18,8 @@ if (!hasRole("bk")) {
 
 include("../../../data/data_guru.php");
 
-$dataKonsul = getDataForm($conn, "SELECT konsultasi.id, konsultasi.tanggal, konsultasi.status, siswa.nama FROM konsultasi JOIN siswa ON siswa.id = konsultasi.id_siswa");
+$date = date("m-Y");
+$dataKonsul = getDataForm($conn, "SELECT konsultasi.id, konsultasi.tanggal, konsultasi.status, siswa.nama FROM konsultasi JOIN siswa ON siswa.id = konsultasi.id_siswa WHERE DATE_FORMAT(tanggal, '%m-%Y') = '$date'");
 
 ?>
 
