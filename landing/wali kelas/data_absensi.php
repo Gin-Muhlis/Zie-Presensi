@@ -21,7 +21,7 @@ include("../../data/data_guru.php");
 
 $dataWalas = getDataWalas($conn, $dataUser["nama"]);
 
-$dataAbsensi = getDataAbsensiSiswa($conn, $dataWalas["tingkat"], $dataWalas["rombel"], $dataWalas["bidang_keahlian"]);
+$dataAbsensi = getDataAbsensiSiswa($conn, $dataWalas["tingkat"], $dataWalas["rombel"], $dataWalas["kompetensi_keahlian"]);
 
 ?>
 
@@ -83,7 +83,7 @@ $dataAbsensi = getDataAbsensiSiswa($conn, $dataWalas["tingkat"], $dataWalas["rom
 
     <div class="container">
         <div class="wrapper">
-            <h1 class="data-absensi">Absensi <?= $dataWalas["tingkat"] ?> <?= $dataWalas["bidang_keahlian"] ?> <?= $dataWalas["rombel"] ?></h1>
+            <h1 class="data-absensi">Absensi <?= $dataWalas["tingkat"] ?> <?= ucwords($dataWalas["kompetensi_keahlian"]) ?> <?= $dataWalas["rombel"] ?></h1>
 
             <table border="1" cellspacing="0">
                 <thead>

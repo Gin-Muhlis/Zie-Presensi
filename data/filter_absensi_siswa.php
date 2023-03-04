@@ -16,7 +16,7 @@ $dataAbsensi = getFullAbsensiSiswa($conn, "SELECT siswa.nama, siswa.no_absen,
             JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
             JOIN kelas ON kelas.id = siswa_kelas.id_kelas
             JOIN jurusan ON jurusan.id = kelas.id_jurusan
-            WHERE kelas.tingkat = $tingkat AND jurusan.bidang_keahlian = '$bidang' AND kelas.rombel = $rombel
+            WHERE kelas.tingkat = $tingkat AND jurusan.kompetensi_keahlian = '$bidang' AND kelas.rombel = $rombel
             GROUP BY siswa.nama
             ");
 
@@ -42,7 +42,7 @@ $dataAbsensi = getFullAbsensiSiswa($conn, "SELECT siswa.nama, siswa.no_absen,
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $data["no_absen"] ?></td>
-                <td><?= ucwords($data["nama"]) ?></td>
+                <td class="nama-kolom"><?= ucwords($data["nama"]) ?></td>
                 <td><?= $data["sakit"] ?></td>
                 <td><?= $data["izin"] ?></td>
                 <td><?= $data["tanpa_keterangan"] ?></td>

@@ -62,7 +62,7 @@ function cekKehadiran($conn, $id_siswa)
 }
 
 // ambil data absensi siswa
-function getDataAbsensiSiswa($conn, $tingkat, $rombel, $bidangKeahlian)
+function getDataAbsensiSiswa($conn, $tingkat, $rombel, $kompetensiKeahlian)
 {
     $query = "SELECT siswa.nama, siswa.no_absen,
             COUNT(CASE WHEN kehadiran.kehadiran = 'izin' THEN 1 END) AS izin,
@@ -73,7 +73,7 @@ function getDataAbsensiSiswa($conn, $tingkat, $rombel, $bidangKeahlian)
             JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
             JOIN kelas ON kelas.id = siswa_kelas.id_kelas
             JOIN jurusan ON jurusan.id = kelas.id_jurusan
-            WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.bidang_keahlian = '$bidangKeahlian'
+            WHERE kelas.tingkat = $tingkat AND kelas.rombel = $rombel AND jurusan.kompetensi_keahlian = '$kompetensiKeahlian'
             GROUP BY siswa.nama
             
             ";
@@ -109,7 +109,7 @@ function getFullAbsensiSiswa($conn, $query)
 function getDataKelas($conn)
 {
 
-    $query = "SELECT kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian FROM jurusan JOIN kelas ON jurusan.id = kelas.id_jurusan";
+    $query = "SELECT kelas.tingkat, kelas.rombel, jurusan.kompetensi_keahlian FROM jurusan JOIN kelas ON jurusan.id = kelas.id_jurusan";
 
     $result = $conn->query($query);
     $data = [];
@@ -119,4 +119,13 @@ function getDataKelas($conn)
     }
 
     return $data;
+}
+
+function cekSelected($value)
+{
+    if (isset($_POST["kelas"])) {
+        if ($_POST["kelas"] === $value) {
+            return "selected";
+        }
+    }
 }

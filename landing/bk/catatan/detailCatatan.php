@@ -121,11 +121,13 @@ $dataKonsul = getDataForm($conn, $query)[0];
                     <input type="text" name="status" id="status" autocomplete="off" value="<?= ucfirst($dataKonsul["status"]) ?>">
                 </label>
                 <label class="disable">
+
                     <span>Dokumentasi</span>
-                    <?php if (strlen($dataKonsul["dokumentasi"]) > 0) : ?>
-                        <img src="../../../image/<?= $dataKonsul["dokumentasi"] ?>" alt="">
-                    <?php else : ?>
+                    <?php if ($dataKonsul["dokumentasi"] == "-") : ?>
                         <p>Tidak ada dokumentasi</p>
+
+                    <?php else : ?>
+                        <img src="../../../image/<?= $dataKonsul["dokumentasi"] ?>" alt="">
                     <?php endif; ?>
                 </label>
             </form>

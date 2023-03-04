@@ -45,7 +45,7 @@ $tahunAjaran = getDataForm($conn, "SELECT id, thn_ajaran, semester FROM tahun_aj
 </head>
 
 <body>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
                 <img src="../../../image/<?= $dataUser["foto"] ?>" alt="image-profile">
@@ -79,7 +79,7 @@ $tahunAjaran = getDataForm($conn, "SELECT id, thn_ajaran, semester FROM tahun_aj
                 <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="container">

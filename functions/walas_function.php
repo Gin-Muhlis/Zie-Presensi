@@ -4,7 +4,7 @@
 function getDataWalas($conn, $nama)
 {
 
-    $query = "SELECT guru.*, kelas.tingkat, kelas.rombel, jurusan.bidang_keahlian
+    $query = "SELECT guru.*, kelas.tingkat, kelas.rombel, jurusan.kompetensi_keahlian
               FROM guru
               JOIN wali_kelas ON guru.id = wali_kelas.id_guru
               JOIN kelas ON kelas.id = wali_kelas.id_kelas

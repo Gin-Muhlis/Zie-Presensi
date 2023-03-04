@@ -1,6 +1,6 @@
 <?php
 
-$jumlahDataPerHalaman = 2;
+$jumlahDataPerHalaman = 5;
 $DataDatabase = $conn->query("SELECT * FROM guru");
 $jumlahData = mysqli_num_rows($DataDatabase);
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);

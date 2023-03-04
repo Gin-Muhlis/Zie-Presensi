@@ -157,7 +157,7 @@ $status = ["diproses", "selesai"]
                 <label>
                     <span>Dokumentasi</span>
                     <?php if (strlen($dataKonsul["dokumentasi"]) > 0) : ?>
-                        <img src="../../image/<?= $dataKonsul["dokumentasi"] ?>" alt="">
+                        <img src="../../../image/<?= $dataKonsul["dokumentasi"] ?>" alt="">
                     <?php else : ?>
                         <p>Tidak ada dokumentasi</p>
                     <?php endif; ?>

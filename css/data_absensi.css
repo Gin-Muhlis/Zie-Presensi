@@ -80,6 +80,10 @@
   text-align: center;
 }
 
+.wrapper table .nama-kolom {
+  text-align: start;
+}
+
 .wrapper .filter-field {
   width: 100%;
   display: flex;
@@ -89,12 +93,43 @@
   margin-bottom: 50px;
 }
 
-.filter-field select {
+.filter-field form {
   flex-basis: 50%;
+}
+
+.filter-field select {
+  width: 100%;
 }
 
 .filter-field select,
 .filter-field select option {
   padding: 7px;
   font-size: 1.1rem;
+}
+
+.wrapper .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pagination a {
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  color: orange;
+  font-weight: 600;
+  background: none;
+  border: 1px solid orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pagination a.halamanAktif {
+  color: #fff;
+  background: orange;
 }

@@ -27,7 +27,7 @@ $dataAbsensi = getFullAbsensiSiswa($conn, "SELECT siswa.nama, siswa.no_absen,
             JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
             JOIN kelas ON kelas.id = siswa_kelas.id_kelas
             JOIN jurusan ON jurusan.id = kelas.id_jurusan
-             WHERE kelas.tingkat = 11 AND kelas.rombel = 1 AND jurusan.bidang_keahlian = 'rekayasa perangkat lunak'
+             WHERE kelas.tingkat = 11 AND kelas.rombel = 1 AND jurusan.kompetensi_keahlian = 'rekayasa perangkat lunak'
             GROUP BY siswa.nama
             ");
 
@@ -46,8 +46,8 @@ $dataKelas = getDataKelas($conn);
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/data_absensi.css">
     <script src="https://kit.fontawesome.com/64f5e4ae10.js" crossorigin="anonymous"></script>
-    <script src="../../js/jquery-3.6.3.min.js"></script>
-    <script src="../../js/script-for-absensi-siswa.js"></script>
+    <!-- <script src="../../js/jquery-3.6.3.min.js"></script>
+    <script src="../../js/script-for-absensi-siswa.js"></script> -->
     <script src="../../js/upload.js"></script>
     <title>halaman wali kelas</title>
 </head>
@@ -96,12 +96,35 @@ $dataKelas = getDataKelas($conn);
 
             <div class="filter-field">
                 <h3>Filter Data : </h3>
-                <select name="kelas" id="kelas">
-                    <?php foreach ($dataKelas as $kelas) : ?>
-                        <option value="<?= $kelas["tingkat"] ?> <?= $kelas["bidang_keahlian"] ?> <?= $kelas["rombel"] ?>"><?= $kelas["tingkat"] ?> <?= ucwords($kelas["bidang_keahlian"]) ?> <?= $kelas["rombel"] ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <form action="" method="POST">
+                    <select name="kelas" id="kelas" onchange="this.form.submit()">
+                        <?php foreach ($dataKelas as $kelas) : ?>
+                            <option value="<?= $kelas["tingkat"] ?> <?= $kelas["kompetensi_keahlian"] ?> <?= $kelas["rombel"] ?>" <?= cekSelected("{$kelas['tingkat']} {$kelas['kompetensi_keahlian']} {$kelas['rombel']}") ?>><?= $kelas["tingkat"] ?> <?= ucwords($kelas["kompetensi_keahlian"]) ?> <?= $kelas["rombel"] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
             </div>
+
+            <?php if (isset($_POST["kelas"])) {
+
+                $data = explode(" ", $_POST["kelas"]);
+                $tingkat = $data[0];
+                $keahlian = "{$data[1]} {$data[2]} {$data[3]}";
+                $rombel = $data[4];
+
+                $dataAbsensi = getFullAbsensiSiswa($conn, "SELECT siswa.nama, siswa.no_absen,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'izin' THEN 1 END) AS izin,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'sakit' THEN 1 END) AS sakit,
+            COUNT(CASE WHEN kehadiran.kehadiran = 'tanpa Keterangan' THEN 1 END) AS tanpa_keterangan
+            FROM siswa
+            JOIN kehadiran ON siswa.id = kehadiran.id_siswa
+            JOIN siswa_kelas ON siswa.id = siswa_kelas.id_siswa
+            JOIN kelas ON kelas.id = siswa_kelas.id_kelas
+            JOIN jurusan ON jurusan.id = kelas.id_jurusan
+            WHERE kelas.tingkat = $tingkat AND jurusan.kompetensi_keahlian = '$keahlian' AND kelas.rombel = $rombel
+            GROUP BY siswa.nama
+            ");
+            } ?>
 
             <div class="data-field">
                 <table border="1" cellspacing="0">
@@ -124,7 +147,7 @@ $dataKelas = getDataKelas($conn);
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $data["no_absen"] ?></td>
-                                <td><?= ucwords($data["nama"]) ?></td>
+                                <td class="nama-kolom"><?= ucwords($data["nama"]) ?></td>
                                 <td><?= $data["sakit"] ?></td>
                                 <td><?= $data["izin"] ?></td>
                                 <td><?= $data["tanpa_keterangan"] ?></td>

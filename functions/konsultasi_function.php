@@ -25,7 +25,7 @@ function tambahCatatan($conn, $post)
     $penanganan = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["penanganan"])));
     $status = htmlspecialchars(mysqli_real_escape_string($conn, strtolower($post["status"])));
     $current_date = date('Y-m-d');
-    $dokumentasi = validasiImage();
+    $dokumentasi = validasiImageCatatan();
 
     // !Validasi Form
     if (empty($kasus) || empty($penanganan)) {
@@ -56,6 +56,7 @@ function tambahCatatan($conn, $post)
 
 function validasiImageCatatan()
 {
+
     $file_name = $_FILES["dokumentasi"]["name"];
     $file_directory = $_FILES["dokumentasi"]["tmp_name"];
     $file_size = $_FILES["dokumentasi"]["size"];
@@ -64,26 +65,29 @@ function validasiImageCatatan()
     $extension = explode(".", $file_name);
     $extension = strtolower(end($extension));
 
-    if (!in_array($extension, $validExtension)) {
-        echo "<script>
-        alert ('Anda hanya bisa mengupload gambar!');
+    if ($_FILES["dokumentasi"]["error"] !== 4) {
+        if (!in_array($extension, $validExtension)) {
+            echo "<script>
+        alert ('Anda hanya bisa mengupload gambar!!!');
         </script>";
-        return false;
+            return false;
+        }
+        if ($file_size > 1000000) {
+            echo "<script>
+            alert ('Gambar terlalu besar!');
+            </script>";
+            return false;
+        }
+
+        $newName = uniqid();
+        $newName = $newName . "." . $extension;
+
+        move_uploaded_file($file_directory, "../../../image/" . $newName);
+
+        return $newName;
     }
 
-    if ($file_size > 1000000) {
-        echo "<script>
-        alert ('Gambar terlalu besar!');
-        </script>";
-        return false;
-    }
-
-    $newName = uniqid();
-    $newName = $newName . "." . $extension;
-
-    move_uploaded_file($file_directory, "../../image/" . $newName);
-
-    return $newName;
+    return "-";
 }
 
 // edit catatan konsultasi
@@ -126,7 +130,7 @@ function editCatatan($conn, $post, $id)
     }
 
     if (!$_FILES["dokumentasi"]["error"] == 4) {
-        unlink("../../image/$gambarLama");
+        unlink("../../../image/$gambarLama");
     }
 
     $query = "UPDATE konsultasi

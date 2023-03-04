@@ -87,7 +87,7 @@ $kehadiran = cekKehadiran($conn, $dataUser['id']);
         <p><?= $hari[date("w")] ?>, <?= date("d") ?> <?= $bulan[date("n") - 1] ?> <?= date("Y") ?></p>
       </div>
       <div class="icon-field">
-        <?php if ($kehadiran !== false) : ?>
+        <?php if ($kehadiran == !false) : ?>
           <i class="fas fa-frown icon sad"></i>
           <p>Anda <?= $kehadiran["kehadiran"] ?> hari ini</p>
         <?php else : ?>

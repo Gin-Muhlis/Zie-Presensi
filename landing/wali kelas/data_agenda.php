@@ -20,7 +20,7 @@ if (!hasRole("walas")) {
 include("../../data/data_guru.php");
 $dataWalas = getDataWalas($conn, $dataUser["nama"]);
 
-$dataAgenda = getDataAgendaKelas($conn, $dataWalas["tingkat"], $dataWalas["rombel"], $dataWalas["bidang_keahlian"]);
+$dataAgenda = getDataAgendaKelas($conn, $dataWalas["tingkat"], $dataWalas["rombel"], $dataWalas["kompetensi_keahlian"]);
 
 ?>
 
@@ -83,7 +83,7 @@ $dataAgenda = getDataAgendaKelas($conn, $dataWalas["tingkat"], $dataWalas["rombe
 
     <div class="container">
         <div class="wrapper">
-            <h1>Absensi <?= $dataWalas["tingkat"] ?> <?= $dataWalas["bidang_keahlian"] ?> <?= $dataWalas["rombel"] ?></h1>
+            <h1>Absensi <?= $dataWalas["tingkat"] ?> <?= ucwords($dataWalas["kompetensi_keahlian"]) ?> <?= $dataWalas["rombel"] ?></h1>
 
             <table border="1" cellspacing="0">
                 <thead>
