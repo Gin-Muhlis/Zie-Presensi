@@ -80,6 +80,12 @@ function login($conn)
                     exit;
 
                     break;
+                    break;
+                case "admin": // !jika nilai dari variabel check adalah kepala sekolah
+                    header("Location: landing/admin/admin.php"); // !arahkan ke halaman kepala sekolah
+                    exit;
+
+                    break;
                 default: // !cek ketika level dari data user tidak sesuai
                     header("Location: landing/errorLevel.php"); // !arahkan ke halaman error
                     exit;
@@ -125,6 +131,11 @@ function checkSession()
                 break;
             case "bk": // !jika nilai dari variabel check adalah kepala sekolah
                 header("Location: landing/bk/bk.php"); // !arahkan ke halaman kepala sekolah
+                exit;
+
+                break;
+            case "admin": // !jika nilai dari variabel check adalah kepala sekolah
+                header("Location: landing/admin/admin.php"); // !arahkan ke halaman kepala sekolah
                 exit;
 
                 break;

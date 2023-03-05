@@ -1,0 +1,140 @@
+.wrapper h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 50px;
+}
+
+.wrapper .tambah-data {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+}
+
+.tambah-data a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 8px 30px;
+  background: #080808;
+  border-radius: 5px;
+}
+
+.wrapper table {
+  width: 100%;
+}
+
+table thead th {
+  padding: 7px;
+  font-size: 1rem;
+}
+
+table tbody td {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+table tbody td.center {
+  text-align: center;
+}
+
+td img {
+  width: 100px;
+}
+
+.wrapper .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.pagination a {
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  color: orange;
+  font-weight: 600;
+  background: none;
+  border: 1px solid orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pagination a.halamanAktif {
+  color: #fff;
+  background: orange;
+}
+
+td.aksi a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+td.aksi {
+  padding: 0;
+}
+
+td a.edit {
+  background-color: green;
+}
+
+td a.hapus {
+  background-color: red;
+}
+
+.wrapper form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+form label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+form label span {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+form label input,
+form label select {
+  width: 100%;
+  padding: 7px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+form .button-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  gap: 7px;
+}
+
+form .button-area button {
+  background-color: none;
+  outline: 0;
+  background: #080808;
+  padding: 8px 30px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
