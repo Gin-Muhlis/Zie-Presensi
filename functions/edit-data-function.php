@@ -8,7 +8,6 @@ function editProfile($conn, $post, $user)
     $username = htmlspecialchars(mysqli_real_escape_string($conn, $post["username"]));
     $passwordLama = htmlspecialchars(mysqli_real_escape_string($conn, $post["pwLama"]));;
     $passwordBaru = htmlspecialchars(mysqli_real_escape_string($conn, $post["pwBaru"]));;
-
     $queryForCheck = "SELECT username FROM user";
 
     $result = $conn->query($queryForCheck);
@@ -19,25 +18,27 @@ function editProfile($conn, $post, $user)
     }
 
     foreach ($dataCheck as $data) {
-        if ($username === $data["username"]) {
-            echo "<script>
-                alert('Username telah digunakan!')
-            </script>";
+        if ($data["username"] !== $usernameUser) {
+            if ($username === $data["username"]) {
+                echo "<script>
+                    alert('Username telah digunakan!')
+                </script>";
 
-            return false;
+                return false;
+            }
         }
     }
 
     if (!empty($passwordLama) && !empty($passwordBaru)) {
-        if ($passwordLama !== $passwordUser) {
+        if (!password_verify($passwordLama, $passwordUser)) {
             echo "<script>
-                alert('Password yang anda masukkan salah!')
+                alert('Password lama yang anda masukkan salah!')
             </script>";
 
             return false;
         }
 
-        $passwordUser = $passwordBaru;
+        $passwordUser = password_hash($passwordBaru, PASSWORD_DEFAULT);
     }
 
     if ((!empty($passwordLama) && empty($passwordBaru)) || (empty($passwordLama) && !empty($passwordBaru))) {

@@ -76,6 +76,7 @@ include("../../../data/data_siswa.php");
 
 
     <div class="container">
+
         <div class="wrapper">
             <h1>Edit Data</h1>
             <div class="form">

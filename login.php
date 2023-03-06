@@ -6,7 +6,6 @@ require "functions/login_function.php";
 
 // checkCookie(); 
 // checkIsSession();
-
 // cek user
 if (isset($_POST["login"])) {
   login($conn);

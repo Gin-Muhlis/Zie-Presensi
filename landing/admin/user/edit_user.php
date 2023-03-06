@@ -17,10 +17,12 @@ if (!hasRole("admin")) {
 }
 
 include("../../../data/data_admin.php");
-include("../../../data/pagination_user_admin.php");
 
-$userData = getUser($conn, "SELECT * FROM user LIMIT $awalData,$jumlahDataPerHalaman");
+$id = $_GET["id"];
 
+$userData =  getUser($conn, "SELECT * FROM user WHERE id = $id")[0];
+$role = ["siswa", "guru"];
+$hak_akses = ["walas", "umum", "bk", "kepala sekolah", "siswa kelas", "operator siswa"];
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +42,7 @@ $userData = getUser($conn, "SELECT * FROM user LIMIT $awalData,$jumlahDataPerHal
 </head>
 
 <body>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="head-sidebar">
             <div class="image-profile">
                 <img src="../../../image/<?= $dataUser["foto"] ?>" alt="image-profile">
@@ -59,8 +61,8 @@ $userData = getUser($conn, "SELECT * FROM user LIMIT $awalData,$jumlahDataPerHal
             <div class="menu">
                 <a href="../admin.php">Home</a>
             </div>
-            <div class="menu" id="active">
-                <a href="#">Data User</a>
+            <div class="menu">
+                <a href="data_user.php">Data User</a>
             </div>
             <div class="menu">
                 <a href="data_absensi.php">Absensi Kelas</a>
@@ -77,58 +79,58 @@ $userData = getUser($conn, "SELECT * FROM user LIMIT $awalData,$jumlahDataPerHal
                 <a href="../../../logout.php?id=<?= $dataUser["id_operator"] ?>">Keluar</a>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="container">
         <div class="wrapper">
-            <h1>Data User</h1>
-            <div class="tambah-data">
-                <a href="tambah_user.php">Tambah User</a>
-            </div>
-            <div class="pagination">
-                <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
-                    <?php if ($i == $halamanAktif) : ?>
-                        <a href="?hal=<?= $i ?>" class="halamanAktif"><?= $i ?></a>
-                    <?php else : ?>
-                        <a href="?hal=<?= $i ?>"><?= $i ?></a>
-                    <?php endif; ?>
-                <?php endfor; ?>
-            </div>
-            <table border="1" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Id Operator</th>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>Hak Akses</th>
-                        <th>Foto profile</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php for ($i = 1; $i <= count($userData); $i++) : ?>
-                        <tr>
-                            <td class="center"><?= $i + $awalData ?></td>
-                            <td class="center"><?= $userData[$i - 1]["id_operator"] ?></td>
-                            <td class="center"><?= $userData[$i - 1]["username"] ?></td>
-                            <td class="center"><?= $userData[$i - 1]["role"] ?></td>
-                            <td class="center"><?= $userData[$i - 1]["hak_akses"] ?></td>
-                            <td class="center">
-                                <img src="../../../image/<?= $userData[$i - 1]["foto"] ?>" alt="">
-                            </td>
-                            <td class="center aksi">
-                                <a href="edit_user.php?id=<?= $userData[$i - 1]["id"] ?>" class="edit">Edit</a>
-                                <a href="?delete=<?= $userData[$i - 1]["id"] ?>" class="hapus" onclick="return confirm('Apakah anda yakin ingin menghapusnya')">Hapus</a>
-                            </td>
-                        </tr>
-                    <?php endfor ?>
-                </tbody>
-            </table>
+            <h1>Tambah Data User</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="fotoLama" value="<?= $userData["foto"] ?>">
+                <label for="id_operator">
+                    <span>Id Operator</span>
+                    <input type="text" name="id_operator" id="id_operator" value="<?= $userData["id_operator"] ?>">
+                </label>
+                <label for="username">
+                    <span>Username</span>
+                    <input type="text" name="username" id="username" value="<?= $userData["username"] ?>">
+                </label>
+                <label for="password">
+                    <span>Password</span>
+                    <input type="text" name="password" id="password" value="<?= $userData["password"] ?>">
+                </label>
+                <label for="role">
+                    <span>Role</span>
+                    <select name="role" id="role">
+                        <?php foreach ($role as $data) : ?>
+                            <option value="<?= $data ?>" <?php if ($data == $userData["role"]) {
+                                                                echo "selected";
+                                                            } ?>><?= ucwords($data) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+                <label for="hak_akses">
+                    <span>Hak Akses</span>
+                    <select name="hak_akses" id="hak_akses">
+                        <?php foreach ($hak_akses as $data) : ?>
+                            <option value="<?= $data ?>" <?php if ($data == $userData["hak_akses"]) {
+                                                                echo "selected";
+                                                            } ?>><?= ucwords($data) ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+                <label for="foto">
+                    <span>Foto Profile</span>
+                    <img src="../../../image/<?= $userData["foto"] ?>" alt="" width="100">
+                    <input type="file" name="foto" id="foto">
+                </label>
+                <div class="button-area">
+                    <button><a href="data_user.php">Batal</a></button>
+                    <button type="submit" name="edit_user">Edit</button>
+                </div>
+            </form>
         </div>
     </div>
-
     <div class="wrapper-popup">
         <div class="popup">
             <form action="" method="POST" enctype="multipart/form-data">
@@ -151,10 +153,10 @@ $userData = getUser($conn, "SELECT * FROM user LIMIT $awalData,$jumlahDataPerHal
         }
     } ?>
 
-    <?php if (isset($_GET["delete"])) {
-        if (hapusUser($conn, $_GET["delete"]) > 0) {
+    <?php if (isset($_POST["edit_user"])) {
+        if (editUser($conn, $_POST, $id) > 0) {
             echo "<script>
-        alert('Data berhasil dihapus!')
+        alert('Data berhasil diedit!')
         document.location.href = 'data_user.php'
       </script>";
         }
